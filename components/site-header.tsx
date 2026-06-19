@@ -19,8 +19,8 @@ export function SiteHeader() {
             {t("contact")}
           </Link>
           <div className="flex items-center gap-2">
-            <ThemeSwitcher />
             <LocaleSwitcher />
+            <ThemeSwitcher />
           </div>
         </div>
       </header>
