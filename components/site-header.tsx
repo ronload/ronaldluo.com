@@ -1,9 +1,10 @@
-import { Mail } from "lucide-react";
+import { Send } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Divider } from "@/components/frame";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { buttonVariants } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
@@ -13,13 +14,13 @@ export function SiteHeader() {
     <>
       <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm">
         <div className="container flex h-16 w-full items-center justify-between gap-2">
-          <a
-            href="mailto:ronald@ronaldluo.com"
+          <Link
+            href="/contact"
             className={cn(buttonVariants({ variant: "outline" }))}
           >
-            <Mail />
+            <Send />
             {t("contact")}
-          </a>
+          </Link>
           <div className="flex items-center gap-2">
             <ThemeSwitcher />
             <LocaleSwitcher />

@@ -1,0 +1,90 @@
+import {
+  SiFacebook,
+  SiGithub,
+  SiInstagram,
+  SiShopee,
+  SiThreads,
+  SiX,
+} from "@icons-pack/react-simple-icons";
+import { Mail } from "lucide-react";
+import { setRequestLocale } from "next-intl/server";
+import { type ComponentType, use } from "react";
+import { GradientButton } from "@/components/gradient-button";
+import { LinkedinIcon } from "@/components/linkedin-icon";
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+type ContactLink = {
+  label: string;
+  href: string;
+  icon: ComponentType<{ className?: string }>;
+  note?: string;
+};
+
+const links: ContactLink[] = [
+  { label: "Email", href: "mailto:ronald@ronaldluo.com", icon: Mail },
+  { label: "GitHub", href: "https://github.com/ronload", icon: SiGithub },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/luo-yong-neng", icon: LinkedinIcon },
+  { label: "X", href: "https://x.com/ron1oad", icon: SiX },
+  { label: "Instagram", href: "https://www.instagram.com/ynent", icon: SiInstagram },
+  { label: "Threads", href: "https://www.threads.com/@ynent", icon: SiThreads },
+  { label: "Facebook", href: "https://www.facebook.com/RonTwps", icon: SiFacebook },
+  {
+    label: "Shopee",
+    href: "https://shopee.tw/ronlo",
+    icon: SiShopee,
+    note: "(archived)",
+  },
+];
+
+export default function Contact({ params }: Props) {
+  const { locale } = use(params);
+
+  setRequestLocale(locale);
+
+  return (
+    <section className="relative flex flex-1 flex-col">
+      <div className="container flex w-full flex-1 flex-col items-center justify-center gap-10 py-24">
+        <div className="flex w-4/5 flex-col gap-4 text-center">
+          <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
+            Get in touch
+          </h1>
+          <p className="text-lg text-muted-foreground leading-8">
+            For work, collaboration, or just to say hi. Reach out anytime.
+          </p>
+        </div>
+        <nav className="grid w-4/5 grid-cols-1 gap-4 md:grid-flow-col md:grid-cols-2 md:grid-rows-4">
+          {links.map(({ label, href, icon: Icon, note }) => {
+            const external = href.startsWith("http");
+
+            return (
+              <GradientButton
+                key={label}
+                variant="outline"
+                size="lg"
+                nativeButton={false}
+                render={
+                  <a
+                    href={href}
+                    {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  />
+                }
+                className="bg-transparent h-12 w-full justify-start gap-3 px-4 text-base"
+              >
+                <Icon className="size-5" />
+                <span>
+                  {label}
+                  {note ? (
+                    <span className="ml-1.5 font-normal text-muted-foreground">{note}</span>
+                  ) : null}
+                </span>
+              </GradientButton>
+            );
+          })}
+        </nav>
+      </div>
+    </section>
+  );
+}
