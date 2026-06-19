@@ -10,21 +10,35 @@ export function SiteHeader() {
   const t = useTranslations("Header");
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm">
-      <div className="container flex h-16 w-full items-center justify-between gap-2">
-        <a
-          href="mailto:ronald@ronaldluo.com"
-          className={cn(buttonVariants({ variant: "outline" }))}
-        >
-          <Mail />
-          {t("contact")}
-        </a>
-        <div className="flex items-center gap-2">
-          <ThemeSwitcher />
-          <LocaleSwitcher />
+    <>
+      <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm">
+        <div className="container flex h-16 w-full items-center justify-between gap-2">
+          <a
+            href="mailto:ronald@ronaldluo.com"
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
+            <Mail />
+            {t("contact")}
+          </a>
+          <div className="flex items-center gap-2">
+            <ThemeSwitcher />
+            <LocaleSwitcher />
+          </div>
         </div>
+      </header>
+      {/*
+        The header's bottom divider lives OUTSIDE <header> on purpose. A sticky
+        element always creates its own stacking context, so a divider nested in
+        the header would be trapped at the header's z-40 and render beneath the
+        FrameGuides (z-45). Its corner dots could then no longer cap the
+        guide/divider intersection the way the in-page section dividers (z-50)
+        do, leaving a see-through point at the junction. As a page-level sticky
+        sibling it shares the frame's stacking layer (z-50, above the guides) and
+        pins to the header's bottom edge (top-16 matches the header's h-16).
+      */}
+      <div className="pointer-events-none sticky top-16 z-50 h-0">
+        <Divider />
       </div>
-      <Divider className="top-auto bottom-0" />
-    </header>
+    </>
   );
 }
