@@ -14,10 +14,7 @@ export function SiteHeader() {
     <>
       <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm">
         <div className="container flex h-16 w-full items-center justify-between gap-2">
-          <Link
-            href="/contact"
-            className={cn(buttonVariants({ variant: "outline" }))}
-          >
+          <Link href="/contact" className={cn(buttonVariants({ variant: "outline" }))}>
             <Send />
             {t("contact")}
           </Link>
