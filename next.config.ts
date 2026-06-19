@@ -63,8 +63,8 @@ const nextConfig: NextConfig = {
         destination: "https://github.com/ronload/dotfiles",
         permanent: true,
       },
-    ]
-  }
+    ];
+  },
 };
 
 export default nextConfig;
