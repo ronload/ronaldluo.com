@@ -6,11 +6,14 @@ import {
   SiThreads,
   SiX,
 } from "@icons-pack/react-simple-icons";
-import { Mail } from "lucide-react";
+import { ArrowLeft, Mail } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
 import { type ComponentType, use } from "react";
 import { GradientButton } from "@/components/gradient-button";
 import { LinkedinIcon } from "@/components/linkedin-icon";
+import { buttonVariants } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -46,6 +49,18 @@ export default function Contact({ params }: Props) {
 
   return (
     <section className="relative flex flex-1 flex-col">
+      <div className="container pt-6">
+        <Link
+          href="/"
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "sm" }),
+            "-ms-3 gap-2 text-muted-foreground",
+          )}
+        >
+          <ArrowLeft />
+          Back to home
+        </Link>
+      </div>
       <div className="container flex w-full flex-1 flex-col items-center justify-center gap-10 py-24">
         <div className="flex w-4/5 flex-col gap-4 text-center">
           <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
