@@ -30,8 +30,8 @@ export default function Home() {
             <Image
               src="/github-icon-dark.svg"
               alt="Github icon"
-              width={32}
-              height={32}
+              width={24}
+              height={24}
               priority
             />
             Github
