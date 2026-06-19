@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PageFrame } from "@/components/frame";
+import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
@@ -37,13 +39,11 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
 }
 
 export default async function LocaleLayout({ children, params }: Props) {
-  // Ensure that the incoming `locale` is valid
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
-  // Enable static rendering
   setRequestLocale(locale);
 
   return (
@@ -60,7 +60,10 @@ export default async function LocaleLayout({ children, params }: Props) {
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <PageFrame>
+              <SiteHeader />
+              {children}
+            </PageFrame>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

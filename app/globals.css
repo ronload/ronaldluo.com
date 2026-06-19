@@ -147,6 +147,10 @@
   --code-highlight: --alpha(var(--color-white) / 4%);
 }
 
+@utility container {
+  @apply mx-auto max-w-6xl px-4 lg:px-6;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
