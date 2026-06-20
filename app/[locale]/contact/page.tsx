@@ -7,13 +7,15 @@ import {
   SiX,
 } from "@icons-pack/react-simple-icons";
 import { ArrowLeft, Mail } from "lucide-react";
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { type ComponentType, use } from "react";
 import { GradientButton } from "@/components/gradient-button";
 import { LinkedinIcon } from "@/components/linkedin-icon";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { alternatesFor } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -56,6 +58,16 @@ function BackToHome({ label }: { label: string }) {
       {label}
     </Link>
   );
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Contact" });
+
+  return {
+    title: t("title"),
+    alternates: alternatesFor(locale, "/contact"),
+  };
 }
 
 export default function Contact({ params }: Props) {
