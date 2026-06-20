@@ -6,6 +6,7 @@ import { setRequestLocale } from "next-intl/server";
 import { type ComponentType, use } from "react";
 import { Divider } from "@/components/frame";
 import { LinkedinIcon } from "@/components/linkedin-icon";
+import { PersonJsonLd } from "@/components/person-jsonld";
 import { buttonVariants } from "@/components/ui/button";
 import { Globe } from "@/components/ui/globe";
 import { Link } from "@/i18n/navigation";
@@ -69,6 +70,7 @@ export default function Home({ params }: Props) {
 
   return (
     <>
+      <PersonJsonLd locale={locale} />
       <section className="relative flex flex-1 flex-col">
         <div className="container flex w-full flex-1 flex-col justify-center py-12 sm:py-24">
           <div className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-8 text-left sm:gap-x-12 sm:gap-y-10">
