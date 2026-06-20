@@ -1,10 +1,13 @@
+import { SiFacebook, SiGithub, SiInstagram, SiThreads, SiX } from "@icons-pack/react-simple-icons";
 import { Mail, Send } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { use } from "react";
+import { type ComponentType, use } from "react";
 import { Divider } from "@/components/frame";
+import { LinkedinIcon } from "@/components/linkedin-icon";
 import { buttonVariants } from "@/components/ui/button";
+import { Globe } from "@/components/ui/globe";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
@@ -38,6 +41,22 @@ const EDUCATION_ICONS: Record<(typeof EDUCATION)[number], string> = {
   fju: "/fju-icon.jpg",
   ckhs: "/ckhs-icon.png",
 };
+
+type SocialLink = {
+  label: string;
+  href: string;
+  icon: ComponentType<{ className?: string }>;
+};
+
+const SOCIALS: SocialLink[] = [
+  { label: "Email", href: "mailto:ronald@ronaldluo.com", icon: Mail },
+  { label: "GitHub", href: "https://github.com/ronload", icon: SiGithub },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/luo-yong-neng", icon: LinkedinIcon },
+  { label: "X", href: "https://x.com/ron1oad", icon: SiX },
+  { label: "Instagram", href: "https://www.instagram.com/ynent", icon: SiInstagram },
+  { label: "Threads", href: "https://www.threads.com/@ynent", icon: SiThreads },
+  { label: "Facebook", href: "https://www.facebook.com/RonTwps", icon: SiFacebook },
+];
 
 export default function Home({ params }: Props) {
   const { locale } = use(params);
@@ -188,35 +207,40 @@ export default function Home({ params }: Props) {
         </div>
       </section>
 
-      <section className="relative">
+      <footer className="relative">
         <Divider />
-        <div className="container flex w-full flex-col items-center py-16 sm:items-start">
-          <a
-            href="https://github.com/ronload/ronaldluo.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "h-12 w-full text-base md:w-auto md:min-w-36",
-            )}
-          >
-            <Image
-              className="dark:invert"
-              src="/github-icon.svg"
-              alt="Github icon"
-              width={24}
-              height={24}
-              priority
-            />
-            {t("github")}
-          </a>
-        </div>
-      </section>
+        <div className="container flex flex-col items-center pt-16 text-center sm:pt-20">
+          <h2 className="font-semibold text-2xl text-foreground tracking-tight sm:text-3xl">
+            {t("connect")}
+          </h2>
+          <div className="mt-6 flex items-center justify-center gap-1 sm:mt-8 sm:gap-2">
+            {SOCIALS.map(({ label, href, icon: Icon }) => {
+              const external = href.startsWith("http");
 
-      <footer className="relative py-6 text-center text-muted-foreground text-sm">
-        <Divider />
-        <div className="container">
-          <p>© {new Date().getFullYear()} ronaldluo.com</p>
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "icon-lg" }),
+                    "text-muted-foreground hover:text-foreground",
+                  )}
+                >
+                  <Icon className="size-5" />
+                </a>
+              );
+            })}
+          </div>
+        </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none relative mt-4 h-[clamp(11rem,38vw,18rem)] overflow-hidden sm:mt-6"
+        >
+          <div className="-translate-x-1/2 absolute top-0 left-1/2 aspect-square w-[clamp(24rem,95vw,42rem)]">
+            <Globe className="max-w-none" />
+          </div>
         </div>
       </footer>
     </>
