@@ -72,16 +72,17 @@ export function Globe({
   };
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
     const onResize = () => {
-      if (canvasRef.current) {
-        widthRef.current = canvasRef.current.offsetWidth;
-      }
+      widthRef.current = canvas.offsetWidth;
     };
 
     window.addEventListener("resize", onResize);
     onResize();
 
-    const globe = createGlobe(canvasRef.current!, {
+    const globe = createGlobe(canvas, {
       ...config,
       width: widthRef.current * 2,
       height: widthRef.current * 2,
@@ -93,7 +94,7 @@ export function Globe({
       },
     });
 
-    setTimeout(() => (canvasRef.current!.style.opacity = "1"), 0);
+    setTimeout(() => (canvas.style.opacity = "1"), 0);
     return () => {
       globe.destroy();
       window.removeEventListener("resize", onResize);
