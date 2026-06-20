@@ -66,11 +66,6 @@
 
 :root {
   --radius: 0.625rem;
-  /*
-   * Font fallback chain: Latin web font -> CJK web font -> system Latin ->
-   * system CJK -> generic. `--font-cjk-web` (Noto Sans TC) loads lazily, so
-   * `--font-cjk-system` renders Traditional Chinese until it arrives.
-   */
   --font-sans:
     var(--font-geist-sans), var(--font-cjk-web), -apple-system, BlinkMacSystemFont,
     var(--font-cjk-system), sans-serif;
