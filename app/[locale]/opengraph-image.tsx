@@ -19,9 +19,9 @@ export const size = {
 
 export const contentType = "image/png";
 
-type Props = {
+interface Props {
   params: Promise<{ locale: string }>;
-};
+}
 
 const BG = "#141414";
 const FG = "#f5f5f5";

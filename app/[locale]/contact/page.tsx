@@ -18,16 +18,16 @@ import { Link } from "@/i18n/navigation";
 import { alternatesFor } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
-type Props = {
+interface Props {
   params: Promise<{ locale: string }>;
-};
+}
 
-type ContactLink = {
+interface ContactLink {
   label: string;
   href: string;
   icon: ComponentType<{ className?: string }>;
   note?: string;
-};
+}
 
 const links: ContactLink[] = [
   { label: "Email", href: "mailto:ronald@ronaldluo.com", icon: Mail },

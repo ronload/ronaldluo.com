@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 
-type FrameProps = {
+interface FrameProps {
   className?: string;
   children?: React.ReactNode;
-};
+}
 
 export function PageFrame({ className, children }: FrameProps) {
   return (

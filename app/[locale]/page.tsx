@@ -12,22 +12,22 @@ import { Globe } from "@/components/ui/globe";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-type Props = {
+interface Props {
   params: Promise<{ locale: string }>;
-};
+}
 
-type ExperienceItem = {
+interface ExperienceItem {
   period: string;
   organization: string;
   role: string;
   highlights: string[];
-};
+}
 
-type EducationItem = {
+interface EducationItem {
   period: string;
   organization: string;
   field?: string;
-};
+}
 
 const EXPERIENCES = ["prinsur", "kaiyn", "yn"] as const;
 const EDUCATION = ["fju", "ckhs"] as const;
@@ -43,11 +43,11 @@ const EDUCATION_ICONS: Record<(typeof EDUCATION)[number], string> = {
   ckhs: "/ckhs-icon.png",
 };
 
-type SocialLink = {
+interface SocialLink {
   label: string;
   href: string;
   icon: ComponentType<{ className?: string }>;
-};
+}
 
 const SOCIALS: SocialLink[] = [
   { label: "Email", href: "mailto:ronald@ronaldluo.com", icon: Mail },

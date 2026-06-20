@@ -29,10 +29,10 @@ const notoSansTC = Noto_Sans_TC({
   preload: false,
 });
 
-type Props = {
+interface Props {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
-};
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
