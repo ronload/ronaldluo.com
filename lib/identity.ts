@@ -30,7 +30,9 @@ export const PERSON = {
   knowsAbout: [
     "Software Engineering",
     "Web Development",
-    "Frontend Development",
+    "Full-Stack Development",
+    "Software Architecture",
+    "Software Development Lifecycle",
     "Product Design",
     "Engineering Leadership",
   ],
