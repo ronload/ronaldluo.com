@@ -107,7 +107,7 @@ export default function Contact({ params }: Props) {
                     {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   />
                 }
-                className="bg-transparent h-12 w-full justify-start gap-3 px-4 text-base"
+                className="h-12 w-full justify-start gap-3 bg-transparent px-4 text-base"
               >
                 <Icon className="size-5" />
                 <span>

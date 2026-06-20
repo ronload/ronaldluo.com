@@ -96,7 +96,7 @@ export default function Home({ params }: Props) {
                 href="mailto:ronald@ronaldluo.com"
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "h-12 flex-1 text-base sm:flex-none sm:min-w-44",
+                  "h-12 flex-1 text-base sm:min-w-44 sm:flex-none",
                 )}
               >
                 <Mail />
@@ -106,7 +106,7 @@ export default function Home({ params }: Props) {
                 href="/contact"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
-                  "h-12 flex-1 text-base sm:flex-none sm:min-w-44",
+                  "h-12 flex-1 text-base sm:min-w-44 sm:flex-none",
                 )}
               >
                 <Send />
@@ -129,7 +129,7 @@ export default function Home({ params }: Props) {
 
               return (
                 <article key={key} className="flex flex-col gap-2 sm:flex-row sm:gap-8">
-                  <p className="shrink-0 whitespace-nowrap text-muted-foreground text-sm leading-relaxed tabular-nums sm:w-36 sm:pt-0.5">
+                  <p className="shrink-0 whitespace-nowrap text-muted-foreground text-sm tabular-nums leading-relaxed sm:w-36 sm:pt-0.5">
                     {item.period}
                   </p>
                   <div className="flex flex-col gap-3">
@@ -179,7 +179,7 @@ export default function Home({ params }: Props) {
 
               return (
                 <article key={key} className="flex flex-col gap-2 sm:flex-row sm:gap-8">
-                  <p className="shrink-0 whitespace-nowrap text-muted-foreground text-sm leading-relaxed tabular-nums sm:w-36 sm:pt-0.5">
+                  <p className="shrink-0 whitespace-nowrap text-muted-foreground text-sm tabular-nums leading-relaxed sm:w-36 sm:pt-0.5">
                     {item.period}
                   </p>
                   <div className="flex items-start gap-3">
@@ -240,7 +240,7 @@ export default function Home({ params }: Props) {
           aria-hidden="true"
           className="pointer-events-none relative mt-4 h-[clamp(11rem,38vw,18rem)] overflow-hidden sm:mt-6"
         >
-          <div className="-translate-x-1/2 absolute top-0 left-1/2 aspect-square w-[clamp(24rem,95vw,42rem)]">
+          <div className="absolute top-0 left-1/2 aspect-square w-[clamp(24rem,95vw,42rem)] -translate-x-1/2">
             <Globe className="max-w-none" />
           </div>
         </div>
