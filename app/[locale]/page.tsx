@@ -180,7 +180,7 @@ export default function Home({ params }: Props) {
                   <p className="shrink-0 whitespace-nowrap text-muted-foreground text-sm leading-relaxed tabular-nums sm:w-36 sm:pt-0.5">
                     {item.period}
                   </p>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-start gap-3">
                     <Image
                       className={cn(
                         "size-10 shrink-0 rounded-lg border border-border object-cover shadow-sm sm:size-11",
