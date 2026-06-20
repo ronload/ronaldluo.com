@@ -1,7 +1,7 @@
 import type { Graph } from "schema-dts";
 import { getPathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { BIO, LAST_UPDATED, PERSON, SITE_URL } from "@/lib/identity";
+import { BIO, PERSON, SITE_URL } from "@/lib/identity";
 
 const PERSON_ID = `${SITE_URL}/#person`;
 const ORG_ID = `${SITE_URL}/#prinsur`;
@@ -19,7 +19,7 @@ export function PersonJsonLd({ locale }: { locale: Locale }) {
         "@id": `${pageUrl}#profilepage`,
         url: pageUrl,
         inLanguage: locale,
-        dateModified: LAST_UPDATED,
+        dateModified: new Date().toISOString(),
         isPartOf: { "@id": WEBSITE_ID },
         about: { "@id": PERSON_ID },
         mainEntity: { "@id": PERSON_ID },
