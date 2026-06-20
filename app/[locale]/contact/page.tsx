@@ -1,49 +1,18 @@
-import {
-  SiFacebook,
-  SiGithub,
-  SiInstagram,
-  SiShopee,
-  SiThreads,
-  SiX,
-} from "@icons-pack/react-simple-icons";
-import { ArrowLeft, Mail } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { type ComponentType, use } from "react";
+import { use } from "react";
 import { GradientButton } from "@/components/gradient-button";
-import { LinkedinIcon } from "@/components/linkedin-icon";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { CONTACT_CHANNELS } from "@/lib/contact-channels";
 import { socialMetadata } from "@/lib/seo";
-import { cn } from "@/lib/utils";
+import { cn, externalLinkProps } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ locale: string }>;
 }
-
-interface ContactLink {
-  label: string;
-  href: string;
-  icon: ComponentType<{ className?: string }>;
-  note?: string;
-}
-
-const links: ContactLink[] = [
-  { label: "Email", href: "mailto:ronald@ronaldluo.com", icon: Mail },
-  { label: "GitHub", href: "https://github.com/ronload", icon: SiGithub },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/luo-yong-neng", icon: LinkedinIcon },
-  { label: "X", href: "https://x.com/ron1oad", icon: SiX },
-  { label: "Instagram", href: "https://www.instagram.com/ynent", icon: SiInstagram },
-  { label: "Threads", href: "https://www.threads.com/@ynent", icon: SiThreads },
-  { label: "Facebook", href: "https://www.facebook.com/RonTwps", icon: SiFacebook },
-  {
-    label: "Shopee",
-    href: "https://shopee.tw/ronlo",
-    icon: SiShopee,
-    note: "(archived)",
-  },
-];
 
 function BackToHome({ label }: { label: string }) {
   return (
@@ -97,33 +66,24 @@ export default function Contact({ params }: Props) {
           </p>
         </div>
         <nav className="grid w-4/5 grid-cols-1 gap-4 md:grid-flow-col md:grid-cols-2 md:grid-rows-4">
-          {links.map(({ label, href, icon: Icon, note }) => {
-            const external = href.startsWith("http");
-
-            return (
-              <GradientButton
-                key={label}
-                variant="outline"
-                size="lg"
-                nativeButton={false}
-                render={
-                  <a
-                    href={href}
-                    {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  />
-                }
-                className="h-12 w-full justify-start gap-3 bg-transparent px-4 text-base"
-              >
-                <Icon className="size-5" />
-                <span>
-                  {label}
-                  {note ? (
-                    <span className="ml-1.5 font-normal text-muted-foreground">{note}</span>
-                  ) : null}
-                </span>
-              </GradientButton>
-            );
-          })}
+          {CONTACT_CHANNELS.map(({ label, href, icon: Icon, note }) => (
+            <GradientButton
+              key={label}
+              variant="outline"
+              size="lg"
+              nativeButton={false}
+              render={<a href={href} {...externalLinkProps(href)} />}
+              className="h-12 w-full justify-start gap-3 bg-transparent px-4 text-base"
+            >
+              <Icon className="size-5" />
+              <span>
+                {label}
+                {note ? (
+                  <span className="ml-1.5 font-normal text-muted-foreground">{note}</span>
+                ) : null}
+              </span>
+            </GradientButton>
+          ))}
         </nav>
       </div>
     </section>

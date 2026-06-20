@@ -1,16 +1,16 @@
-import { SiFacebook, SiGithub, SiInstagram, SiThreads, SiX } from "@icons-pack/react-simple-icons";
 import { Mail, Send } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { type ComponentType, use } from "react";
+import { use } from "react";
 import { Divider } from "@/components/frame";
-import { LinkedinIcon } from "@/components/linkedin-icon";
 import { PersonJsonLd } from "@/components/person-jsonld";
 import { buttonVariants } from "@/components/ui/button";
 import { Globe } from "@/components/ui/globe";
 import { Link } from "@/i18n/navigation";
-import { cn } from "@/lib/utils";
+import { ACTIVE_CHANNELS } from "@/lib/contact-channels";
+import { PERSON } from "@/lib/identity";
+import { cn, externalLinkProps } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -42,22 +42,6 @@ const EDUCATION_ICONS: Record<(typeof EDUCATION)[number], string> = {
   fju: "/fju-icon.jpg",
   ckhs: "/ckhs-icon.png",
 };
-
-interface SocialLink {
-  label: string;
-  href: string;
-  icon: ComponentType<{ className?: string }>;
-}
-
-const SOCIALS: SocialLink[] = [
-  { label: "Email", href: "mailto:ronald@ronaldluo.com", icon: Mail },
-  { label: "GitHub", href: "https://github.com/ronload", icon: SiGithub },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/luo-yong-neng", icon: LinkedinIcon },
-  { label: "X", href: "https://x.com/ron1oad", icon: SiX },
-  { label: "Instagram", href: "https://www.instagram.com/ynent", icon: SiInstagram },
-  { label: "Threads", href: "https://www.threads.com/@ynent", icon: SiThreads },
-  { label: "Facebook", href: "https://www.facebook.com/RonTwps", icon: SiFacebook },
-];
 
 export default function Home({ params }: Props) {
   const { locale } = use(params);
@@ -93,7 +77,7 @@ export default function Home({ params }: Props) {
             />
             <div className="col-span-2 row-start-2 flex gap-3 sm:col-span-1 sm:col-start-1 sm:gap-4">
               <a
-                href="mailto:ronald@ronaldluo.com"
+                href={`mailto:${PERSON.email}`}
                 className={cn(
                   buttonVariants({ size: "lg" }),
                   "h-12 flex-1 text-base sm:min-w-44 sm:flex-none",
@@ -216,24 +200,20 @@ export default function Home({ params }: Props) {
             {t("connect")}
           </h2>
           <div className="mt-6 flex items-center justify-center gap-1 sm:mt-8 sm:gap-2">
-            {SOCIALS.map(({ label, href, icon: Icon }) => {
-              const external = href.startsWith("http");
-
-              return (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "icon-lg" }),
-                    "text-muted-foreground hover:text-foreground",
-                  )}
-                >
-                  <Icon className="size-5" />
-                </a>
-              );
-            })}
+            {ACTIVE_CHANNELS.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                aria-label={label}
+                {...externalLinkProps(href)}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "icon-lg" }),
+                  "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                <Icon className="size-5" />
+              </a>
+            ))}
           </div>
         </div>
         <div

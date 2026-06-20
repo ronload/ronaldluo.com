@@ -1,3 +1,5 @@
+import { SOCIAL_LINKS } from "@/lib/socials";
+
 export const SITE_URL = "https://ronaldluo.com";
 
 export const PERSON = {
@@ -35,14 +37,8 @@ export const PERSON = {
   knowsLanguage: ["zh-Hant", "en"],
   nationality: "TW",
   image: `${SITE_URL}/avatar.jpg`,
-  sameAs: [
-    "https://github.com/ronload",
-    "https://www.linkedin.com/in/luo-yong-neng",
-    "https://x.com/ron1oad",
-    "https://www.instagram.com/ynent",
-    "https://www.threads.com/@ynent",
-    "https://www.facebook.com/RonTwps",
-  ],
+  email: "ronald@ronaldluo.com",
+  sameAs: SOCIAL_LINKS.filter((social) => !social.archived).map((social) => social.url),
 } as const;
 
 export const BIO = {
