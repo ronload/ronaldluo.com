@@ -1,12 +1,13 @@
 import type { Graph } from "schema-dts";
 import { getPathname } from "@/i18n/navigation";
-import { BIO, PERSON, SITE_URL } from "@/lib/identity";
+import type { Locale } from "@/i18n/routing";
+import { BIO, LAST_UPDATED, PERSON, SITE_URL } from "@/lib/identity";
 
 const PERSON_ID = `${SITE_URL}/#person`;
 const ORG_ID = `${SITE_URL}/#prinsur`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 
-export function PersonJsonLd({ locale }: { locale: string }) {
+export function PersonJsonLd({ locale }: { locale: Locale }) {
   const isZh = locale === "zh-TW";
   const pageUrl = SITE_URL + getPathname({ locale, href: "/" });
 
@@ -18,7 +19,7 @@ export function PersonJsonLd({ locale }: { locale: string }) {
         "@id": `${pageUrl}#profilepage`,
         url: pageUrl,
         inLanguage: locale,
-        dateModified: new Date().toISOString(),
+        dateModified: LAST_UPDATED,
         isPartOf: { "@id": WEBSITE_ID },
         about: { "@id": PERSON_ID },
         mainEntity: { "@id": PERSON_ID },

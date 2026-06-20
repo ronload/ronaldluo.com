@@ -1,25 +1,26 @@
 import type { Metadata } from "next";
 import { getPathname } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import { type Locale, routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/identity";
 
-export function alternatesFor(locale: string, href: string) {
-  const languages: Record<string, string> = {};
+export function languagesFor(href: string) {
+  return {
+    ...Object.fromEntries(
+      routing.locales.map((locale) => [locale, SITE_URL + getPathname({ locale, href })]),
+    ),
+    "x-default": SITE_URL + getPathname({ locale: routing.defaultLocale, href }),
+  };
+}
 
-  for (const l of routing.locales) {
-    languages[l] = SITE_URL + getPathname({ locale: l, href });
-  }
-
-  languages["x-default"] = SITE_URL + getPathname({ locale: routing.defaultLocale, href });
-
+export function alternatesFor(locale: Locale, href: string) {
   return {
     canonical: SITE_URL + getPathname({ locale, href }),
-    languages,
+    languages: languagesFor(href),
   };
 }
 
 interface SocialInput {
-  locale: string;
+  locale: Locale;
   path: string;
   title: string;
   description: string;

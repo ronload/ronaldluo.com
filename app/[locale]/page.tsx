@@ -1,6 +1,7 @@
 import { Mail, Send } from "lucide-react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { notFound } from "next/navigation";
+import { hasLocale, useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
 import { Divider } from "@/components/frame";
@@ -8,6 +9,7 @@ import { PersonJsonLd } from "@/components/person-jsonld";
 import { buttonVariants } from "@/components/ui/button";
 import { Globe } from "@/components/ui/globe";
 import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 import { ACTIVE_CHANNELS } from "@/lib/contact-channels";
 import { PERSON } from "@/lib/identity";
 import { cn, externalLinkProps } from "@/lib/utils";
@@ -45,6 +47,9 @@ const EDUCATION_ICONS: Record<(typeof EDUCATION)[number], string> = {
 
 export default function Home({ params }: Props) {
   const { locale } = use(params);
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
 
   setRequestLocale(locale);
 
