@@ -15,7 +15,7 @@ import { GradientButton } from "@/components/gradient-button";
 import { LinkedinIcon } from "@/components/linkedin-icon";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { alternatesFor } from "@/lib/seo";
+import { socialMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -66,7 +66,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: t("title"),
-    alternates: alternatesFor(locale, "/contact"),
+    ...socialMetadata({
+      locale,
+      path: "/contact",
+      title: t("title"),
+      description: t("description"),
+    }),
   };
 }
 

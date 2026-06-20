@@ -8,10 +8,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageFrame } from "@/components/frame";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
-import { getPathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/identity";
-import { alternatesFor } from "@/lib/seo";
+import { socialMetadata } from "@/lib/seo";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -43,7 +42,6 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Omit<Props, "children">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
-  const isZh = locale === "zh-TW";
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -51,22 +49,12 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
       default: t("title"),
       template: "%s | Ronald Luo 羅永能",
     },
-    description: t("description"),
-    alternates: alternatesFor(locale, "/"),
-    openGraph: {
-      type: "profile",
-      locale: isZh ? "zh_TW" : "en_US",
-      alternateLocale: isZh ? "en_US" : "zh_TW",
-      url: SITE_URL + getPathname({ locale, href: "/" }),
-      siteName: "Ronald Luo 羅永能",
+    ...socialMetadata({
+      locale,
+      path: "/",
       title: t("title"),
       description: t("description"),
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: t("title"),
-      description: t("description"),
-    },
+    }),
     robots: {
       index: true,
       follow: true,
