@@ -50,6 +50,16 @@
           }
         }
       }
+    },
+    {
+      "includes": ["app/\\[locale\\]/opengraph-image.tsx"],
+      "linter": {
+        "rules": {
+          "performance": {
+            "noImgElement": "off"
+          }
+        }
+      }
     }
   ]
 }
