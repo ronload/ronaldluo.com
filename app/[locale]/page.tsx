@@ -82,7 +82,7 @@ export default function Home({ params }: Props) {
               </div>
             </div>
             <Image
-              className="col-start-2 row-start-1 aspect-square size-24 self-center rounded-full border border-border object-cover shadow-sm invert sm:row-span-2 sm:h-full sm:w-auto sm:self-stretch dark:invert-0"
+              className="col-start-2 row-start-1 aspect-square size-24 self-center rounded-full border-none object-cover shadow-sm invert sm:row-span-2 sm:h-full sm:w-auto sm:self-stretch dark:invert-0"
               src="/avatar.jpg"
               alt={t("name")}
               width={176}
