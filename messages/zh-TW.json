@@ -9,6 +9,53 @@
     "company": "鈦溪科技股份有限公司",
     "github": "Github"
   },
+  "Experience": {
+    "title": "經歷",
+    "items": {
+      "prinsur": {
+        "period": "2025 – 至今",
+        "organization": "鈦溪科技股份有限公司",
+        "role": "共同創辦人、董事及技術長",
+        "highlights": [
+          "共同創辦公司並擔任董事。",
+          "主導技術策略、產品設計、開發與工程發展方向。"
+        ]
+      },
+      "kaiyn": {
+        "period": "2023 – 2025",
+        "organization": "Kaiyn Capital",
+        "role": "共同創辦人及營運負責人",
+        "highlights": [
+          "共同創辦華語 Web3 教學社群，負責社群營運與行銷。",
+          "社群成員數穩定維持於 3,000+。"
+        ]
+      },
+      "yn": {
+        "period": "2019 – 2025",
+        "organization": "YN OFFICIAL",
+        "role": "創辦人",
+        "highlights": [
+          "獨立創辦並營運電商男裝品牌。",
+          "連續三年達成年經常性營收新台幣 500 萬+。",
+          "蝦皮商店追蹤人數穩定維持於 30,000+。"
+        ]
+      }
+    }
+  },
+  "Education": {
+    "title": "學歷",
+    "items": {
+      "fju": {
+        "period": "2021 – 2025",
+        "organization": "天主教輔仁大學",
+        "field": "資訊工程學系學士"
+      },
+      "ckhs": {
+        "period": "2016 – 2019",
+        "organization": "台北市立建國高級中學"
+      }
+    }
+  },
   "Header": {
     "contact": "聯絡我"
   },

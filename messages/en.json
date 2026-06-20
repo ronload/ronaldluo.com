@@ -9,6 +9,53 @@
     "company": "Prinsur Tech CO., LTD.",
     "github": "Github"
   },
+  "Experience": {
+    "title": "Experience",
+    "items": {
+      "prinsur": {
+        "period": "2025 – Present",
+        "organization": "Prinsur Tech CO., LTD.",
+        "role": "Co-Founder, Board Director & CTO",
+        "highlights": [
+          "Co-founded the company and serve on the board",
+          "Leading its technical strategy, product design, development and engineering direction."
+        ]
+      },
+      "kaiyn": {
+        "period": "2023 – 2025",
+        "organization": "Kaiyn Capital",
+        "role": "Co-Founder & Community Manager",
+        "highlights": [
+          "Co-founded a Mandarin Web3 education community, leading community operations and marketing.",
+          "Grew and sustained membership at 3,000+."
+        ]
+      },
+      "yn": {
+        "period": "2019 – 2025",
+        "organization": "YN OFFICIAL",
+        "role": "Founder",
+        "highlights": [
+          "Single-handedly founded and operated an e-commerce menswear brand.",
+          "Hit NT$5M+ in annual recurring revenue for three consecutive years.",
+          "Grew and sustained 30,000+ followers on the Shopee storefront."
+        ]
+      }
+    }
+  },
+  "Education": {
+    "title": "Education",
+    "items": {
+      "fju": {
+        "period": "2021 – 2025",
+        "organization": "Fu Jen Catholic University",
+        "field": "Bachelor's, Department of Computer Science and Information Engineering"
+      },
+      "ckhs": {
+        "period": "2016 – 2019",
+        "organization": "Taipei Municipal Jianguo High School"
+      }
+    }
+  },
   "Header": {
     "contact": "Get in Touch"
   },
