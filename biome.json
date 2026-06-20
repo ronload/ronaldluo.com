@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.next", "!dist", "!build", "!public"]
+    "includes": ["**", "!node_modules", "!.next", "!dist", "!build", "!public", "!components/ui"]
   },
   "css": {
     "parser": {
@@ -24,8 +24,37 @@
     "enabled": true,
     "rules": {
       "preset": "recommended",
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "warn"
+      },
+      "correctness": {
+        "noUndeclaredDependencies": "error"
+      },
+      "style": {
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": { "filenameCases": ["kebab-case"], "requireAscii": true }
+        },
+        "useConsistentArrayType": {
+          "level": "warn",
+          "options": { "syntax": "shorthand" }
+        },
+        "useConsistentTypeDefinitions": {
+          "level": "warn",
+          "options": { "style": "interface" }
+        },
+        "noNestedTernary": "warn"
+      },
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noConsole": { "level": "warn", "options": { "allow": ["error", "warn"] } },
+        "noImportCycles": "warn"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "options": { "functions": ["cn", "cva", "clsx", "cx", "tw"] }
+        }
       }
     },
     "domains": {
