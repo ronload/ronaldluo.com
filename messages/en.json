@@ -4,8 +4,9 @@
     "description": "The official personal site of Ronald Luo"
   },
   "Home": {
-    "title": "Placeholder",
-    "description": "This page has not launched yet.",
+    "name": "Ronald Luo（羅永能）",
+    "title": "Co-Founder, Board Director & CTO",
+    "company": "Prinsur Tech CO., LTD.",
     "github": "Github"
   },
   "Header": {

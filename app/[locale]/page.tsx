@@ -20,21 +20,24 @@ export default function Home({ params }: Props) {
   return (
     <>
       <section className="relative flex flex-1 flex-col">
-        <div className="container flex w-full flex-1 flex-col items-center justify-center gap-8 py-24 text-center sm:items-start sm:text-left">
+        <div className="container flex w-full flex-1 flex-row items-center justify-between gap-6 py-24 text-left sm:gap-12">
+          <div className="flex flex-col items-start gap-1.5 sm:gap-3">
+            <h1 className="font-semibold text-2xl text-foreground leading-tight tracking-tight sm:text-4xl md:text-5xl">
+              {t("name")}
+            </h1>
+            <div className="flex max-w-md flex-col gap-0.5 text-muted-foreground text-sm leading-relaxed sm:text-base md:text-lg">
+              <p>{t("title")}</p>
+              <p>{t("company")}</p>
+            </div>
+          </div>
           <Image
-            className="dark:invert"
-            src="/next.svg"
-            alt="Next.js logo"
-            width={100}
-            height={20}
+            className="size-24 shrink-0 rounded-full border border-border object-cover shadow-sm invert sm:size-36 md:size-44 dark:invert-0"
+            src="/avatar.jpg"
+            alt={t("name")}
+            width={176}
+            height={176}
             priority
           />
-          <div className="flex flex-col items-center gap-6 sm:items-start">
-            <h1 className="max-w-md font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
-              {t("title")}
-            </h1>
-            <p className="max-w-md text-lg text-muted-foreground leading-8">{t("description")}</p>
-          </div>
         </div>
       </section>
 

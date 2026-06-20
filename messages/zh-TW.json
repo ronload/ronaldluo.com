@@ -4,8 +4,9 @@
     "description": "Ronald Luo 的官方個人網站"
   },
   "Home": {
-    "title": "施工中",
-    "description": "此頁面尚未上線。",
+    "name": "羅永能(Ronald Luo)",
+    "title": "共同創辦人、董事及技術長",
+    "company": "鈦溪科技股份有限公司",
     "github": "Github"
   },
   "Header": {
