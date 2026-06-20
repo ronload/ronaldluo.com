@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "analyze": "ANALYZE=true next build",
+    "analyze": "next experimental-analyze",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "clear:cache": "rm -rf .next",
@@ -34,7 +34,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.0",
-    "@next/bundle-analyzer": "^16.2.9",
     "@tailwindcss/postcss": "^4.3.1",
     "@types/node": "^25.9.3",
     "@types/react": "^19.2.17",
