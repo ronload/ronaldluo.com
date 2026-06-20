@@ -94,7 +94,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider>
+          <NextIntlClientProvider messages={{}}>
             <PageFrame>
               <SiteHeader />
               {children}
