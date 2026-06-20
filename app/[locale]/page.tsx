@@ -1,9 +1,11 @@
+import { Mail, Send } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
 import { Divider } from "@/components/frame";
 import { buttonVariants } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -49,24 +51,48 @@ export default function Home({ params }: Props) {
   return (
     <>
       <section className="relative flex flex-1 flex-col">
-        <div className="container flex w-full flex-1 flex-row items-center justify-between gap-6 py-24 text-left sm:gap-12">
-          <div className="flex flex-col items-start gap-1.5 sm:gap-3">
-            <h1 className="font-semibold text-2xl text-foreground leading-tight tracking-tight sm:text-4xl md:text-5xl">
-              {t("name")}
-            </h1>
-            <div className="flex max-w-md flex-col gap-0.5 text-muted-foreground text-sm leading-relaxed sm:text-base md:text-lg">
-              <p>{t("title")}</p>
-              <p>{t("company")}</p>
+        <div className="container flex w-full flex-1 flex-col justify-center py-12 sm:py-24">
+          <div className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-8 text-left sm:gap-x-12 sm:gap-y-10">
+            <div className="col-start-1 row-start-1 flex flex-col items-start gap-1.5 self-center sm:gap-3 sm:self-start">
+              <h1 className="font-semibold text-2xl text-foreground leading-tight tracking-tight sm:text-4xl md:text-5xl">
+                {t("name")}
+              </h1>
+              <div className="flex max-w-md flex-col gap-0.5 text-muted-foreground text-sm leading-relaxed sm:text-base md:text-lg">
+                <p>{t("title")}</p>
+                <p>{t("company")}</p>
+              </div>
+            </div>
+            <Image
+              className="col-start-2 row-start-1 aspect-square size-24 self-center rounded-full border border-border object-cover shadow-sm invert sm:row-span-2 sm:h-full sm:w-auto sm:self-stretch dark:invert-0"
+              src="/avatar.jpg"
+              alt={t("name")}
+              width={176}
+              height={176}
+              priority
+            />
+            <div className="col-span-2 row-start-2 flex gap-3 sm:col-span-1 sm:col-start-1 sm:gap-4">
+              <a
+                href="mailto:ronald@ronaldluo.com"
+                className={cn(
+                  buttonVariants({ size: "lg" }),
+                  "h-12 flex-1 text-base sm:flex-none sm:min-w-44",
+                )}
+              >
+                <Mail />
+                {t("email")}
+              </a>
+              <Link
+                href="/contact"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "h-12 flex-1 text-base sm:flex-none sm:min-w-44",
+                )}
+              >
+                <Send />
+                {t("contact")}
+              </Link>
             </div>
           </div>
-          <Image
-            className="size-24 shrink-0 rounded-full border border-border object-cover shadow-sm invert sm:size-36 md:size-44 dark:invert-0"
-            src="/avatar.jpg"
-            alt={t("name")}
-            width={176}
-            height={176}
-            priority
-          />
         </div>
       </section>
 
