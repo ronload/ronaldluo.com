@@ -10,5 +10,8 @@
   },
   "Header": {
     "contact": "Get in Touch"
+  },
+  "Contact": {
+    "backToHome": "Back to home"
   }
 }

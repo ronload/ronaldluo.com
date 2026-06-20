@@ -10,5 +10,8 @@
   },
   "Header": {
     "contact": "聯絡我"
+  },
+  "Contact": {
+    "backToHome": "回到首頁"
   }
 }

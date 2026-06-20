@@ -7,6 +7,7 @@ import {
   SiX,
 } from "@icons-pack/react-simple-icons";
 import { ArrowLeft, Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { type ComponentType, use } from "react";
 import { GradientButton } from "@/components/gradient-button";
@@ -42,24 +43,32 @@ const links: ContactLink[] = [
   },
 ];
 
+function BackToHome({ label }: { label: string }) {
+  return (
+    <Link
+      href="/"
+      className={cn(
+        buttonVariants({ variant: "link", size: "sm" }),
+        "-ms-3 gap-2 text-muted-foreground transition-colors hover:text-foreground",
+      )}
+    >
+      <ArrowLeft />
+      {label}
+    </Link>
+  );
+}
+
 export default function Contact({ params }: Props) {
   const { locale } = use(params);
 
   setRequestLocale(locale);
 
+  const t = useTranslations("Contact");
+
   return (
     <section className="relative flex flex-1 flex-col">
       <div className="container pt-6">
-        <Link
-          href="/"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
-            "-ms-3 gap-2 text-muted-foreground",
-          )}
-        >
-          <ArrowLeft />
-          Back to home
-        </Link>
+        <BackToHome label={t("backToHome")} />
       </div>
       <div className="container flex w-full flex-1 flex-col items-center justify-center gap-10 py-24">
         <div className="flex w-4/5 flex-col gap-4 text-center">
