@@ -4,9 +4,9 @@ import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
 import { Divider } from "@/components/frame";
+import { GlobeCanvas } from "@/components/globe-canvas";
 import { PersonJsonLd } from "@/components/person-jsonld";
 import { buttonVariants } from "@/components/ui/button";
-import { Globe } from "@/components/ui/globe";
 import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
 import { ACTIVE_CHANNELS } from "@/lib/contact-channels";
@@ -208,7 +208,7 @@ export default function Home({ params }: Props) {
           className="pointer-events-none relative mt-4 h-[clamp(11rem,38vw,18rem)] overflow-hidden sm:mt-6"
         >
           <div className="absolute top-0 left-1/2 aspect-square w-[clamp(24rem,95vw,42rem)] -translate-x-1/2">
-            <Globe className="max-w-none" />
+            <GlobeCanvas className="max-w-none" />
           </div>
         </div>
       </footer>

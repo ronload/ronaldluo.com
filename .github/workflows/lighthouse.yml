@@ -1,50 +1,27 @@
 name: Lighthouse
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  deployment_status:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}
   cancel-in-progress: true
-
-env:
-  NEXT_TELEMETRY_DISABLED: "1"
 
 jobs:
   lighthouse:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Production'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 11.7.0
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - name: Start production server
-        run: pnpm start &
-      - name: Wait for server
-        run: |
-          for _ in $(seq 1 60); do
-            if curl --silent --fail --output /dev/null http://127.0.0.1:3000/en; then
-              echo "Server is ready"
-              exit 0
-            fi
-            sleep 2
-          done
-          echo "Server did not become ready in time" >&2
-          exit 1
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v12
         with:
+          urls: |
+            https://ronaldluo.com/en
+            https://ronaldluo.com/zh-TW
+            https://ronaldluo.com/en/contact
           configPath: ./lighthouserc.json
           temporaryPublicStorage: true
