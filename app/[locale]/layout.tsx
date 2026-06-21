@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageFrame } from "@/components/frame";
+import { RelMeLinks } from "@/components/rel-me-links";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
@@ -90,6 +91,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
+        <RelMeLinks />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
