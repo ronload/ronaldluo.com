@@ -3,6 +3,9 @@ import createNextIntlPlugin from "next-intl/plugin";
 import { SOCIAL_LINKS } from "./lib/socials";
 
 const nextConfig: NextConfig = {
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
   async redirects() {
     const socialRedirects = SOCIAL_LINKS.flatMap((social) => [
       { source: `/${social.id}`, destination: social.url, permanent: true },
@@ -20,6 +23,8 @@ const nextConfig: NextConfig = {
         destination: "https://github.com/ronload/dotfiles",
         permanent: true,
       },
+      { source: "/en", destination: "/", permanent: true },
+      { source: "/en/:path*", destination: "/:path*", permanent: true },
     ];
   },
 };

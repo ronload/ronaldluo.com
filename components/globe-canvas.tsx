@@ -1,7 +1,11 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useSyncExternalStore } from "react";
-import { Globe } from "@/components/ui/globe";
+
+const Globe = dynamic(() => import("@/components/ui/globe").then((m) => m.Globe), {
+  ssr: false,
+});
 
 let cachedSupport: boolean | undefined;
 
