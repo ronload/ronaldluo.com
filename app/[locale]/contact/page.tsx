@@ -1,13 +1,12 @@
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { hasLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { use } from "react";
 import { GradientButton } from "@/components/gradient-button";
 import { buttonVariants } from "@/components/ui/button";
+import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
 import { CONTACT_CHANNELS } from "@/lib/contact-channels";
 import { socialMetadata } from "@/lib/seo";
 import { cn, externalLinkProps } from "@/lib/utils";
@@ -33,10 +32,7 @@ function BackToHome({ label }: { label: string }) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
+  assertLocale(locale);
   const t = await getTranslations({ locale, namespace: "Contact" });
 
   return {
@@ -52,10 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function Contact({ params }: Props) {
   const { locale } = use(params);
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
+  assertLocale(locale);
   setRequestLocale(locale);
 
   const t = useTranslations("Contact");

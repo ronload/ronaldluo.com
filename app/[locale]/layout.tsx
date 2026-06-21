@@ -2,8 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_TC } from "next/font/google";
-import { notFound } from "next/navigation";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageFrame } from "@/components/frame";
 import { SiteHeader } from "@/components/site-header";
@@ -12,6 +11,7 @@ import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/identity";
 import { socialMetadata } from "@/lib/seo";
 import "../globals.css";
+import { assertLocale } from "@/i18n/assert-locale";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,10 +41,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Omit<Props, "children">): Promise<Metadata> {
   const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
+  assertLocale(locale);
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
   return {
@@ -75,10 +72,7 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
+  assertLocale(locale);
   setRequestLocale(locale);
 
   return (
