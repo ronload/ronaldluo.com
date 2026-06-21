@@ -10,7 +10,7 @@ import { Globe } from "@/components/ui/globe";
 import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
 import { ACTIVE_CHANNELS } from "@/lib/contact-channels";
-import { PERSON } from "@/lib/identity";
+import { EXPERIENCES, PERSON, SCHOOLS } from "@/lib/identity";
 import { cn, externalLinkProps } from "@/lib/utils";
 
 interface Props {
@@ -29,20 +29,6 @@ interface EducationItem {
   organization: string;
   field?: string;
 }
-
-const EXPERIENCES = ["prinsur", "kaiyn", "yn"] as const;
-const EDUCATION = ["fju", "ckhs"] as const;
-
-const EXPERIENCE_ICONS: Record<(typeof EXPERIENCES)[number], string> = {
-  prinsur: "/prinsur-icon.png",
-  kaiyn: "/kaiyn-capital-icon.jpg",
-  yn: "/yn-official-icon.jpg",
-};
-
-const EDUCATION_ICONS: Record<(typeof EDUCATION)[number], string> = {
-  fju: "/fju-icon.jpg",
-  ckhs: "/ckhs-icon.png",
-};
 
 export default function Home({ params }: Props) {
   const { locale } = use(params);
@@ -109,7 +95,7 @@ export default function Home({ params }: Props) {
             {tExperience("title")}
           </h2>
           <div className="mt-8 flex flex-col gap-10 sm:mt-10 sm:gap-12">
-            {EXPERIENCES.map((key) => {
+            {Object.entries(EXPERIENCES).map(([key, { icon }]) => {
               const item = tExperience.raw(`items.${key}`) as ExperienceItem;
 
               return (
@@ -121,7 +107,7 @@ export default function Home({ params }: Props) {
                     <div className="flex items-center gap-3">
                       <Image
                         className="size-10 shrink-0 rounded-lg border border-border object-cover shadow-sm sm:size-11"
-                        src={EXPERIENCE_ICONS[key]}
+                        src={icon}
                         alt={item.organization}
                         width={96}
                         height={96}
@@ -159,7 +145,7 @@ export default function Home({ params }: Props) {
             {tEducation("title")}
           </h2>
           <div className="mt-8 flex flex-col gap-10 sm:mt-10 sm:gap-12">
-            {EDUCATION.map((key) => {
+            {Object.entries(SCHOOLS).map(([key, school]) => {
               const item = tEducation.raw(`items.${key}`) as EducationItem;
 
               return (
@@ -171,9 +157,9 @@ export default function Home({ params }: Props) {
                     <Image
                       className={cn(
                         "size-10 shrink-0 rounded-lg border border-border object-cover shadow-sm sm:size-11",
-                        key === "ckhs" && "bg-white",
+                        school.brightIcon && "bg-white",
                       )}
-                      src={EDUCATION_ICONS[key]}
+                      src={school.icon}
                       alt={item.organization}
                       width={96}
                       height={96}

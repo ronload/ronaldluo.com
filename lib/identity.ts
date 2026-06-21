@@ -15,18 +15,6 @@ export const PERSON = {
     nameZh: "鈦溪科技股份有限公司",
     url: "https://prinsur.com",
   },
-  alumniOf: [
-    {
-      name: "Fu Jen Catholic University",
-      nameZh: "天主教輔仁大學",
-      url: "https://www.fju.edu.tw",
-    },
-    {
-      name: "Taipei Municipal Jianguo High School",
-      nameZh: "台北市立建國高級中學",
-      url: "https://www.ck.tp.edu.tw",
-    },
-  ],
   knowsAbout: [
     "Software Engineering",
     "Web Development",
@@ -42,6 +30,36 @@ export const PERSON = {
   email: "ronald@ronaldluo.com",
   sameAs: SOCIAL_LINKS.filter((social) => !social.archived).map((social) => social.url),
 } as const;
+
+interface School {
+  name: string;
+  nameZh: string;
+  url: string;
+  icon: string;
+  brightIcon?: boolean;
+}
+
+export const EXPERIENCES: Record<"prinsur" | "kaiyn" | "yn", { icon: string }> = {
+  prinsur: { icon: "/prinsur-icon.png" },
+  kaiyn: { icon: "/kaiyn-capital-icon.jpg" },
+  yn: { icon: "/yn-official-icon.jpg" },
+};
+
+export const SCHOOLS: Record<"fju" | "ckhs", School> = {
+  fju: {
+    name: "Fu Jen Catholic University",
+    nameZh: "天主教輔仁大學",
+    url: "https://www.fju.edu.tw",
+    icon: "/fju-icon.jpg",
+  },
+  ckhs: {
+    name: "Taipei Municipal Jianguo High School",
+    nameZh: "台北市立建國高級中學",
+    url: "https://www.ck.tp.edu.tw",
+    icon: "/ckhs-icon.png",
+    brightIcon: true,
+  },
+};
 
 export const BIO = {
   en: "Ronald Luo (羅永能) is the Co-Founder, Board Director and CTO of Prinsur Tech (Prinsur Tech CO., LTD.), a software developer based in Taiwan who studied at Fu Jen Catholic University and Taipei Municipal Jianguo High School.",

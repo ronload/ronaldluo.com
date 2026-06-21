@@ -1,7 +1,7 @@
 import type { Graph } from "schema-dts";
 import { getPathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { BIO, PERSON, SITE_URL } from "@/lib/identity";
+import { BIO, PERSON, SCHOOLS, SITE_URL } from "@/lib/identity";
 
 const PERSON_ID = `${SITE_URL}/#person`;
 const ORG_ID = `${SITE_URL}/#prinsur`;
@@ -34,7 +34,7 @@ export function PersonJsonLd({ locale }: { locale: Locale }) {
         description: isZh ? BIO.zh : BIO.en,
         jobTitle: isZh ? PERSON.jobTitle.zh : PERSON.jobTitle.en,
         worksFor: { "@id": ORG_ID },
-        alumniOf: PERSON.alumniOf.map((school) => ({
+        alumniOf: Object.values(SCHOOLS).map((school) => ({
           "@type": "EducationalOrganization" as const,
           name: school.name,
           alternateName: school.nameZh,
