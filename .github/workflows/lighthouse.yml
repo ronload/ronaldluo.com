@@ -7,12 +7,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.deployment_status.environment_url || github.ref }}
+  group: ${{ github.workflow }}
   cancel-in-progress: true
 
 jobs:
   lighthouse:
-    if: github.event.deployment_status.state == 'success'
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Production'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -20,8 +20,8 @@ jobs:
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
-            ${{ github.event.deployment_status.environment_url }}/en
-            ${{ github.event.deployment_status.environment_url }}/zh-TW
-            ${{ github.event.deployment_status.environment_url }}/en/contact
+            https://ronaldluo.com/en
+            https://ronaldluo.com/zh-TW
+            https://ronaldluo.com/en/contact
           configPath: ./lighthouserc.json
           temporaryPublicStorage: true
