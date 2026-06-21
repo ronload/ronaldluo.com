@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ronaldluo.com
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-First, run the development server:
+The official bilingual personal site of **Ronald Luo (羅永能)** — Co-Founder, Board Director & CTO of Prinsur Tech. Built to be the canonical, machine-readable source of identity for both search and answer engines (SEO / AEO / GEO).
+
+Live at **[ronaldluo.com](https://ronaldluo.com)**.
+
+## Tech Stack
+
+- **Next.js 16** (App Router, React 19) on **TypeScript**
+- **next-intl** for `en` / `zh-TW` localization
+- **Tailwind CSS v4** with **shadcn** (`base-maia`) on **@base-ui/react**
+- **next-themes** for light/dark, **motion** + **cobe** for the interactive globe
+- **Biome** + **ESLint** for linting/formatting, deployed on **Vercel**
+
+## Features
+
+- **Bilingual** routing (`en`, `zh-TW`) with locale-aware navigation and `hreflang` / `x-default` alternates.
+- **Structured data** — schema.org `Person` / `Organization` / `WebSite` / `ProfilePage` JSON-LD with bilingual names and romanizations for entity disambiguation.
+- **Answer-engine ready** — robots explicitly opts in to AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …).
+- **Dynamic OG images** generated per locale via `next/og`.
+- **Social shortlinks** — `/(github|linkedin|x|instagram|…)` permanently redirect to the matching profile.
+- **Interactive globe**, theme toggle, and locale switcher.
+
+## Development
+
+Requires **Node.js 20+** (CI uses Node 24) and **pnpm**.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm build      # production build
+pnpm validate   # typecheck + lint
+pnpm format     # auto-fix with Biome
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/[locale]/   Pages (home, contact), layout, metadata, OG image, sitemap, robots, manifest
+components/      UI components (globe, header, theme/locale switchers, JSON-LD)
+i18n/            next-intl routing and request config
+lib/             Identity, SEO, socials, and contact-channel data
+messages/        en / zh-TW translations
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Quality & CI
 
-## Learn More
+Every push and PR to `main` runs **typecheck**, **lint**, and **build**, plus **gitleaks** (secret scanning), **lychee** (link checking), and **typos** (spell checking). **Lighthouse** audits the production deployment.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[MIT](LICENSE)
