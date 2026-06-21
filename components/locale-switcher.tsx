@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
-export function LocaleSwitcher() {
+export function LocaleSwitcher({ label }: { label: string }) {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -19,7 +19,7 @@ export function LocaleSwitcher() {
     <Button
       variant="outline"
       size="icon"
-      aria-label="Switch language"
+      aria-label={label}
       disabled={isPending}
       onClick={() => startTransition(() => router.replace(pathname, { locale: nextLocale }))}
     >

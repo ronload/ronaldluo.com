@@ -65,11 +65,9 @@ export default function Contact({ params }: Props) {
       <div className="container flex w-full flex-1 flex-col items-center justify-center gap-10 py-24">
         <div className="flex w-4/5 flex-col gap-4 text-center">
           <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
-            Get in touch
+            {t("title")}
           </h1>
-          <p className="text-lg text-muted-foreground leading-8">
-            For work, collaboration, or just to say hi. Reach out anytime.
-          </p>
+          <p className="text-lg text-muted-foreground leading-8">{t("description")}</p>
         </div>
         <nav className="grid w-4/5 grid-cols-1 gap-4 md:grid-flow-col md:grid-cols-2 md:grid-rows-4">
           {CONTACT_CHANNELS.map(({ label, href, icon: Icon, note }) => (

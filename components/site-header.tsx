@@ -19,8 +19,8 @@ export function SiteHeader() {
             {t("contact")}
           </Link>
           <div className="flex items-center gap-2">
-            <LocaleSwitcher />
-            <ThemeSwitcher />
+            <LocaleSwitcher label={t("switchLanguage")} />
+            <ThemeSwitcher label={t("toggleTheme")} />
           </div>
         </div>
       </header>

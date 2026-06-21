@@ -60,11 +60,13 @@
     }
   },
   "Header": {
-    "contact": "聯絡我"
+    "contact": "聯絡我",
+    "switchLanguage": "切換語言",
+    "toggleTheme": "切換主題"
   },
   "Contact": {
-    "title": "聯絡我",
-    "description": "與 Ronald Luo（羅永能）取得聯繫 — Email、GitHub、LinkedIn、X、Instagram、Threads、Facebook。歡迎洽談合作、工作機會，或單純打聲招呼。",
+    "title": "與我聯繫",
+    "description": "談工作、找合作，或單純聊聊，歡迎隨時聯繫",
     "backToHome": "回到首頁"
   }
 }

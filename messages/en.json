@@ -60,11 +60,13 @@
     }
   },
   "Header": {
-    "contact": "Get in Touch"
+    "contact": "Get in Touch",
+    "switchLanguage": "Switch language",
+    "toggleTheme": "Toggle theme"
   },
   "Contact": {
     "title": "Contact",
-    "description": "Get in touch with Ronald Luo (羅永能) — email, GitHub, LinkedIn, X, Instagram, Threads, and Facebook. For work, collaboration, or just to say hi.",
+    "description": "For work, collaboration, or just to say hi. Reach out anytime.",
     "backToHome": "Back to home"
   }
 }
