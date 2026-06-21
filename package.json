@@ -10,6 +10,7 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "clean:cache": "rm -rf .next",
+    "font:cjk": "node scripts/build-cjk-font.mjs",
     "lint": "biome check && eslint .",
     "format": "biome check --write",
     "validate": "pnpm typecheck && pnpm lint"

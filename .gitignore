@@ -46,6 +46,11 @@ tmp/
 temp.md
 TEMP.md
 
+# font subset: commit woff2 + OFL; ignore the large source VF (auto-downloaded) + intermediates
+assets/fonts/NotoSansTC-VF.ttf
+assets/fonts/.NotoTC-*.ttf
+assets/fonts/.cjk-charset.txt
+
 # claude
 CLAUDE.md
 .claude/
