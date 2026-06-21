@@ -39,10 +39,35 @@ interface School {
   brightIcon?: boolean;
 }
 
-export const EXPERIENCES: Record<"prinsur" | "kaiyn" | "yn", { icon: string }> = {
-  prinsur: { icon: "/prinsur-icon.png" },
-  kaiyn: { icon: "/kaiyn-capital-icon.jpg" },
-  yn: { icon: "/yn-official-icon.jpg" },
+interface Experience {
+  icon: string;
+  organization: string;
+  roleName: string;
+  startDate: string;
+  endDate?: string;
+}
+
+export const EXPERIENCES: Record<"prinsur" | "kaiyn" | "yn", Experience> = {
+  prinsur: {
+    icon: "/prinsur-icon.png",
+    organization: "Prinsur Tech CO., LTD.",
+    roleName: "Co-Founder, Board Director & CTO",
+    startDate: "2025",
+  },
+  kaiyn: {
+    icon: "/kaiyn-capital-icon.jpg",
+    organization: "Kaiyn Capital",
+    roleName: "Co-Founder & Community Manager",
+    startDate: "2023",
+    endDate: "2025",
+  },
+  yn: {
+    icon: "/yn-official-icon.jpg",
+    organization: "YN OFFICIAL",
+    roleName: "Founder",
+    startDate: "2019",
+    endDate: "2025",
+  },
 };
 
 export const SCHOOLS: Record<"fju" | "ckhs", School> = {
