@@ -28,7 +28,7 @@ export interface ContactChannel {
   label: string;
   href: string;
   icon: IconType;
-  note?: string;
+  archived?: boolean;
 }
 
 export const CONTACT_CHANNELS: ContactChannel[] = [
@@ -37,8 +37,8 @@ export const CONTACT_CHANNELS: ContactChannel[] = [
     label: social.label,
     href: social.url,
     icon: ICONS[social.id],
-    note: social.archived ? "(archived)" : undefined,
+    archived: social.archived,
   })),
 ];
 
-export const ACTIVE_CHANNELS = CONTACT_CHANNELS.filter((channel) => !channel.note);
+export const ACTIVE_CHANNELS = CONTACT_CHANNELS.filter((channel) => !channel.archived);

@@ -66,7 +66,7 @@ export default function Contact({ params }: Props) {
           <p className="text-lg text-muted-foreground leading-8">{t("description")}</p>
         </div>
         <nav className="grid w-4/5 grid-cols-1 gap-4 md:grid-flow-col md:grid-cols-2 md:grid-rows-4">
-          {CONTACT_CHANNELS.map(({ label, href, icon: Icon, note }) => (
+          {CONTACT_CHANNELS.map(({ label, href, icon: Icon, archived }) => (
             <GradientButton
               key={label}
               variant="outline"
@@ -78,8 +78,8 @@ export default function Contact({ params }: Props) {
               <Icon className="size-5" />
               <span>
                 {label}
-                {note ? (
-                  <span className="ml-1.5 font-normal text-muted-foreground">{note}</span>
+                {archived ? (
+                  <span className="ml-1.5 font-normal text-muted-foreground">{t("archived")}</span>
                 ) : null}
               </span>
             </GradientButton>

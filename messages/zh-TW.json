@@ -67,6 +67,7 @@
   "Contact": {
     "title": "與我聯繫",
     "description": "談工作、找合作，或單純聊聊，歡迎隨時聯繫",
+    "archived": "（已封存）",
     "backToHome": "回到首頁"
   }
 }

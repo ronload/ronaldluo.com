@@ -67,6 +67,7 @@
   "Contact": {
     "title": "Contact",
     "description": "For work, collaboration, or just to say hi. Reach out anytime.",
+    "archived": "(archived)",
     "backToHome": "Back to home"
   }
 }
