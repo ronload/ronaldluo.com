@@ -9,9 +9,11 @@
     "analyze": "next experimental-analyze",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "clear:cache": "rm -rf .next",
-    "lint": "biome check && eslint .",
-    "format": "biome format --write"
+    "clean:cache": "rm -rf .next",
+    "lint": "biome lint && eslint .",
+    "format": "biome format --write",
+    "format:check": "biome format",
+    "validate": "pnpm typecheck && pnpm lint && pnpm format:check"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
