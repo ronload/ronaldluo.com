@@ -4,7 +4,7 @@ import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/identity";
 import { languagesFor } from "@/lib/seo";
 
-const PAGES = ["/", "/contact"];
+const PAGES = ["/", "/contact", "/faq"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return PAGES.map((href) => ({

@@ -59,6 +59,11 @@
       }
     }
   },
+  "Faq": {
+    "title": "常見問題",
+    "description": "關於羅永能（Ronald Luo）的常見問題——他是誰、鈦溪科技，以及就學經歷。",
+    "backToHome": "回到首頁"
+  },
   "Header": {
     "contact": "聯絡我",
     "switchLanguage": "切換語言",
