@@ -1,0 +1,35 @@
+name: Links
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lychee:
+    name: Broken link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          token: ${{ github.token }}
+          args: >-
+            --config lychee.toml
+            --verbose
+            --no-progress
+            './**/*.md'
+            './lib/**/*.ts'
+          fail: true
+          jobSummary: true
