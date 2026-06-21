@@ -59,6 +59,11 @@
       }
     }
   },
+  "Faq": {
+    "title": "Frequently Asked Questions",
+    "description": "Common questions about Ronald Luo (羅永能) — who he is, Prinsur Tech, and where he studied.",
+    "backToHome": "Back to home"
+  },
   "Header": {
     "contact": "Get in Touch",
     "switchLanguage": "Switch language",
