@@ -52,6 +52,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function Contact({ params }: Props) {
   const { locale } = use(params);
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
 
   setRequestLocale(locale);
 
