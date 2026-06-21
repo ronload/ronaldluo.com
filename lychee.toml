@@ -1,0 +1,10 @@
+max_retries = 3
+retry_wait_time = 2
+timeout = 20
+max_redirects = 10
+exclude_loopback = true
+accept = ["200", "206", "403", "429", "999"]
+user_agent = "Mozilla/5.0 (compatible; lychee link checker)"
+exclude = [
+  '^https?://localhost',
+]

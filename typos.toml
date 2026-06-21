@@ -1,0 +1,10 @@
+[default.extend-identifiers]
+Luo = "Luo"
+
+[files]
+extend-exclude = [
+  "pnpm-lock.yaml",
+  "public/",
+  "components/ui/",
+  "messages/*.json",
+]
