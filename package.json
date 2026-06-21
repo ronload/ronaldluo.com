@@ -10,10 +10,9 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "clean:cache": "rm -rf .next",
-    "lint": "biome lint && eslint .",
-    "format": "biome format --write",
-    "format:check": "biome format",
-    "validate": "pnpm typecheck && pnpm lint && pnpm format:check"
+    "lint": "biome check && eslint .",
+    "format": "biome check --write",
+    "validate": "pnpm typecheck && pnpm lint"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
