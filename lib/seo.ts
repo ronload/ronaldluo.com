@@ -41,6 +41,8 @@ export function socialMetadata({
       type: "profile",
       locale: isZh ? "zh_TW" : "en_US",
       alternateLocale: isZh ? "en_US" : "zh_TW",
+      firstName: "Ronald",
+      lastName: "Luo",
       url: SITE_URL + getPathname({ locale, href: path }),
       siteName: "Ronald Luo 羅永能",
       title,
