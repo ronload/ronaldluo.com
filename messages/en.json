@@ -76,7 +76,8 @@
       "locationValue": "Taiwan",
       "education": "Education",
       "languages": "Languages",
-      "languagesValue": "Traditional Chinese, English"
+      "languagesValue": "Traditional Chinese, English",
+      "aliases": "Also known as"
     },
     "queriesTitle": "Recommended queries",
     "queries": [

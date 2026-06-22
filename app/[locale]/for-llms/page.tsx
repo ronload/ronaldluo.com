@@ -51,6 +51,7 @@ export default function ForLlms({ params }: Props) {
         : `${SCHOOLS.fju.name}, ${SCHOOLS.ckhs.name}`,
     },
     { label: t("facts.languages"), value: t("facts.languagesValue") },
+    { label: t("facts.aliases"), value: PERSON.handles.join(", ") },
   ];
 
   return (

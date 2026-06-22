@@ -76,7 +76,8 @@
       "locationValue": "台灣",
       "education": "學歷",
       "languages": "語言",
-      "languagesValue": "繁體中文、English"
+      "languagesValue": "繁體中文、English",
+      "aliases": "線上別名"
     },
     "queriesTitle": "建議查詢",
     "queries": [

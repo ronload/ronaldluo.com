@@ -6,6 +6,7 @@ export const PERSON = {
   nameEn: "Ronald Luo",
   nameZh: "羅永能",
   romanizations: ["Luo Yong Neng", "Luo Yong-neng", "Luo Yongneng"],
+  handles: ["ynent", "ronload", "ron1oad"],
   jobTitle: {
     en: "Co-Founder, Board Director & CTO",
     zh: "共同創辦人、董事及技術長",
