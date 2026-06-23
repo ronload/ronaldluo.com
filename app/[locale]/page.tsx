@@ -60,6 +60,8 @@ export default function Home({ params }: Props) {
               alt={t("name")}
               width={176}
               height={176}
+              sizes="(min-width: 640px) 176px, 96px"
+              quality={60}
               priority
             />
             <div className="col-span-2 row-start-2 flex gap-3 sm:col-span-1 sm:col-start-1 sm:gap-4">

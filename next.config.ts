@@ -5,6 +5,7 @@ import { SOCIAL_LINKS } from "./lib/socials";
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
+    qualities: [60, 75],
   },
   async redirects() {
     const socialRedirects = SOCIAL_LINKS.flatMap((social) => [
