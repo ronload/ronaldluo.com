@@ -7,8 +7,13 @@ export interface SocialLink {
 }
 
 export const SOCIAL_LINKS: readonly SocialLink[] = [
-  { id: "github", label: "GitHub", url: "https://github.com/ronload" },
-  { id: "linkedin", label: "LinkedIn", url: "https://www.linkedin.com/in/luo-yong-neng" },
+  { id: "github", label: "GitHub", url: "https://github.com/ronload", aliases: ["gh", "git"] },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    url: "https://www.linkedin.com/in/luo-yong-neng",
+    aliases: ["li", "in"],
+  },
   { id: "x", label: "X", url: "https://x.com/ron1oad", aliases: ["twitter"] },
   {
     id: "instagram",
