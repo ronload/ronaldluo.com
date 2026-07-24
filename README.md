@@ -17,7 +17,7 @@ Live at **[ronaldluo.com](https://ronaldluo.com)**.
 
 ## Features
 
-- **Bilingual** routing (`en`, `zh-TW`) with locale-aware navigation and `hreflang` / `x-default` alternates.
+- **Bilingual** routing with canonical unprefixed English paths and `/zh-TW/...` paths; legacy `/en/...` URLs permanently redirect to their English equivalents. Includes locale-aware navigation and `hreflang` / `x-default` alternates.
 - **Structured data** — schema.org `Person` / `Organization` / `WebSite` / `ProfilePage` JSON-LD with bilingual names and romanizations for entity disambiguation.
 - **Answer-engine ready** — robots explicitly opts in to AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …).
 - **Dynamic OG images** generated per locale via `next/og`.
@@ -34,21 +34,27 @@ pnpm dev        # http://localhost:3000
 pnpm build      # production build
 pnpm validate   # typecheck + lint
 pnpm format     # auto-fix with Biome
+pnpm font:cjk   # regenerate subsetted CJK fonts after changing zh-TW content (requires uvx)
 ```
 
 ## Project Structure
 
 ```
-app/[locale]/   Pages (home, contact), layout, metadata, OG image, sitemap, robots, manifest
+app/             App Router routes, global metadata, and the llms.txt endpoint
+app/[locale]/    Localized pages (home, contact, FAQ, for-LLMs), layout, OG image, errors, and CJK fonts
 components/      UI components (globe, header, theme/locale switchers, JSON-LD)
 i18n/            next-intl routing and request config
 lib/             Identity, SEO, socials, and contact-channel data
 messages/        en / zh-TW translations
+public/          Static images, app icons, and the IndexNow verification key
+scripts/         CJK font subsetting and IndexNow submission scripts
+proxy.ts         next-intl locale middleware
+.github/         CI, security, link, spelling, and Lighthouse workflows
 ```
 
 ## Quality & CI
 
-Every push and PR to `main` runs **typecheck**, **lint**, and **build**, plus **gitleaks** (secret scanning), **lychee** (link checking), and **typos** (spell checking). **Lighthouse** audits the production deployment.
+Every push and PR targeting `main` runs **typecheck**, **lint**, and **build**, plus **gitleaks** (secret scanning), **lychee** (link checking), and **typos** (spell checking). **Lychee** also runs weekly. **Lighthouse** audits the production site after a successful deployment to the `Production` environment.
 
 ## License
 
