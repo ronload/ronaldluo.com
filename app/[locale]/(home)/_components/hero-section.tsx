@@ -11,9 +11,9 @@ export function HeroSection() {
   const t = useTranslations("Home");
 
   return (
-    <section className="relative z-0 flex flex-1 flex-col">
+    <section className="relative z-0 flex flex-col">
       <FrameTexture />
-      <div className="container flex w-full flex-1 flex-col justify-center py-12 sm:py-24">
+      <div className="container flex w-full flex-col justify-center py-12 sm:py-24">
         <div className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-8 text-left sm:gap-x-12 sm:gap-y-10">
           <div className="col-start-1 row-start-1 flex flex-col items-start gap-1.5 self-center sm:gap-3 sm:self-start">
             <h1 className="font-semibold text-2xl text-foreground leading-tight tracking-tight sm:text-4xl md:text-5xl">

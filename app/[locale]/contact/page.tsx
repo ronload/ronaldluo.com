@@ -56,12 +56,12 @@ export default function Contact({ params }: Props) {
 
   return (
     <>
-      <section className="relative z-0 flex flex-1 flex-col">
+      <section className="relative z-0 flex flex-col">
         <FrameTexture />
         <div className="container absolute inset-x-0 top-0 pt-3 sm:pt-6">
           <BackToHome label={t("backToHome")} />
         </div>
-        <div className="container flex w-full flex-1 flex-col items-center justify-center py-12 sm:py-24">
+        <div className="container flex w-full flex-col items-center justify-center py-12 sm:py-24">
           <div className="flex w-4/5 flex-col gap-4 text-center">
             <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
               {t("title")}
