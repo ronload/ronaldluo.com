@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
-import { Divider } from "@/components/frame";
+import { Divider, FrameTexture } from "@/components/frame";
 import { GlobeCanvas } from "@/components/globe-canvas";
 import { PersonJsonLd } from "@/components/person-jsonld";
 import { buttonVariants } from "@/components/ui/button";
@@ -42,7 +42,8 @@ export default function Home({ params }: Props) {
   return (
     <>
       <PersonJsonLd locale={locale} />
-      <section className="relative flex flex-1 flex-col">
+      <section className="relative z-0 flex flex-1 flex-col">
+        <FrameTexture />
         <div className="container flex w-full flex-1 flex-col justify-center py-12 sm:py-24">
           <div className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-8 text-left sm:gap-x-12 sm:gap-y-10">
             <div className="col-start-1 row-start-1 flex flex-col items-start gap-1.5 self-center sm:gap-3 sm:self-start">
@@ -182,7 +183,8 @@ export default function Home({ params }: Props) {
         </div>
       </section>
 
-      <footer className="relative">
+      <footer className="relative z-0">
+        <FrameTexture />
         <Divider />
         <div className="container flex flex-col items-center pt-16 text-center sm:pt-20">
           <h2 className="font-semibold text-2xl text-foreground tracking-tight sm:text-3xl">
