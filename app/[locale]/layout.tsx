@@ -5,7 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { FrameGuides, PageFrame } from "@/components/frame";
+import { FrameGuides, FrameTexture, PageFrame } from "@/components/frame";
 import { RelMeLinks } from "@/components/rel-me-links";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -102,6 +102,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <PageFrame>
               <SiteHeader />
               <main className="relative z-0 flex flex-1 flex-col">
+                <FrameTexture />
                 <FrameGuides />
                 {children}
               </main>
