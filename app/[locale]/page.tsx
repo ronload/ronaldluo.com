@@ -183,7 +183,7 @@ export default function Home({ params }: Props) {
         </div>
       </section>
 
-      <footer className="relative z-0">
+      <footer className="relative">
         <FrameTexture />
         <Divider />
         <div className="container flex flex-col items-center pt-16 text-center sm:pt-20">
