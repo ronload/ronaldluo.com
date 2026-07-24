@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { use } from "react";
+import { Divider, FrameTexture } from "@/components/frame";
 import { GradientButton } from "@/components/gradient-button";
 import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
@@ -54,38 +55,48 @@ export default function Contact({ params }: Props) {
   const t = useTranslations("Contact");
 
   return (
-    <section className="relative flex flex-1 flex-col">
-      <div className="container pt-6">
-        <BackToHome label={t("backToHome")} />
-      </div>
-      <div className="container flex w-full flex-1 flex-col items-center justify-center gap-10 py-24">
-        <div className="flex w-4/5 flex-col gap-4 text-center">
-          <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
-            {t("title")}
-          </h1>
-          <p className="text-lg text-muted-foreground leading-8">{t("description")}</p>
+    <>
+      <section className="relative z-0 flex flex-1 flex-col">
+        <FrameTexture />
+        <div className="container absolute inset-x-0 top-0 pt-3 sm:pt-6">
+          <BackToHome label={t("backToHome")} />
         </div>
-        <nav className="grid w-4/5 grid-cols-1 gap-4 md:grid-flow-col md:grid-cols-2 md:grid-rows-4">
-          {CONTACT_CHANNELS.map(({ label, href, icon: Icon, archived }) => (
-            <GradientButton
-              key={label}
-              variant="outline"
-              size="lg"
-              nativeButton={false}
-              render={<a href={href} {...externalLinkProps(href)} />}
-              className="h-12 w-full justify-start gap-3 bg-transparent px-4 text-base"
-            >
-              <Icon className="size-5" />
-              <span>
-                {label}
-                {archived ? (
-                  <span className="ml-1.5 font-normal text-muted-foreground">{t("archived")}</span>
-                ) : null}
-              </span>
-            </GradientButton>
-          ))}
-        </nav>
-      </div>
-    </section>
+        <div className="container flex w-full flex-1 flex-col items-center justify-center py-12 sm:py-24">
+          <div className="flex w-4/5 flex-col gap-4 text-center">
+            <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
+              {t("title")}
+            </h1>
+            <p className="text-lg text-muted-foreground leading-8">{t("description")}</p>
+          </div>
+        </div>
+      </section>
+      <section className="relative z-0 bg-background">
+        <Divider />
+        <div className="container flex w-full justify-center py-12 sm:py-16">
+          <nav className="grid w-4/5 grid-cols-1 gap-4 md:grid-flow-col md:grid-cols-2 md:grid-rows-4">
+            {CONTACT_CHANNELS.map(({ label, href, icon: Icon, archived }) => (
+              <GradientButton
+                key={label}
+                variant="outline"
+                size="lg"
+                nativeButton={false}
+                render={<a href={href} {...externalLinkProps(href)} />}
+                className="h-12 w-full justify-start gap-3 bg-transparent px-4 text-base"
+              >
+                <Icon className="size-5" />
+                <span>
+                  {label}
+                  {archived ? (
+                    <span className="ml-1.5 font-normal text-muted-foreground">
+                      {t("archived")}
+                    </span>
+                  ) : null}
+                </span>
+              </GradientButton>
+            ))}
+          </nav>
+        </div>
+      </section>
+    </>
   );
 }
