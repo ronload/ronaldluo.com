@@ -8,7 +8,6 @@ interface FrameProps {
 export function PageFrame({ className, children }: FrameProps) {
   return (
     <div className={cn("relative isolate flex min-h-svh flex-1 flex-col overflow-clip", className)}>
-      <FrameGuides />
       {children}
     </div>
   );
