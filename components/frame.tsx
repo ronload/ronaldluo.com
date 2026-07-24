@@ -13,6 +13,23 @@ export function PageFrame({ className, children }: FrameProps) {
   );
 }
 
+export function FrameTexture({ className }: FrameProps) {
+  return (
+    <div
+      aria-hidden="true"
+      className={cn("container pointer-events-none absolute inset-0 -z-10", className)}
+    >
+      <div
+        className="absolute inset-y-0 -right-3 -left-3 bg-background"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(45deg, transparent, transparent 2px, var(--secondary) 2px, var(--secondary) 4px)",
+        }}
+      />
+    </div>
+  );
+}
+
 export function FrameGuides({ className }: FrameProps) {
   return (
     <div
