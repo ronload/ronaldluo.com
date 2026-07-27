@@ -1,6 +1,7 @@
 import Image, { type ImageProps } from "next/image";
 import type { ComponentProps } from "react";
 import { CodeBlock } from "@/components/mdx/code-block";
+import { Mermaid } from "@/components/mdx/mermaid";
 import { Link } from "@/i18n/navigation";
 
 function MdxImage({ alt, height, src, width, ...props }: ComponentProps<"img">) {
@@ -31,6 +32,7 @@ function MdxLink({ href, ...props }: ComponentProps<"a">) {
 
 export function mdxComponents(labels: { copy: string; copied: string }) {
   return {
+    Mermaid,
     a: MdxLink,
     img: MdxImage,
     pre: (props: ComponentProps<"pre">) => (

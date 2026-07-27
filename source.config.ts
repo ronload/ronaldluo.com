@@ -1,3 +1,4 @@
+import { remarkMdxMermaid } from "fumadocs-core/mdx-plugins";
 import { defineCollections, defineConfig } from "fumadocs-mdx/config";
 import remarkCjkFriendly from "remark-cjk-friendly/parseOnly";
 import remarkJoinCjkLines from "remark-join-cjk-lines";
@@ -18,7 +19,7 @@ export const notes = defineCollections({
 
 export default defineConfig({
   mdxOptions: {
-    remarkPlugins: (v) => [remarkCjkFriendly, remarkJoinCjkLines, ...v],
+    remarkPlugins: (v) => [remarkCjkFriendly, remarkJoinCjkLines, remarkMdxMermaid, ...v],
     rehypeCodeOptions: {
       themes: { light: "github-light", dark: "github-dark" },
       icon: false,
