@@ -197,7 +197,7 @@
     @apply mt-7 mb-2 scroll-mt-24 font-medium text-lg leading-snug;
   }
   .note-prose a {
-    @apply underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground;
+    @apply font-medium underline decoration-muted-foreground underline-offset-4 transition-colors hover:decoration-foreground;
   }
   .note-prose strong {
     @apply font-semibold;
