@@ -1,10 +1,9 @@
-import { Mail, Send } from "lucide-react";
+import { NotebookText, Send } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { FrameTexture } from "@/components/frame";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { PERSON } from "@/lib/identity";
 import { cn } from "@/lib/utils";
 
 export function HeroSection() {
@@ -35,16 +34,16 @@ export function HeroSection() {
             priority
           />
           <div className="col-span-2 row-start-2 flex gap-3 sm:col-span-1 sm:col-start-1 sm:gap-4">
-            <a
-              href={`mailto:${PERSON.email}`}
+            <Link
+              href="/notes"
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "h-12 flex-1 text-base sm:min-w-44 sm:flex-none",
               )}
             >
-              <Mail />
-              {t("email")}
-            </a>
+              <NotebookText />
+              {t("notes")}
+            </Link>
             <Link
               href="/contact"
               className={cn(
