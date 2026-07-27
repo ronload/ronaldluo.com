@@ -27,6 +27,7 @@ jobs:
           token: ${{ github.token }}
           args: >-
             --config lychee.toml
+            --root-dir ${{ github.workspace }}
             --verbose
             --no-progress
             './**/*.md'

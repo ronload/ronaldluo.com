@@ -40,17 +40,18 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# fumadocs-mdx codegen
+.source/
+
 # temp
 temp/
 tmp/
 temp.md
 TEMP.md
 
-# font subset: commit woff2 + OFL; ignore the large source VF (auto-downloaded) + intermediates
-assets/fonts/NotoSansTC-VF.ttf
-assets/fonts/.NotoTC-*.ttf
-assets/fonts/.cjk-charset.txt
-
 # claude
 CLAUDE.md
 .claude/
+
+# obsidian vault state
+content/**/.obsidian/

@@ -1,4 +1,4 @@
-import { Send } from "lucide-react";
+import { NotebookText, Send } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Divider, FrameGuides } from "@/components/frame";
 import { LocaleSwitcher } from "@/components/locale-switcher";
@@ -19,6 +19,13 @@ export function SiteHeader() {
           {t("contact")}
         </Link>
         <div className="flex items-center gap-2">
+          <Link
+            href="/notes"
+            aria-label={t("notes")}
+            className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
+          >
+            <NotebookText />
+          </Link>
           <LocaleSwitcher label={t("switchLanguage")} />
           <ThemeSwitcher label={t("toggleTheme")} />
         </div>

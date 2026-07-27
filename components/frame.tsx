@@ -44,6 +44,26 @@ export function FrameGuides({ className }: FrameProps) {
   );
 }
 
+interface FrameAsideProps extends FrameProps {
+  side?: "start" | "end";
+}
+
+export function FrameAside({ className, children, side = "end" }: FrameAsideProps) {
+  return (
+    <div
+      className={cn(
+        "absolute inset-y-0 hidden 3xl:w-[calc((100%_-_72rem)/2)] w-[calc((100%_-_56rem)/2)] xl:block",
+        side === "start"
+          ? "start-0 ps-4 pe-[calc(0.75rem_+_1px_+_1rem)]"
+          : "end-0 ps-[calc(0.75rem_+_1px_+_1rem)] pe-4",
+        className,
+      )}
+    >
+      <div className="sticky top-16 pt-6">{children}</div>
+    </div>
+  );
+}
+
 export function Divider({ className }: FrameProps) {
   return (
     <div

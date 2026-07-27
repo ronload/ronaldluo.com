@@ -7,4 +7,5 @@ accept = ["200", "206", "403", "429", "999"]
 user_agent = "Mozilla/5.0 (compatible; lychee link checker)"
 exclude = [
   '^https?://localhost',
+  '^file://.*/notes/[a-z0-9-]+$',
 ]
