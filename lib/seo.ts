@@ -3,6 +3,13 @@ import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/identity";
 
+export const FEED_ALTERNATES = {
+  "application/atom+xml": routing.locales.map((locale) => ({
+    url: SITE_URL + getPathname({ locale, href: "/feed.xml" }),
+    title: `Notes (${locale})`,
+  })),
+};
+
 export function languagesFor(href: string, locales: readonly Locale[] = routing.locales) {
   const available = locales.length > 0 ? locales : routing.locales;
   const fallback = available.includes(routing.defaultLocale) ? routing.defaultLocale : available[0];

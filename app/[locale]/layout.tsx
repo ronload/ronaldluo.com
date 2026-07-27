@@ -10,7 +10,7 @@ import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/identity";
-import { socialMetadata } from "@/lib/seo";
+import { FEED_ALTERNATES, socialMetadata } from "@/lib/seo";
 import "../globals.css";
 import { assertLocale } from "@/i18n/assert-locale";
 
@@ -38,6 +38,12 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
   const { locale } = await params;
   assertLocale(locale);
   const t = await getTranslations({ locale, namespace: "Metadata" });
+  const social = socialMetadata({
+    locale,
+    path: "/",
+    title: t("title"),
+    description: t("description"),
+  });
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -45,12 +51,8 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
       default: t("title"),
       template: "%s | Ronald Luo 羅永能",
     },
-    ...socialMetadata({
-      locale,
-      path: "/",
-      title: t("title"),
-      description: t("description"),
-    }),
+    ...social,
+    alternates: { ...social.alternates, types: FEED_ALTERNATES },
     robots: {
       googleBot: {
         "max-snippet": -1,

@@ -5,7 +5,7 @@ import { Divider, FrameTexture } from "@/components/frame";
 import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
-import { socialMetadata } from "@/lib/seo";
+import { FEED_ALTERNATES, socialMetadata } from "@/lib/seo";
 import { source } from "@/lib/source";
 import { cn } from "@/lib/utils";
 
@@ -44,6 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     ...social,
+    alternates: { ...social.alternates, types: FEED_ALTERNATES },
   };
 }
 
