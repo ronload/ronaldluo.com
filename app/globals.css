@@ -175,5 +175,6 @@
   html {
     @apply font-sans;
     text-autospace: normal;
+    scrollbar-gutter: stable;
   }
 }
