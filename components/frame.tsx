@@ -59,7 +59,7 @@ export function FrameAside({ className, children, side = "end" }: FrameAsideProp
         className,
       )}
     >
-      <div className="sticky top-16">{children}</div>
+      <div className="sticky top-16 pt-6">{children}</div>
     </div>
   );
 }
