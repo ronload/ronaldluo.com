@@ -10,6 +10,7 @@ Live at **[ronaldluo.com](https://ronaldluo.com)**.
 ## Tech Stack
 
 - **Next.js 16** (App Router, React 19) on **TypeScript**
+- **fumadocs** (`fumadocs-core` + `fumadocs-mdx`) for the bilingual MDX content layer
 - **next-intl** for `en` / `zh-TW` localization
 - **Tailwind CSS v4** with **shadcn** (`base-maia`) on **@base-ui/react**
 - **next-themes** for light/dark, **motion** + **cobe** for the interactive globe
@@ -22,6 +23,7 @@ Live at **[ronaldluo.com](https://ronaldluo.com)**.
 - **Answer-engine ready** — robots explicitly opts in to AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …).
 - **Dynamic OG images** generated per locale via `next/og`.
 - **Social shortlinks** — `/(github|linkedin|x|instagram|…)` permanently redirect to the matching profile.
+- **Notes** at `/notes` — bilingual MDX with a table of contents, shiki syntax highlighting, and an Atom feed per locale.
 - **Interactive globe**, theme toggle, and locale switcher.
 
 ## Development
@@ -39,14 +41,15 @@ pnpm format     # auto-fix with Biome
 ## Project Structure
 
 ```
-app/             App Router routes, global metadata, and the llms.txt endpoint
-app/[locale]/    Localized pages (home, contact, FAQ, for-LLMs), layout, OG image, and errors
+app/             App Router routes, global metadata, sitemap, llms.txt, and the Atom feed
+app/[locale]/    Localized pages (home, notes, contact, FAQ, for-LLMs), layout, OG image, errors
 components/      UI components (globe, header, theme/locale switchers, JSON-LD)
+content/notes/   Bilingual MDX notes, `<slug>.<locale>.mdx`
 i18n/            next-intl routing and request config
-lib/             Identity, SEO, socials, and contact-channel data
+lib/             Identity, SEO, socials, contact-channel data, and the notes source
 messages/        en / zh-TW translations
 public/          Static images, app icons, and the IndexNow verification key
-scripts/         IndexNow submission script
+scripts/         Note translation check and IndexNow submission scripts
 proxy.ts         next-intl locale middleware
 .github/         CI, security, link, spelling, and Lighthouse workflows
 ```
