@@ -1,0 +1,17 @@
+*.ts
+*.tsx
+*.js
+*.mjs
+*.cjs
+*.json
+*.jsonc
+*.css
+*.yml
+*.yaml
+*.html
+
+.next/
+.source/
+content/**/.obsidian/
+temp/
+tmp/
