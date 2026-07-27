@@ -72,7 +72,9 @@ export default async function NotesPage({ params }: Props) {
             <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
               {t("title")}
             </h1>
-            <p className="text-lg text-muted-foreground leading-8">{t("description")}</p>
+            <p className="wrap-break-word break-keep text-lg text-muted-foreground leading-8">
+              {t("description")}
+            </p>
           </div>
         </div>
       </section>
