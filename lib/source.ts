@@ -20,7 +20,7 @@ export const source = loader({
 export type Note = ReturnType<typeof source.getPages>[number];
 
 export function isFallbackNote(note: Note, locale: string) {
-  return locale !== "zh-TW" && note.data.info.fullPath.endsWith(".zh-TW.mdx");
+  return locale !== "zh-TW" && note.data.info.fullPath.endsWith(".zh-TW.md");
 }
 
 export function noteLocales(slug: string) {

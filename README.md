@@ -10,7 +10,7 @@ Live at **[ronaldluo.com](https://ronaldluo.com)**.
 ## Tech Stack
 
 - **Next.js 16** (App Router, React 19) on **TypeScript**
-- **fumadocs** (`fumadocs-core` + `fumadocs-mdx`) for the bilingual MDX content layer
+- **fumadocs** (`fumadocs-core` + `fumadocs-mdx`) for the bilingual Markdown content layer
 - **next-intl** for `en` / `zh-TW` localization
 - **Tailwind CSS v4** with **shadcn** (`base-maia`) on **@base-ui/react**
 - **next-themes** for light/dark, **motion** + **cobe** for the interactive globe
@@ -23,7 +23,7 @@ Live at **[ronaldluo.com](https://ronaldluo.com)**.
 - **Answer-engine ready** — robots explicitly opts in to AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …).
 - **Dynamic OG images** generated per locale via `next/og`.
 - **Social shortlinks** — `/(github|linkedin|x|instagram|…)` permanently redirect to the matching profile.
-- **Notes** at `/notes` — bilingual MDX with a table of contents, shiki syntax highlighting, and an Atom feed per locale.
+- **Notes** at `/notes` — bilingual Markdown with a table of contents, shiki syntax highlighting, and an Atom feed per locale.
 - **Interactive globe**, theme toggle, and locale switcher.
 
 ## Development
@@ -44,7 +44,7 @@ pnpm format     # auto-fix with Biome
 app/             App Router routes, global metadata, sitemap, llms.txt, and the Atom feed
 app/[locale]/    Localized pages (home, notes, contact, FAQ, for-LLMs), layout, OG image, errors
 components/      UI components (globe, header, theme/locale switchers, JSON-LD)
-content/notes/   Bilingual MDX notes, `<slug>.<locale>.mdx`
+content/notes/   Bilingual Markdown notes, `<slug>.<locale>.md`
 i18n/            next-intl routing and request config
 lib/             Identity, SEO, socials, contact-channel data, and the notes source
 messages/        en / zh-TW translations
