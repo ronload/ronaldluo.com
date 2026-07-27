@@ -62,7 +62,7 @@ Output: "A"
 
 ### 暴力解
 
-**思路**：直接按照題目要求建表，利用一個 step 變數記錄當前字串讀取方式。由於建表過程需要用到雙重回圈，時間複雜度為O(n^2)。
+**思路**：直接按照題目要求建表，利用一個 state 變數記錄當前字串讀取方式。由於建表過程需要用到雙重迴圈，時間複雜度為O(n²)。
 
 這個用 state 變數控制讀取方向的寫法再往下推，就是[「String to Integer (atoi)｜字串轉整數」](/notes/string-to-integer-atoi)裡的狀態機。
 
@@ -91,7 +91,7 @@ class Solution:
         return res
 ```
 
-**結果**：1102ms, beats 5.02%of users with Python3.
+**結果**：1102ms, beats 5.02% of users with Python3.
 
 ### 省去建表
 
@@ -117,4 +117,4 @@ class Solution:
         return res
 ```
 
-**結果**：42ms, beats 97.29%of users with Python3.
+**結果**：42ms, beats 97.29% of users with Python3.

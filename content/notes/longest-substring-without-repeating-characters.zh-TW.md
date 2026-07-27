@@ -109,7 +109,7 @@ class Solution:
             if s[end] in char_set:
                 char_set.remove(s[start])
                 start = start + 1
-            # 如果下一個字元不在子字串中，則將窗口終點左移
+            # 如果下一個字元不在子字串中，則將窗口終點右移
             else:
                 char_set.add(s[end])
                 end = end + 1

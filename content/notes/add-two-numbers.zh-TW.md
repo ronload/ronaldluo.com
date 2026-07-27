@@ -100,7 +100,7 @@ class Solution:
         head = current = ListNode(0)  # 創建新串列
         carry = 0
 
-        # 當`l1`和`l2`都非空時，進行相加。如果有一者為空提前結束回圈
+        # 當`l1`和`l2`都非空時，進行相加。如果有一者為空提前結束迴圈
         while l1 and l2:
             carry, value = divmod(l1.val + l2.val + carry, 10)
             current.next = ListNode(value)

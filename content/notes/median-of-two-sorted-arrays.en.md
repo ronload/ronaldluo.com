@@ -88,7 +88,7 @@ class Solution:
 
 > The text on its own is fairly abstract, and watching it drawn out is what made it click for me.
 
-**Complexity**: O(log(min(m + n)))
+**Complexity**: O(log(min(m, n)))
 
 ```python
 class Solution:

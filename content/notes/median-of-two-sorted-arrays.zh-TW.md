@@ -8,7 +8,7 @@ date: 2024-01-17
 
 **難度**：Hard
 
-**主題**：Array、Binary Search、Devide and Conquer
+**主題**：Array、Binary Search、Divide and Conquer
 
 > Given two sorted arrays nums1 and nums2 of size m and n respectively, return **the median** of the two sorted arrays.
 
@@ -47,9 +47,9 @@ Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 
 ### 暴力解
 
-**思路**：直接合併兩陣列再對其進行快速排序，最後回傳中位數。合併+排序的複雜度為O((m+n)\log (m+n))，計算中位數的複雜度為O(m+n)。這種情況下，此解法並不滿足題目要求的複雜度，而且也沒有使用到**兩陣列已排序**這個條件進行優化。
+**思路**：直接合併兩陣列再對其進行快速排序，最後回傳中位數。合併+排序的複雜度為O((m+n)log(m+n))，計算中位數的複雜度為O(m+n)。這種情況下，此解法並不滿足題目要求的複雜度，而且也沒有使用到**兩陣列已排序**這個條件進行優化。
 
-**複雜度**：O((m+n)log (m+n))
+**複雜度**：O((m+n)log(m+n))
 
 ```python
 class Solution:
@@ -86,13 +86,13 @@ class Solution:
 
 ### Two Pointer＋二元搜尋法
 
-**思路**：既然題目要求時間複雜度在O((m+n)\log (m+n))，代表我們不可能將兩個陣列完全進行遍歷（至少需要線性時間），更不用說是對陣列進行合併。這邊要求要在對數時間內進行計算，唯一的解法就是使用二元搜尋（binary search）。這題的難點主要是在**如何在不合併陣列的情況下進行二元搜尋**，我們的思路是利用兩個指針分別將兩個陣列分成割兩段，利用二元搜尋法尋找適合的分割點，使指針左側代表小於中位數的部分，而指針右側代表小於中位數的部分。
+**思路**：既然題目要求時間複雜度在O(log(m+n))，代表我們不可能將兩個陣列完全進行遍歷（至少需要線性時間），更不用說是對陣列進行合併。這邊要求要在對數時間內進行計算，唯一的解法就是使用二元搜尋（binary search）。這題的難點主要是在**如何在不合併陣列的情況下進行二元搜尋**，我們的思路是利用兩個指針分別將兩個陣列分割成兩段，利用二元搜尋法尋找適合的分割點，使指針左側代表小於中位數的部分，而指針右側代表大於中位數的部分。
 
 > [https://www.youtube.com/watch?v=wDBnBA82z1c](https://www.youtube.com/watch?v=wDBnBA82z1c)
 
 > 這邊單看文字敘述可能有點抽象，可以看看這個影片比較幫助理解。
 
-**複雜度**：O(log(min(m + n)))
+**複雜度**：O(log(min(m, n)))
 
 ```python
 class Solution:
