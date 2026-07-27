@@ -52,3 +52,6 @@ TEMP.md
 # claude
 CLAUDE.md
 .claude/
+
+# obsidian vault state
+content/**/.obsidian/
