@@ -178,3 +178,109 @@
     scrollbar-gutter: stable;
   }
 }
+
+@layer components {
+  .note-prose {
+    @apply text-lg;
+    line-height: 1.85;
+  }
+  .note-prose p {
+    @apply my-[1.15em];
+  }
+  .note-prose h2 {
+    @apply mt-12 mb-4 scroll-mt-24 font-semibold text-2xl leading-snug tracking-tight;
+  }
+  .note-prose h3 {
+    @apply mt-9 mb-3 scroll-mt-24 font-semibold text-xl leading-snug tracking-tight;
+  }
+  .note-prose h4 {
+    @apply mt-7 mb-2 scroll-mt-24 font-medium text-lg leading-snug;
+  }
+  .note-prose a {
+    @apply underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground;
+  }
+  .note-prose strong {
+    @apply font-semibold;
+  }
+  .note-prose ul {
+    @apply my-[1.15em] list-outside list-disc ps-6;
+  }
+  .note-prose ol {
+    @apply my-[1.15em] list-outside list-decimal ps-6;
+  }
+  .note-prose li::marker {
+    @apply text-muted-foreground;
+  }
+  .note-prose li + li,
+  .note-prose li > ul,
+  .note-prose li > ol {
+    @apply mt-2;
+  }
+  .note-prose blockquote {
+    @apply my-[1.15em] border-s-2 ps-4 text-muted-foreground;
+  }
+  .note-prose :not(pre) > code {
+    @apply rounded-md bg-muted px-1.5 py-0.5 font-mono text-[0.875em];
+  }
+  .note-prose hr {
+    @apply my-10;
+  }
+  .note-prose table {
+    @apply my-[1.15em] w-full border-collapse text-base;
+  }
+  .note-prose th,
+  .note-prose td {
+    @apply border-b px-3 py-2 text-start align-top;
+  }
+  .note-prose th {
+    @apply font-medium;
+  }
+}
+
+@layer components {
+  .shiki,
+  .shiki span {
+    color: var(--shiki-light);
+    font-style: var(--shiki-light-font-style);
+    font-weight: var(--shiki-light-font-weight);
+    text-decoration: var(--shiki-light-text-decoration);
+  }
+  .dark .shiki,
+  .dark .shiki span {
+    color: var(--shiki-dark);
+    font-style: var(--shiki-dark-font-style);
+    font-weight: var(--shiki-dark-font-weight);
+    text-decoration: var(--shiki-dark-text-decoration);
+  }
+  .shiki .line {
+    @apply px-4;
+  }
+  .shiki .line.highlighted,
+  .shiki .line.diff {
+    @apply bg-code-highlight;
+  }
+  .shiki .line.diff.add {
+    @apply bg-success/10;
+  }
+  .shiki .line.diff.remove {
+    @apply bg-destructive/10;
+  }
+  .shiki .line.diff::before {
+    @apply -ms-2.5 me-0.5 inline-block w-2 text-muted-foreground;
+  }
+  .shiki .line.diff.add::before {
+    content: "+";
+  }
+  .shiki .line.diff.remove::before {
+    content: "-";
+  }
+  .shiki.has-focused .line:not(.focused) {
+    @apply opacity-40 blur-[1px] transition-[filter,opacity];
+  }
+  .shiki.has-focused:hover .line:not(.focused) {
+    @apply opacity-100 blur-none;
+  }
+  .shiki .highlighted-word {
+    @apply rounded-sm bg-code-highlight px-0.5;
+  }
+}

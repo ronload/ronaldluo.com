@@ -14,10 +14,15 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 w-full bg-background">
       <FrameGuides />
       <div className="container flex h-16 w-full items-center justify-between gap-2">
-        <Link href="/contact" className={cn(buttonVariants({ variant: "outline" }))}>
-          <Send />
-          {t("contact")}
-        </Link>
+        <div className="flex items-center gap-1">
+          <Link href="/contact" className={cn(buttonVariants({ variant: "outline" }))}>
+            <Send />
+            {t("contact")}
+          </Link>
+          <Link href="/notes" className={cn(buttonVariants({ variant: "ghost" }))}>
+            {t("notes")}
+          </Link>
+        </div>
         <div className="flex items-center gap-2">
           <LocaleSwitcher label={t("switchLanguage")} />
           <ThemeSwitcher label={t("toggleTheme")} />

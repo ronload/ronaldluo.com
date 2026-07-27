@@ -92,6 +92,7 @@
   },
   "Header": {
     "contact": "Get in Touch",
+    "notes": "Notes",
     "switchLanguage": "Switch language",
     "toggleTheme": "Toggle theme"
   },
@@ -100,5 +101,17 @@
     "description": "For work, collaboration, or just to say hi. Reach out anytime.",
     "archived": "(archived)",
     "backToHome": "Back to home"
+  },
+  "Notes": {
+    "title": "Notes",
+    "description": "Write-ups on what I build and the problems I run into along the way.",
+    "empty": "Nothing published here yet.",
+    "backToHome": "Back to home",
+    "backToNotes": "Back to notes",
+    "toc": "On this page",
+    "updated": "Updated {date}",
+    "fallbackNotice": "This note has no English version yet, so the original Traditional Chinese text is shown below.",
+    "copyCode": "Copy code",
+    "copiedCode": "Copied"
   }
 }

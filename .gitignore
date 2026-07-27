@@ -40,6 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# fumadocs-mdx codegen
+.source/
+
 # temp
 temp/
 tmp/

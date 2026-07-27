@@ -71,7 +71,11 @@
   },
   "overrides": [
     {
-      "includes": ["components/person-jsonld.tsx", "components/faq-jsonld.tsx"],
+      "includes": [
+        "components/person-jsonld.tsx",
+        "components/faq-jsonld.tsx",
+        "components/note-jsonld.tsx"
+      ],
       "linter": {
         "rules": {
           "security": {
