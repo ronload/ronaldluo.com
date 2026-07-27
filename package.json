@@ -10,7 +10,6 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "clean:cache": "rm -rf .next",
-    "font:cjk": "node scripts/build-cjk-font.mjs",
     "seo:indexnow": "node scripts/submit-indexnow.mjs",
     "lint": "biome check && eslint .",
     "format": "biome check --write",

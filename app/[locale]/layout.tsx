@@ -2,7 +2,6 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FrameGuides, PageFrame } from "@/components/frame";
@@ -24,19 +23,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   preload: false,
-});
-
-const notoSansTC = localFont({
-  variable: "--font-noto-sans-tc",
-  display: "swap",
-  preload: false,
-  adjustFontFallback: false,
-  fallback: ["PingFang TC", "Microsoft JhengHei", "Heiti TC", "sans-serif"],
-  src: [
-    { path: "./fonts/noto-sans-tc-400.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/noto-sans-tc-500.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/noto-sans-tc-700.woff2", weight: "700", style: "normal" },
-  ],
 });
 
 interface Props {
@@ -87,7 +73,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} ${notoSansTC.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">

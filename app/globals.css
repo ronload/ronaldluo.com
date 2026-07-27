@@ -67,10 +67,9 @@
 :root {
   --radius: 0.625rem;
   --font-sans:
-    var(--font-geist-sans), var(--font-cjk-web), -apple-system, BlinkMacSystemFont,
-    var(--font-cjk-system), sans-serif;
-  --font-cjk-web: var(--font-noto-sans-tc);
-  --font-cjk-system: "PingFang TC", "Microsoft JhengHei", "Heiti TC", "Source Han Sans TC";
+    var(--font-geist-sans), -apple-system, BlinkMacSystemFont, var(--font-cjk-system), sans-serif;
+  --font-cjk-system:
+    "PingFang TC", "Microsoft JhengHei", "Heiti TC", "Noto Sans TC", "Source Han Sans TC";
   --background: var(--color-white);
   --foreground: var(--color-neutral-800);
   --card: var(--color-white);

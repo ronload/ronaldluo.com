@@ -34,20 +34,19 @@ pnpm dev        # http://localhost:3000
 pnpm build      # production build
 pnpm validate   # typecheck + lint
 pnpm format     # auto-fix with Biome
-pnpm font:cjk   # regenerate subsetted CJK fonts after changing zh-TW content (requires uvx)
 ```
 
 ## Project Structure
 
 ```
 app/             App Router routes, global metadata, and the llms.txt endpoint
-app/[locale]/    Localized pages (home, contact, FAQ, for-LLMs), layout, OG image, errors, and CJK fonts
+app/[locale]/    Localized pages (home, contact, FAQ, for-LLMs), layout, OG image, and errors
 components/      UI components (globe, header, theme/locale switchers, JSON-LD)
 i18n/            next-intl routing and request config
 lib/             Identity, SEO, socials, and contact-channel data
 messages/        en / zh-TW translations
 public/          Static images, app icons, and the IndexNow verification key
-scripts/         CJK font subsetting and IndexNow submission scripts
+scripts/         IndexNow submission script
 proxy.ts         next-intl locale middleware
 .github/         CI, security, link, spelling, and Lighthouse workflows
 ```
