@@ -14,7 +14,6 @@ const PAGES = [
 export default function sitemap(): MetadataRoute.Sitemap {
   return PAGES.map(({ href, priority }) => ({
     url: SITE_URL + getPathname({ locale: routing.defaultLocale, href }),
-    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority,
     alternates: { languages: languagesFor(href) },
