@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/identity";
@@ -62,6 +62,23 @@ export function socialMetadata({
       card: "summary_large_image",
       title,
       description,
+    },
+  };
+}
+
+export async function withInheritedOpenGraphImages(
+  metadata: Metadata,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const images = (await parent).openGraph?.images;
+
+  if (!metadata.openGraph || metadata.openGraph.images || !images) return metadata;
+
+  return {
+    ...metadata,
+    openGraph: {
+      ...metadata.openGraph,
+      images,
     },
   };
 }

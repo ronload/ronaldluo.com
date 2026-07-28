@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { use } from "react";
@@ -9,7 +9,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
 import { CONTACT_CHANNELS } from "@/lib/contact-channels";
-import { socialMetadata } from "@/lib/seo";
+import { socialMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
 import { cn, externalLinkProps } from "@/lib/utils";
 
 interface Props {
@@ -31,20 +31,26 @@ function BackToHome({ label }: { label: string }) {
   );
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { locale } = await params;
   assertLocale(locale);
   const t = await getTranslations({ locale, namespace: "Contact" });
 
-  return {
-    title: t("title"),
-    ...socialMetadata({
-      locale,
-      path: "/contact",
+  return withInheritedOpenGraphImages(
+    {
       title: t("title"),
-      description: t("description"),
-    }),
-  };
+      ...socialMetadata({
+        locale,
+        path: "/contact",
+        title: t("title"),
+        description: t("description"),
+      }),
+    },
+    parent,
+  );
 }
 
 export default function Contact({ params }: Props) {

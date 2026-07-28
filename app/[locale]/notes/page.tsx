@@ -1,11 +1,11 @@
 import { ArrowLeft } from "lucide-react";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Divider, FrameTexture } from "@/components/frame";
 import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
-import { FEED_ALTERNATES, socialMetadata } from "@/lib/seo";
+import { FEED_ALTERNATES, socialMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
 import { source } from "@/lib/source";
 import { cn } from "@/lib/utils";
 
@@ -30,7 +30,10 @@ function BackToHome({ label }: { label: string }) {
   );
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { locale } = await params;
   assertLocale(locale);
   const t = await getTranslations({ locale, namespace: "Notes" });
@@ -41,11 +44,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: t("description"),
   });
 
-  return {
-    title: t("title"),
-    ...social,
-    alternates: { ...social.alternates, types: FEED_ALTERNATES },
-  };
+  return withInheritedOpenGraphImages(
+    {
+      title: t("title"),
+      ...social,
+      alternates: { ...social.alternates, types: FEED_ALTERNATES },
+    },
+    parent,
+  );
 }
 
 export default async function NotesPage({ params }: Props) {
