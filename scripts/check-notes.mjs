@@ -102,6 +102,14 @@ for (const note of notes) {
   if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
     at(1, `date \`${date}\` is not YYYY-MM-DD`);
   }
+  if (frontmatter.get("draft") !== "true") {
+    for (const key of ["title", "description"]) {
+      if (frontmatter.has(key) && frontmatter.get(key) === "") {
+        at(1, `${key} is empty; fill it in or keep \`draft: true\``);
+      }
+    }
+    if (body.trim() === "") at(1, "body is empty; write it or keep `draft: true`");
+  }
 
   for (const { info, lineNumber } of fenceInfoStrings(body, offset)) {
     if (info === "") {
