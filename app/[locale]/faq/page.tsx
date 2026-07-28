@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { use } from "react";
@@ -8,27 +8,33 @@ import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
 import { FAQ } from "@/lib/identity";
-import { socialMetadata } from "@/lib/seo";
+import { socialMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { locale } = await params;
   assertLocale(locale);
   const t = await getTranslations({ locale, namespace: "Faq" });
 
-  return {
-    title: t("title"),
-    ...socialMetadata({
-      locale,
-      path: "/faq",
+  return withInheritedOpenGraphImages(
+    {
       title: t("title"),
-      description: t("description"),
-    }),
-  };
+      ...socialMetadata({
+        locale,
+        path: "/faq",
+        title: t("title"),
+        description: t("description"),
+      }),
+    },
+    parent,
+  );
 }
 
 export default function Faq({ params }: Props) {

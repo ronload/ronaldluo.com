@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { FrameAside } from "@/components/frame";
@@ -10,7 +10,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
 import { getPathname, Link } from "@/i18n/navigation";
 import { SITE_URL } from "@/lib/identity";
-import { noteMetadata } from "@/lib/seo";
+import { noteMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
 import { isFallbackNote, noteLocales, source } from "@/lib/source";
 import { cn } from "@/lib/utils";
 import { NoteNav } from "../_components/note-nav";
@@ -39,21 +39,27 @@ export function generateStaticParams() {
     });
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
   const { locale, slug } = await params;
   assertLocale(locale);
   const note = getNote(locale, slug);
 
-  return noteMetadata({
-    locale,
-    slug,
-    title: note.data.title,
-    description: note.data.description,
-    date: note.data.date,
-    modified: note.data.lastModified,
-    locales: noteLocales(slug),
-    fallback: isFallbackNote(note, locale),
-  });
+  return withInheritedOpenGraphImages(
+    noteMetadata({
+      locale,
+      slug,
+      title: note.data.title,
+      description: note.data.description,
+      date: note.data.date,
+      modified: note.data.lastModified,
+      locales: noteLocales(slug),
+      fallback: isFallbackNote(note, locale),
+    }),
+    parent,
+  );
 }
 
 export default async function NotePage({ params }: Props) {
