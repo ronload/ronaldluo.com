@@ -35,6 +35,7 @@ export default defineConfig({
         "rose-pine-dawn": "rose-pine-dawn",
         "rose-pine-moon": "rose-pine-moon",
         "rose-pine": "rose-pine",
+        "one-light": "one-light",
         "one-dark-pro": "one-dark-pro",
         "one-dark-pro-darker": "one-dark-pro",
         "one-dark-pro-flat": "one-dark-pro",

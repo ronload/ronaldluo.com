@@ -10,6 +10,7 @@ export type ThemeId =
   | "rose-pine-dawn"
   | "rose-pine-moon"
   | "rose-pine"
+  | "one-light"
   | "one-dark-pro"
   | "one-dark-pro-darker"
   | "one-dark-pro-flat"
@@ -93,7 +94,12 @@ const rosePine: readonly ThemeDefinition[] = [
   },
 ];
 
-const oneDarkPro: readonly ThemeDefinition[] = [
+const one: readonly ThemeDefinition[] = [
+  {
+    id: "one-light",
+    label: "One Light",
+    dark: false,
+  },
   {
     id: "one-dark-pro",
     label: "One Dark Pro",
@@ -125,7 +131,7 @@ export const themeGroups: readonly ThemeGroup[] = [
   { label: "Tokyo Night", themes: tokyonight },
   { label: "Catppuccin", themes: catppuccin },
   { label: "Rose Pine", themes: rosePine },
-  { label: "One Dark Pro", themes: oneDarkPro },
+  { label: "One", themes: one },
 ];
 
 export const themeDefinitions = themeGroups.flatMap((group) => group.themes);
@@ -149,5 +155,5 @@ export function resolveTheme(
 ): ThemeDefinition {
   if (isThemeId(preference)) return getTheme(preference);
 
-  return getTheme(resolvedTheme === "dark" ? "tokyonight-night" : "tokyonight-day");
+  return getTheme(resolvedTheme === "dark" ? "tokyonight-night" : "one-light");
 }

@@ -101,24 +101,24 @@
     var(--font-geist-sans), -apple-system, BlinkMacSystemFont, var(--font-cjk-system), sans-serif;
   --font-cjk-system:
     "PingFang TC", "Microsoft JhengHei", "Heiti TC", "Noto Sans TC", "Source Han Sans TC";
-  --theme-background: #e1e2e7;
-  --theme-foreground: #315292;
-  --theme-surface: #d0d5e3;
-  --theme-surface-raised: #c4c8da;
-  --theme-muted-foreground: #526196;
-  --theme-primary: #355db9;
-  --theme-primary-foreground: #e1e2e7;
-  --theme-info: #355db9;
-  --theme-success: #7847bd;
-  --theme-warning: #b15c00;
-  --theme-warning-foreground: #775c35;
-  --theme-destructive: #a83939;
-  --theme-border: #6172b0;
-  --theme-code: #e1e2e7;
-  --theme-code-highlight: #b7c1e3;
-  --theme-globe-base: #9aa5ce;
-  --theme-globe-marker: #b15c00;
-  --theme-globe-glow: #e1e2e7;
+  --theme-background: #fafafa;
+  --theme-foreground: #383a42;
+  --theme-surface: #eaeaeb;
+  --theme-surface-raised: #e5e5e6;
+  --theme-muted-foreground: #626772;
+  --theme-primary: #526fff;
+  --theme-primary-foreground: #ffffff;
+  --theme-info: #0184bc;
+  --theme-success: #50a14f;
+  --theme-warning: #986801;
+  --theme-warning-foreground: #986801;
+  --theme-destructive: #e45649;
+  --theme-border: #dbdbdc;
+  --theme-code: #fafafa;
+  --theme-code-highlight: #e5e5e6;
+  --theme-globe-base: #526fff;
+  --theme-globe-marker: #986801;
+  --theme-globe-glow: #fafafa;
   --background: var(--theme-background);
   --foreground: var(--theme-foreground);
   --card: var(--theme-surface);
@@ -164,6 +164,28 @@
 }
 
 html[data-theme="light"],
+html[data-theme="one-light"] {
+  --theme-background: #fafafa;
+  --theme-foreground: #383a42;
+  --theme-surface: #eaeaeb;
+  --theme-surface-raised: #e5e5e6;
+  --theme-muted-foreground: #626772;
+  --theme-primary: #526fff;
+  --theme-primary-foreground: #ffffff;
+  --theme-info: #0184bc;
+  --theme-success: #50a14f;
+  --theme-warning: #986801;
+  --theme-warning-foreground: #986801;
+  --theme-destructive: #e45649;
+  --theme-border: #dbdbdc;
+  --theme-code: #fafafa;
+  --theme-code-highlight: #e5e5e6;
+  --theme-globe-base: #526fff;
+  --theme-globe-marker: #986801;
+  --theme-globe-glow: #fafafa;
+  color-scheme: light;
+}
+
 html[data-theme="tokyonight-day"] {
   --theme-background: #e1e2e7;
   --theme-foreground: #315292;
@@ -572,20 +594,27 @@ html[data-theme="one-dark-pro-night-flat"] {
   }
   html[data-theme]:not([data-theme="light"]):not([data-theme="tokyonight-day"]):not(
       [data-theme="catppuccin-latte"]
-    ):not([data-theme="rose-pine-dawn"])
+    ):not([data-theme="rose-pine-dawn"]):not([data-theme="one-light"])
     .gradient-glow {
     border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
     box-shadow: 0 -20px 80px -20px color-mix(in srgb, var(--primary) 32%, transparent) inset;
   }
   .shiki,
   .shiki span {
-    color: var(--site-shiki-color, var(--shiki-tokyonight-day));
-    font-style: var(--site-shiki-font-style, var(--shiki-tokyonight-day-font-style));
-    font-weight: var(--site-shiki-font-weight, var(--shiki-tokyonight-day-font-weight));
-    text-decoration: var(--site-shiki-text-decoration, var(--shiki-tokyonight-day-text-decoration));
+    color: var(--site-shiki-color, var(--shiki-one-light));
+    font-style: var(--site-shiki-font-style, var(--shiki-one-light-font-style));
+    font-weight: var(--site-shiki-font-weight, var(--shiki-one-light-font-weight));
+    text-decoration: var(--site-shiki-text-decoration, var(--shiki-one-light-text-decoration));
   }
   html[data-theme="light"] .shiki,
   html[data-theme="light"] .shiki span,
+  html[data-theme="one-light"] .shiki,
+  html[data-theme="one-light"] .shiki span {
+    --site-shiki-color: var(--shiki-one-light);
+    --site-shiki-font-style: var(--shiki-one-light-font-style);
+    --site-shiki-font-weight: var(--shiki-one-light-font-weight);
+    --site-shiki-text-decoration: var(--shiki-one-light-text-decoration);
+  }
   html[data-theme="tokyonight-day"] .shiki,
   html[data-theme="tokyonight-day"] .shiki span {
     --site-shiki-color: var(--shiki-tokyonight-day);

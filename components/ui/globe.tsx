@@ -36,10 +36,10 @@ const GLOBE_CONFIG: Omit<COBEOptions, "dark" | "baseColor" | "markerColor" | "gl
 type GlobeThemeConfig = Pick<COBEOptions, "dark" | "baseColor" | "markerColor" | "glowColor">;
 
 const defaultGlobeThemeConfig: GlobeThemeConfig = {
-  baseColor: [154 / 255, 165 / 255, 206 / 255],
+  baseColor: [82 / 255, 111 / 255, 255 / 255],
   dark: 0,
-  glowColor: [225 / 255, 226 / 255, 231 / 255],
-  markerColor: [177 / 255, 92 / 255, 0],
+  glowColor: [250 / 255, 250 / 255, 250 / 255],
+  markerColor: [152 / 255, 104 / 255, 1 / 255],
 };
 
 function themeGlobeConfig(dark: boolean): GlobeThemeConfig {
