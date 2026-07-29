@@ -11,10 +11,7 @@ function GradientGlow({ className }: { className?: string }) {
   return (
     <span
       aria-hidden="true"
-      className={cn(
-        "gradient-glow pointer-events-none absolute inset-0 -z-10 rounded-[inherit]",
-        className,
-      )}
+      className={cn("gradient-glow pointer-events-none absolute inset-0 -z-10", className)}
     />
   );
 }

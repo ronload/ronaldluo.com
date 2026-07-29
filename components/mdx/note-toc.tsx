@@ -163,7 +163,7 @@ function TrackHighlight({ track }: { track: Track }) {
         <path className="stroke-primary" d={track.path} fill="none" strokeWidth="1" />
       </svg>
       <div
-        className="absolute left-0 size-1 rounded-full bg-primary opacity-[var(--opacity,0)] transition-[opacity,offset-distance] [offset-distance:var(--offset-distance,0)]"
+        className="absolute left-0 size-1 bg-primary opacity-[var(--opacity,0)] transition-[opacity,offset-distance] [offset-distance:var(--offset-distance,0)]"
         style={{ offsetPath: `path("${track.path}")` }}
       />
     </div>

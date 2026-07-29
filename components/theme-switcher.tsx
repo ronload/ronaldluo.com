@@ -67,7 +67,7 @@ export function ThemeSwitcher({ labels }: { labels: ThemeSwitcherLabels }) {
         />
         <Dialog.Viewport className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
           <Dialog.Popup
-            className="flex h-[30rem] max-h-[calc(100svh-2rem)] w-full max-w-md flex-col overflow-hidden rounded-2xl border bg-popover text-popover-foreground shadow-2xl outline-none transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0"
+            className="flex h-[30rem] max-h-[calc(100svh-2rem)] w-full max-w-md flex-col overflow-hidden border bg-popover text-popover-foreground shadow-2xl outline-none transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0"
             style={{ willChange: "opacity" }}
           >
             <div className="flex shrink-0 items-start justify-between gap-4 border-b px-5 py-4 sm:px-6">
@@ -105,7 +105,7 @@ export function ThemeSwitcher({ labels }: { labels: ThemeSwitcherLabels }) {
                           return (
                             <Radio.Root
                               className={cn(
-                                "flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-left outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                                "flex cursor-pointer items-center gap-3 px-3 py-2 text-left outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
                                 selected ? "bg-primary/8" : "hover:bg-muted/60",
                               )}
                               key={theme.id}

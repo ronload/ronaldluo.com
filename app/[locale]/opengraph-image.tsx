@@ -139,7 +139,6 @@ export default async function Image({ params }: Props) {
           left: FRAME_INSET - DOT_SIZE / 2,
           width: DOT_SIZE,
           height: DOT_SIZE,
-          borderRadius: 2,
           border: `1px solid ${FRAME_LINE}`,
           backgroundColor: BG,
           boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
@@ -152,7 +151,6 @@ export default async function Image({ params }: Props) {
           right: FRAME_INSET - DOT_SIZE / 2,
           width: DOT_SIZE,
           height: DOT_SIZE,
-          borderRadius: 2,
           border: `1px solid ${FRAME_LINE}`,
           backgroundColor: BG,
           boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
@@ -165,7 +163,6 @@ export default async function Image({ params }: Props) {
           left: FRAME_INSET - DOT_SIZE / 2,
           width: DOT_SIZE,
           height: DOT_SIZE,
-          borderRadius: 2,
           border: `1px solid ${FRAME_LINE}`,
           backgroundColor: BG,
           boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
@@ -178,7 +175,6 @@ export default async function Image({ params }: Props) {
           right: FRAME_INSET - DOT_SIZE / 2,
           width: DOT_SIZE,
           height: DOT_SIZE,
-          borderRadius: 2,
           border: `1px solid ${FRAME_LINE}`,
           backgroundColor: BG,
           boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
@@ -214,13 +210,7 @@ export default async function Image({ params }: Props) {
             <div style={{ display: "flex", fontSize: 30, color: MUTED }}>{company}</div>
           </div>
         </div>
-        <img
-          src={avatarSrc}
-          width={280}
-          height={280}
-          style={{ borderRadius: "50%", objectFit: "cover" }}
-          alt={name}
-        />
+        <img src={avatarSrc} width={280} height={280} style={{ objectFit: "cover" }} alt={name} />
       </div>
     </div>,
     {
