@@ -10,7 +10,7 @@
     "notes": "筆記",
     "contact": "聯絡我",
     "connect": "與我聯繫",
-    "copyright": "© {year} Ronald Luo。保留一切權利。"
+    "copyright": "© {year} Ronald Luo。MIT授權。"
   },
   "Experience": {
     "title": "經歷",
