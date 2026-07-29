@@ -1,3 +1,4 @@
+import { FrameAnimation } from "@/components/frame-animation";
 import { cn } from "@/lib/utils";
 
 interface FrameProps {
@@ -32,12 +33,11 @@ export function FrameTexture({ className }: FrameProps) {
 
 export function FrameGuides({ className }: FrameProps) {
   return (
-    <div
-      aria-hidden="true"
+    <FrameAnimation
       className={cn(
-        "container pointer-events-none absolute inset-0 z-45",
-        "before:absolute before:inset-y-0 before:-left-3 before:w-px before:bg-border/64",
-        "after:absolute after:inset-y-0 after:-right-3 after:w-px after:bg-border/64",
+        "frame-guides container pointer-events-none absolute inset-0 z-45",
+        "before:absolute before:top-0 before:-left-3 before:h-full before:w-px before:bg-border",
+        "after:absolute after:top-0 after:-right-3 after:h-full after:w-px after:bg-border",
         className,
       )}
     />
@@ -66,10 +66,10 @@ export function FrameAside({ className, children, side = "end" }: FrameAsideProp
 
 export function Divider({ className }: FrameProps) {
   return (
-    <div
-      aria-hidden="true"
+    <FrameAnimation
       className={cn(
-        "pointer-events-none absolute inset-x-0 top-0 z-50 h-px bg-border/64",
+        "frame-divider pointer-events-none absolute inset-x-0 top-0 z-50 h-px",
+        "before:absolute before:inset-y-0 before:left-0 before:w-full before:bg-border",
         className,
       )}
     >
@@ -80,6 +80,6 @@ export function Divider({ className }: FrameProps) {
           "after:absolute after:top-[-3.5px] after:-right-[11.5px] after:-mr-1 after:size-2 after:rounded-[2px] after:border after:border-border after:bg-background after:bg-clip-border after:shadow-xs",
         )}
       />
-    </div>
+    </FrameAnimation>
   );
 }
