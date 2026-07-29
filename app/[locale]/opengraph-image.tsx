@@ -26,60 +26,13 @@ interface Props {
 const BG = "#141414";
 const FG = "#f5f5f5";
 const MUTED = "#818181";
-
-const GRID_SQUARE = 6;
-const GRID_GAP = 10;
-const GRID_MAX_OPACITY = 0.4;
-const GRID_SEED = 20260621;
-
-function mulberry32(seed: number) {
-  return () => {
-    seed |= 0;
-    seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function buildFlickeringGrid() {
-  const cell = GRID_SQUARE + GRID_GAP;
-  const cols = Math.ceil(size.width / cell);
-  const rows = Math.ceil(size.height / cell);
-  const rand = mulberry32(GRID_SEED);
-  return (
-    <div
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
-      }}
-    >
-      {[...Array(rows).keys()].map((r) => (
-        <div key={r} style={{ display: "flex", flexDirection: "row" }}>
-          {[...Array(cols).keys()].map((c) => (
-            <div
-              key={c}
-              style={{
-                width: GRID_SQUARE,
-                height: GRID_SQUARE,
-                marginRight: GRID_GAP,
-                marginBottom: GRID_GAP,
-                backgroundColor: FG,
-                opacity: rand() * GRID_MAX_OPACITY,
-              }}
-            />
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-}
+const FRAME_LINE = "rgba(245, 245, 245, 0.08)";
+const FRAME_TEXTURE = "rgba(245, 245, 245, 0.04)";
+const FRAME_INSET = 104;
+const FRAME_TOP = 72;
+const FRAME_BOTTOM = size.height - FRAME_TOP;
+const DOT_SIZE = 8;
+const CONTENT_INSET = FRAME_INSET + 48;
 
 async function loadGoogleFont(family: string, weight: number, text: string): Promise<ArrayBuffer> {
   const url = `https://fonts.googleapis.com/css2?family=${family}:wght@${weight}&text=${encodeURIComponent(text)}`;
@@ -128,16 +81,107 @@ export default async function Image({ params }: Props) {
         fontFamily: "Geist",
       }}
     >
-      {buildFlickeringGrid()}
+      <div
+        style={{
+          position: "absolute",
+          top: FRAME_TOP,
+          right: FRAME_INSET,
+          bottom: size.height - FRAME_BOTTOM,
+          left: FRAME_INSET,
+          backgroundColor: BG,
+          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 2px, ${FRAME_TEXTURE} 2px, ${FRAME_TEXTURE} 4px)`,
+        }}
+      />
       <div
         style={{
           position: "absolute",
           top: 0,
+          bottom: 0,
+          left: FRAME_INSET - 0.5,
+          width: 1,
+          backgroundColor: FRAME_LINE,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          right: FRAME_INSET - 0.5,
+          bottom: 0,
+          width: 1,
+          backgroundColor: FRAME_LINE,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: FRAME_TOP - 0.5,
           left: 0,
           width: "100%",
-          height: "100%",
-          backgroundImage:
-            "linear-gradient(90deg, rgba(20,20,20,1) 0%, rgba(20,20,20,0.82) 34%, rgba(20,20,20,0) 74%)",
+          height: 1,
+          backgroundColor: FRAME_LINE,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: FRAME_BOTTOM - 0.5,
+          left: 0,
+          width: "100%",
+          height: 1,
+          backgroundColor: FRAME_LINE,
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: FRAME_TOP - DOT_SIZE / 2,
+          left: FRAME_INSET - DOT_SIZE / 2,
+          width: DOT_SIZE,
+          height: DOT_SIZE,
+          borderRadius: 2,
+          border: `1px solid ${FRAME_LINE}`,
+          backgroundColor: BG,
+          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: FRAME_TOP - DOT_SIZE / 2,
+          right: FRAME_INSET - DOT_SIZE / 2,
+          width: DOT_SIZE,
+          height: DOT_SIZE,
+          borderRadius: 2,
+          border: `1px solid ${FRAME_LINE}`,
+          backgroundColor: BG,
+          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: FRAME_BOTTOM - DOT_SIZE / 2,
+          left: FRAME_INSET - DOT_SIZE / 2,
+          width: DOT_SIZE,
+          height: DOT_SIZE,
+          borderRadius: 2,
+          border: `1px solid ${FRAME_LINE}`,
+          backgroundColor: BG,
+          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: FRAME_BOTTOM - DOT_SIZE / 2,
+          right: FRAME_INSET - DOT_SIZE / 2,
+          width: DOT_SIZE,
+          height: DOT_SIZE,
+          borderRadius: 2,
+          border: `1px solid ${FRAME_LINE}`,
+          backgroundColor: BG,
+          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
         }}
       />
       <div
@@ -149,14 +193,14 @@ export default async function Image({ params }: Props) {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "0 88px",
+          padding: `0 ${CONTENT_INSET}px`,
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 660 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 540 }}>
           <div
             style={{
               display: "flex",
-              fontSize: 60,
+              fontSize: 48,
               fontWeight: 600,
               color: FG,
               lineHeight: 1.1,
@@ -172,8 +216,8 @@ export default async function Image({ params }: Props) {
         </div>
         <img
           src={avatarSrc}
-          width={320}
-          height={320}
+          width={280}
+          height={280}
           style={{ borderRadius: "50%", objectFit: "cover" }}
           alt={name}
         />
