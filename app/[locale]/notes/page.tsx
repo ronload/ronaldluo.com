@@ -1,34 +1,16 @@
-import { ArrowLeft } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Divider, FrameTexture } from "@/components/frame";
-import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
 import { FEED_ALTERNATES, socialMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
 import { source } from "@/lib/source";
-import { cn } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ locale: string }>;
 }
 
 const includeDrafts = process.env.NODE_ENV !== "production";
-
-function BackToHome({ label }: { label: string }) {
-  return (
-    <Link
-      className={cn(
-        buttonVariants({ variant: "link", size: "sm" }),
-        "-ms-3 gap-2 text-muted-foreground transition-colors hover:text-foreground",
-      )}
-      href="/"
-    >
-      <ArrowLeft />
-      {label}
-    </Link>
-  );
-}
 
 export async function generateMetadata(
   { params }: Props,
@@ -70,9 +52,6 @@ export default async function NotesPage({ params }: Props) {
     <>
       <section className="relative z-0 flex flex-col">
         <FrameTexture />
-        <div className="container absolute inset-x-0 top-0 pt-3 sm:pt-6">
-          <BackToHome label={t("backToHome")} />
-        </div>
         <div className="container flex w-full flex-col items-center justify-center py-12 sm:py-24">
           <div className="flex w-4/5 flex-col gap-4 text-center">
             <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">

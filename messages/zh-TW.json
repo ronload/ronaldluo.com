@@ -92,6 +92,7 @@
   },
   "Header": {
     "contact": "聯絡我",
+    "home": "首頁",
     "notes": "筆記",
     "switchLanguage": "切換語言",
     "toggleTheme": "切換主題"
@@ -99,14 +100,12 @@
   "Contact": {
     "title": "與我聯繫",
     "description": "談工作、找合作，或單純聊聊，歡迎隨時聯繫",
-    "archived": "（已封存）",
-    "backToHome": "回到首頁"
+    "archived": "（已封存）"
   },
   "Notes": {
     "title": "筆記",
     "description": "記錄我做的東西，以及過程中遇到的問題",
     "empty": "還沒有發布任何內容。",
-    "backToHome": "回到首頁",
     "backToNotes": "回到筆記",
     "toc": "本頁目錄",
     "updated": "更新於 {date}",

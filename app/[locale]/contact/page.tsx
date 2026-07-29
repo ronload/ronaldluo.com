@@ -1,34 +1,16 @@
-import { ArrowLeft } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { use } from "react";
 import { Divider, FrameTexture } from "@/components/frame";
 import { GradientButton } from "@/components/gradient-button";
-import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
-import { Link } from "@/i18n/navigation";
 import { CONTACT_CHANNELS } from "@/lib/contact-channels";
 import { socialMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
-import { cn, externalLinkProps } from "@/lib/utils";
+import { externalLinkProps } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ locale: string }>;
-}
-
-function BackToHome({ label }: { label: string }) {
-  return (
-    <Link
-      href="/"
-      className={cn(
-        buttonVariants({ variant: "link", size: "sm" }),
-        "-ms-3 gap-2 text-muted-foreground transition-colors hover:text-foreground",
-      )}
-    >
-      <ArrowLeft />
-      {label}
-    </Link>
-  );
 }
 
 export async function generateMetadata(
@@ -64,9 +46,6 @@ export default function Contact({ params }: Props) {
     <>
       <section className="relative z-0 flex flex-col">
         <FrameTexture />
-        <div className="container absolute inset-x-0 top-0 pt-3 sm:pt-6">
-          <BackToHome label={t("backToHome")} />
-        </div>
         <div className="container flex w-full flex-col items-center justify-center py-12 sm:py-24">
           <div className="flex w-4/5 flex-col gap-4 text-center">
             <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
