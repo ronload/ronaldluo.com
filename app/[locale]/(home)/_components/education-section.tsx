@@ -33,7 +33,7 @@ export function EducationSection() {
                   <Image
                     className={cn(
                       "size-10 shrink-0 rounded-lg border border-border object-cover shadow-sm sm:size-11",
-                      school.brightIcon && "bg-white",
+                      school.brightIcon && "bg-card",
                     )}
                     src={school.icon}
                     alt={item.organization}

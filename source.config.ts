@@ -3,6 +3,8 @@ import { defineCollections, defineConfig } from "fumadocs-mdx/config";
 import remarkCjkFriendly from "remark-cjk-friendly/parseOnly";
 import remarkJoinCjkLines from "remark-join-cjk-lines";
 import { z } from "zod";
+import tokyoNightDark from "./themes/tokyo-night-dark.json";
+import tokyoNightDay from "./themes/tokyo-night-day.json";
 
 export const notes = defineCollections({
   type: "doc",
@@ -21,7 +23,10 @@ export default defineConfig({
   mdxOptions: {
     remarkPlugins: (v) => [remarkCjkFriendly, remarkJoinCjkLines, remarkMdxMermaid, ...v],
     rehypeCodeOptions: {
-      themes: { light: "github-light", dark: "github-dark" },
+      themes: {
+        light: { ...tokyoNightDay, type: "light" },
+        dark: { ...tokyoNightDark, type: "dark" },
+      },
       icon: false,
       tab: false,
     },

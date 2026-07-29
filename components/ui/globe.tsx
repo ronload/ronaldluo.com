@@ -2,26 +2,23 @@
 
 import createGlobe, { type COBEOptions } from "cobe";
 import { useMotionValue, useSpring } from "motion/react";
+import { useTheme } from "next-themes";
 import { useEffect, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 
 const MOVEMENT_DAMPING = 1400;
 
-const GLOBE_CONFIG: COBEOptions = {
+const GLOBE_CONFIG: Omit<COBEOptions, "dark" | "baseColor" | "markerColor" | "glowColor"> = {
   width: 800,
   height: 800,
   onRender: () => {},
   devicePixelRatio: 2,
   phi: 0,
   theta: 0.3,
-  dark: 0,
   diffuse: 0.4,
   mapSamples: 16000,
   mapBrightness: 1.2,
-  baseColor: [1, 1, 1],
-  markerColor: [251 / 255, 100 / 255, 21 / 255],
-  glowColor: [1, 1, 1],
   markers: [
     { location: [14.5995, 120.9842], size: 0.03 },
     { location: [19.076, 72.8777], size: 0.1 },
@@ -36,13 +33,30 @@ const GLOBE_CONFIG: COBEOptions = {
   ],
 };
 
+const DAY_GLOBE_CONFIG: COBEOptions = {
+  ...GLOBE_CONFIG,
+  dark: 0,
+  baseColor: [154 / 255, 165 / 255, 206 / 255],
+  markerColor: [177 / 255, 92 / 255, 0],
+  glowColor: [225 / 255, 226 / 255, 231 / 255],
+};
+
+const DARK_GLOBE_CONFIG: COBEOptions = {
+  ...GLOBE_CONFIG,
+  dark: 1,
+  baseColor: [122 / 255, 162 / 255, 247 / 255],
+  markerColor: [224 / 255, 175 / 255, 104 / 255],
+  glowColor: [26 / 255, 27 / 255, 38 / 255],
+};
+
 export function Globe({
   className,
-  config = GLOBE_CONFIG,
+  config,
 }: {
   className?: string;
   config?: COBEOptions;
 }) {
+  const { resolvedTheme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const phiRef = useRef(0);
   const widthRef = useRef(0);
@@ -55,6 +69,7 @@ export function Globe({
     damping: 30,
     stiffness: 100,
   });
+  const globeConfig = config ?? (resolvedTheme === "dark" ? DARK_GLOBE_CONFIG : DAY_GLOBE_CONFIG);
 
   const updatePointerInteraction = (value: number | null) => {
     pointerInteracting.current = value;
@@ -83,7 +98,7 @@ export function Globe({
     onResize();
 
     const globe = createGlobe(canvas, {
-      ...config,
+      ...globeConfig,
       width: widthRef.current * 2,
       height: widthRef.current * 2,
       onRender: (state) => {
@@ -99,7 +114,7 @@ export function Globe({
       globe.destroy();
       window.removeEventListener("resize", onResize);
     };
-  }, [rs, config]);
+  }, [globeConfig, rs]);
 
   return (
     <div className={cn("absolute inset-0 mx-auto aspect-square w-full max-w-150", className)}>

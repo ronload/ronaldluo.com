@@ -124,7 +124,6 @@ flowchart LR
   s1 -- "#quot;0#quot;~#quot;9#quot;" ---> s2
   s0 -- "#quot;space#quot;" --> s0
   s2 -- "#quot;0#quot;~#quot;9#quot;" --> s2
-  classDef entry fill:#8f8f8f,stroke:#8f8f8f
 ```
 
 Implementing that DFA is the whole solution.
