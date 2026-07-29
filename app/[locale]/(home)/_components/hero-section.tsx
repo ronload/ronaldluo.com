@@ -10,7 +10,7 @@ export function HeroSection() {
   const t = useTranslations("Home");
 
   return (
-    <section className="relative z-0 flex flex-col">
+    <section className="relative z-0 flex flex-col font-mono">
       <FrameTexture />
       <div className="container flex w-full flex-col justify-center py-12 sm:py-24">
         <div className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-8 text-left sm:gap-x-12 sm:gap-y-10">
@@ -24,7 +24,7 @@ export function HeroSection() {
             </div>
           </div>
           <Image
-            className="col-start-2 row-start-1 aspect-square size-24 self-center rounded-full border-none object-cover shadow-sm invert sm:row-span-2 sm:h-full sm:w-auto sm:self-stretch dark:invert-0"
+            className="col-start-2 row-start-1 aspect-square size-24 self-center border-none object-cover shadow-sm invert [clip-path:inset(1px)] sm:row-span-2 sm:h-full sm:w-auto sm:self-stretch dark:invert-0"
             src="/avatar.jpg"
             alt={t("name")}
             width={176}
@@ -38,7 +38,7 @@ export function HeroSection() {
               href="/notes"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "h-12 flex-1 text-base sm:min-w-44 sm:flex-none",
+                "h-12 flex-1 rounded-none font-mono text-base sm:min-w-44 sm:flex-none",
               )}
             >
               <NotebookText />
@@ -48,7 +48,7 @@ export function HeroSection() {
               href="/contact"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "h-12 flex-1 text-base sm:min-w-44 sm:flex-none",
+                "h-12 flex-1 rounded-none font-mono text-base sm:min-w-44 sm:flex-none",
               )}
             >
               <Send />
