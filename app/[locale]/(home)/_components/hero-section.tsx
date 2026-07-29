@@ -6,6 +6,15 @@ import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
+function HomeShine({ position = "top-left" }: { position?: "top-left" | "bottom-right" }) {
+  return (
+    <span
+      aria-hidden
+      className={cn("home-shine z-10", position === "bottom-right" && "home-shine--bottom-right")}
+    />
+  );
+}
+
 export function HeroSection() {
   const t = useTranslations("Home");
 
@@ -23,37 +32,46 @@ export function HeroSection() {
               <p>{t("company")}</p>
             </div>
           </div>
-          <Image
-            className="col-start-2 row-start-1 hidden aspect-square size-24 self-center border-none object-cover shadow-sm invert [clip-path:inset(1px)] sm:row-span-2 sm:block sm:h-full sm:w-auto sm:self-stretch dark:invert-0"
-            src="/avatar.jpg"
-            alt={t("name")}
-            width={176}
-            height={176}
-            sizes="(min-width: 640px) 176px, 96px"
-            quality={60}
-            priority
-          />
+          <div className="home-shine-frame col-start-2 row-start-1 hidden aspect-square size-24 self-center sm:row-span-2 sm:block sm:h-full sm:w-auto sm:self-stretch">
+            <HomeShine position="bottom-right" />
+            <Image
+              className="home-surface-enter block size-full border-none object-cover shadow-sm invert [clip-path:inset(1px)] dark:invert-0"
+              src="/avatar.jpg"
+              alt={t("name")}
+              width={176}
+              height={176}
+              sizes="(min-width: 640px) 176px, 96px"
+              quality={60}
+              priority
+            />
+          </div>
           <div className="col-start-1 row-start-2 flex gap-3 sm:gap-4">
-            <Link
-              href="/notes"
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "h-12 flex-1 rounded-none font-mono text-base sm:min-w-44 sm:flex-none",
-              )}
-            >
-              <NotebookText />
-              {t("notes")}
-            </Link>
-            <Link
-              href="/contact"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "lg" }),
-                "h-12 flex-1 rounded-none font-mono text-base sm:min-w-44 sm:flex-none",
-              )}
-            >
-              <Send />
-              {t("contact")}
-            </Link>
+            <div className="home-shine-frame flex-1 sm:min-w-44 sm:flex-none">
+              <HomeShine />
+              <Link
+                href="/notes"
+                className={cn(
+                  buttonVariants({ size: "lg" }),
+                  "home-surface-enter flex h-12 w-full rounded-none font-mono text-base",
+                )}
+              >
+                <NotebookText />
+                {t("notes")}
+              </Link>
+            </div>
+            <div className="home-shine-frame flex-1 sm:min-w-44 sm:flex-none">
+              <HomeShine />
+              <Link
+                href="/contact"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "home-surface-enter flex h-12 w-full rounded-none font-mono text-base",
+                )}
+              >
+                <Send />
+                {t("contact")}
+              </Link>
+            </div>
           </div>
         </div>
       </div>
