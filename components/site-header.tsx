@@ -1,4 +1,4 @@
-import { NotebookText, Send } from "lucide-react";
+import { NotebookText } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Divider, FrameGuides } from "@/components/frame";
 import { LocaleSwitcher } from "@/components/locale-switcher";
@@ -15,7 +15,6 @@ export function SiteHeader() {
       <FrameGuides />
       <div className="container flex h-16 w-full items-center justify-between gap-2">
         <Link href="/contact" className={cn(buttonVariants({ variant: "outline" }))}>
-          <Send />
           {t("contact")}
         </Link>
         <div className="flex items-center gap-2">
