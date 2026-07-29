@@ -9,7 +9,8 @@
     "company": "鈦溪科技股份有限公司",
     "notes": "筆記",
     "contact": "聯絡我",
-    "connect": "與我聯繫"
+    "connect": "與我聯繫",
+    "copyright": "© {year} Ronald Luo。保留一切權利。"
   },
   "Experience": {
     "title": "經歷",

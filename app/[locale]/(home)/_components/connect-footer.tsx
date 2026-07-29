@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
+import { ConnectMap } from "@/components/connect-map";
 import { Divider, FrameTexture } from "@/components/frame";
-import { GlobeCanvas } from "@/components/globe-canvas";
 import { buttonVariants } from "@/components/ui/button";
 import { ACTIVE_CHANNELS } from "@/lib/contact-channels";
 import { cn, externalLinkProps } from "@/lib/utils";
@@ -35,11 +35,14 @@ export function ConnectFooter() {
       </div>
       <div
         aria-hidden="true"
-        className="pointer-events-none relative mt-4 h-[clamp(11rem,38vw,18rem)] overflow-hidden sm:mt-6"
+        className="pointer-events-none relative mt-4 h-[clamp(12rem,38vw,21rem)] overflow-hidden sm:mt-6"
       >
-        <div className="absolute top-0 left-1/2 aspect-square w-[clamp(24rem,95vw,42rem)] -translate-x-1/2">
-          <GlobeCanvas className="max-w-none" />
-        </div>
+        <ConnectMap className="absolute top-0 left-1/2 w-[clamp(24rem,76vw,42rem)] -translate-x-1/2" />
+      </div>
+      <div className="container mt-4 pb-6 text-center sm:mt-6">
+        <p className="text-muted-foreground text-xs">
+          {t("copyright", { year: new Date().getFullYear() })}
+        </p>
       </div>
     </footer>
   );

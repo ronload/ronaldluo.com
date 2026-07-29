@@ -116,9 +116,6 @@
   --theme-border: #dbdbdc;
   --theme-code: #fafafa;
   --theme-code-highlight: #e5e5e6;
-  --theme-globe-base: #526fff;
-  --theme-globe-marker: #986801;
-  --theme-globe-glow: #fafafa;
   --background: var(--theme-background);
   --foreground: var(--theme-foreground);
   --card: var(--theme-surface);
@@ -180,9 +177,6 @@ html[data-theme="one-light"] {
   --theme-border: #dbdbdc;
   --theme-code: #fafafa;
   --theme-code-highlight: #e5e5e6;
-  --theme-globe-base: #526fff;
-  --theme-globe-marker: #986801;
-  --theme-globe-glow: #fafafa;
   color-scheme: light;
 }
 
@@ -202,9 +196,6 @@ html[data-theme="tokyonight-day"] {
   --theme-border: #6172b0;
   --theme-code: #e1e2e7;
   --theme-code-highlight: #b7c1e3;
-  --theme-globe-base: #9aa5ce;
-  --theme-globe-marker: #b15c00;
-  --theme-globe-glow: #e1e2e7;
   color-scheme: light;
 }
 
@@ -225,9 +216,6 @@ html[data-theme="tokyonight-night"] {
   --theme-border: #5d6590;
   --theme-code: #1a1b26;
   --theme-code-highlight: #292e42;
-  --theme-globe-base: #7aa2f7;
-  --theme-globe-marker: #e0af68;
-  --theme-globe-glow: #1a1b26;
   color-scheme: dark;
 }
 
@@ -247,9 +235,6 @@ html[data-theme="tokyonight-storm"] {
   --theme-border: #545c7e;
   --theme-code: #1f2335;
   --theme-code-highlight: #292e42;
-  --theme-globe-base: #7aa2f7;
-  --theme-globe-marker: #e0af68;
-  --theme-globe-glow: #1f2335;
   color-scheme: dark;
 }
 
@@ -269,9 +254,6 @@ html[data-theme="tokyonight-moon"] {
   --theme-border: #545c7e;
   --theme-code: #1e2030;
   --theme-code-highlight: #2f334d;
-  --theme-globe-base: #82aaff;
-  --theme-globe-marker: #ffc777;
-  --theme-globe-glow: #1e2030;
   color-scheme: dark;
 }
 
@@ -291,9 +273,6 @@ html[data-theme="catppuccin-latte"] {
   --theme-border: #9ca0b0;
   --theme-code: #e6e9ef;
   --theme-code-highlight: #ccd0da;
-  --theme-globe-base: #1e66f5;
-  --theme-globe-marker: #df8e1d;
-  --theme-globe-glow: #eff1f5;
   color-scheme: light;
 }
 
@@ -313,9 +292,6 @@ html[data-theme="catppuccin-frappe"] {
   --theme-border: #737994;
   --theme-code: #292c3c;
   --theme-code-highlight: #414559;
-  --theme-globe-base: #8caaee;
-  --theme-globe-marker: #e5c890;
-  --theme-globe-glow: #303446;
   color-scheme: dark;
 }
 
@@ -335,9 +311,6 @@ html[data-theme="catppuccin-macchiato"] {
   --theme-border: #8087a2;
   --theme-code: #1e2030;
   --theme-code-highlight: #363a4f;
-  --theme-globe-base: #8aadf4;
-  --theme-globe-marker: #eed49f;
-  --theme-globe-glow: #24273a;
   color-scheme: dark;
 }
 
@@ -357,9 +330,6 @@ html[data-theme="catppuccin-mocha"] {
   --theme-border: #7f849c;
   --theme-code: #181825;
   --theme-code-highlight: #313244;
-  --theme-globe-base: #89b4fa;
-  --theme-globe-marker: #f9e2af;
-  --theme-globe-glow: #1e1e2e;
   color-scheme: dark;
 }
 
@@ -379,9 +349,6 @@ html[data-theme="rose-pine-dawn"] {
   --theme-border: #9893a5;
   --theme-code: #fffaf3;
   --theme-code-highlight: #f2e9e1;
-  --theme-globe-base: #56949f;
-  --theme-globe-marker: #ea9d34;
-  --theme-globe-glow: #faf4ed;
   color-scheme: light;
 }
 
@@ -401,9 +368,6 @@ html[data-theme="rose-pine-moon"] {
   --theme-border: #817c9c;
   --theme-code: #2a273f;
   --theme-code-highlight: #393552;
-  --theme-globe-base: #9ccfd8;
-  --theme-globe-marker: #f6c177;
-  --theme-globe-glow: #232136;
   color-scheme: dark;
 }
 
@@ -423,9 +387,6 @@ html[data-theme="rose-pine"] {
   --theme-border: #6e6a86;
   --theme-code: #1f1d2e;
   --theme-code-highlight: #26233a;
-  --theme-globe-base: #9ccfd8;
-  --theme-globe-marker: #f6c177;
-  --theme-globe-glow: #191724;
   color-scheme: dark;
 }
 
@@ -447,9 +408,6 @@ html[data-theme="one-dark-pro-mix"] {
   --theme-border: #3e4451;
   --theme-code: #21252b;
   --theme-code-highlight: #2c313c;
-  --theme-globe-base: #61afef;
-  --theme-globe-marker: #e5c07b;
-  --theme-globe-glow: #282c34;
   color-scheme: dark;
 }
 
@@ -477,9 +435,6 @@ html[data-theme="one-dark-pro-darker"] {
   --theme-border: #3e4451;
   --theme-code: #181a1f;
   --theme-code-highlight: #2c313c;
-  --theme-globe-base: #61afef;
-  --theme-globe-marker: #e5c07b;
-  --theme-globe-glow: #23272e;
   color-scheme: dark;
 }
 
@@ -499,9 +454,6 @@ html[data-theme="one-dark-pro-night-flat"] {
   --theme-border: #343a43;
   --theme-code: #111418;
   --theme-code-highlight: #24282f;
-  --theme-globe-base: #61afef;
-  --theme-globe-marker: #e5c07b;
-  --theme-globe-glow: #16191d;
   color-scheme: dark;
 }
 
