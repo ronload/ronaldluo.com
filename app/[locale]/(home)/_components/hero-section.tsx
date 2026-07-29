@@ -1,18 +1,12 @@
 import { NotebookText, Send } from "lucide-react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { FrameTexture } from "@/components/frame";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-function HomeShine({ position = "top-left" }: { position?: "top-left" | "bottom-right" }) {
-  return (
-    <span
-      aria-hidden
-      className={cn("home-shine z-10", position === "bottom-right" && "home-shine--bottom-right")}
-    />
-  );
+function HomeShine() {
+  return <span aria-hidden className="home-shine z-10" />;
 }
 
 export function HeroSection() {
@@ -21,9 +15,9 @@ export function HeroSection() {
   return (
     <section className="relative z-0 flex flex-col font-mono">
       <FrameTexture />
-      <div className="container flex w-full flex-col justify-center py-12 sm:py-24">
-        <div className="grid grid-cols-1 gap-y-8 text-left sm:grid-cols-[1fr_auto] sm:gap-x-12 sm:gap-y-10">
-          <div className="col-start-1 row-start-1 flex flex-col items-start gap-1.5 self-center sm:gap-3 sm:self-start">
+      <div className="container flex w-full flex-col justify-center py-12 sm:py-24 md:py-19">
+        <div className="grid grid-cols-1 gap-y-8 text-left sm:grid-cols-[1fr_auto] sm:gap-x-12">
+          <div className="col-start-1 row-start-1 flex flex-col items-start gap-1.5 self-center sm:gap-3 sm:self-stretch">
             <h1 className="home-reveal font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl md:text-5xl">
               {t("name")}
             </h1>
@@ -32,20 +26,7 @@ export function HeroSection() {
               <p>{t("company")}</p>
             </div>
           </div>
-          <div className="home-shine-frame col-start-2 row-start-1 hidden aspect-square size-24 self-center sm:row-span-2 sm:block sm:h-full sm:w-auto sm:self-stretch">
-            <HomeShine position="bottom-right" />
-            <Image
-              className="home-surface-enter block size-full border-none object-cover shadow-sm invert [clip-path:inset(1px)] dark:invert-0"
-              src="/avatar.jpg"
-              alt={t("name")}
-              width={176}
-              height={176}
-              sizes="(min-width: 640px) 176px, 96px"
-              quality={60}
-              priority
-            />
-          </div>
-          <div className="col-start-1 row-start-2 flex gap-3 sm:gap-4">
+          <div className="col-start-1 row-start-2 flex gap-3 sm:col-start-2 sm:row-start-1 sm:flex-col sm:justify-center sm:gap-4 sm:self-stretch">
             <div className="home-shine-frame flex-1 sm:min-w-44 sm:flex-none">
               <HomeShine />
               <Link

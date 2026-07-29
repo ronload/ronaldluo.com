@@ -24,7 +24,7 @@ export function FrameTexture({ className }: FrameProps) {
         className="absolute inset-y-0 -right-3 -left-3 bg-background"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(45deg, transparent, transparent 2px, var(--secondary) 2px, var(--secondary) 4px)",
+            "repeating-linear-gradient(45deg, transparent, transparent 2px, color-mix(in srgb, var(--secondary) 36%, var(--background)) 2px, color-mix(in srgb, var(--secondary) 36%, var(--background)) 4px)",
         }}
       />
     </div>
@@ -76,8 +76,8 @@ export function Divider({ className }: FrameProps) {
       <div
         className={cn(
           "container absolute inset-x-0 top-0",
-          "before:absolute before:top-[-3.5px] before:-left-[11.5px] before:-ml-1 before:size-2 before:rounded-[2px] before:border before:border-border before:bg-background before:bg-clip-border before:shadow-xs",
-          "after:absolute after:top-[-3.5px] after:-right-[11.5px] after:-mr-1 after:size-2 after:rounded-[2px] after:border after:border-border after:bg-background after:bg-clip-border after:shadow-xs",
+          "before:absolute before:top-[-3.5px] before:-left-[11.5px] before:-ml-1 before:size-2 before:rounded-[2px] before:border before:border-border/40 before:bg-background before:bg-clip-border before:shadow-xs",
+          "after:absolute after:top-[-3.5px] after:-right-[11.5px] after:-mr-1 after:size-2 after:rounded-[2px] after:border after:border-border/40 after:bg-background after:bg-clip-border after:shadow-xs",
         )}
       />
     </FrameAnimation>
