@@ -120,9 +120,9 @@ class Solution:
 
 ```mermaid
 flowchart LR
-  e(( )):::entry --> s0(state 0)
-  s0 -- "#quot;0#quot;~#quot;9#quot;" --> s2(state 2)
-  s0 -- "#quot;+#quot;, #quot;-#quot;" ---> s1(state 1)
+  e[Start]:::entry --> s0[state 0]
+  s0 -- "#quot;0#quot;~#quot;9#quot;" --> s2[state 2]
+  s0 -- "#quot;+#quot;, #quot;-#quot;" ---> s1[state 1]
   s1 -- "#quot;0#quot;~#quot;9#quot;" ---> s2
   s0 -- "#quot;space#quot;" --> s0
   s2 -- "#quot;0#quot;~#quot;9#quot;" --> s2

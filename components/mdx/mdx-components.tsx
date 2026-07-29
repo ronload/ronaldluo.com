@@ -11,7 +11,7 @@ function MdxImage({ alt, height, src, width, ...props }: ComponentProps<"img">) 
     <Image
       {...props}
       alt={alt ?? ""}
-      className="my-6 h-auto w-full rounded-xl border"
+      className="my-6 h-auto w-full border"
       height={height === undefined ? undefined : Number(height)}
       sizes="(min-width: 112.5rem) 69rem, (min-width: 58rem) 53rem, 100vw"
       src={src as ImageProps["src"]}

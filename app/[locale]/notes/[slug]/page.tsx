@@ -122,7 +122,7 @@ export default async function NotePage({ params }: Props) {
             </p>
           </header>
           {fallback ? (
-            <p className="mt-8 rounded-xl border border-warning/40 bg-warning/8 px-4 py-3 text-sm text-warning-foreground">
+            <p className="mt-8 border border-warning/40 bg-warning/8 px-4 py-3 text-sm text-warning-foreground">
               {t("fallbackNotice")}
             </p>
           ) : null}

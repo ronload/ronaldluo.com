@@ -32,7 +32,7 @@ export function ExperienceSection() {
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-3">
                     <Image
-                      className="size-10 shrink-0 rounded-lg border border-border object-cover shadow-sm sm:size-11"
+                      className="size-10 shrink-0 border border-border object-cover shadow-sm sm:size-11"
                       src={icon}
                       alt={item.organization}
                       width={96}
@@ -50,7 +50,7 @@ export function ExperienceSection() {
                       <li key={highlight} className="flex gap-2.5">
                         <span
                           aria-hidden="true"
-                          className="mt-[0.5625rem] size-1 shrink-0 rounded-lg bg-muted-foreground/50"
+                          className="mt-[0.5625rem] size-1 shrink-0 bg-muted-foreground/50"
                         />
                         <span>{highlight}</span>
                       </li>

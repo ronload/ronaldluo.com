@@ -32,7 +32,7 @@ export function EducationSection() {
                 <div className="flex items-start gap-3">
                   <Image
                     className={cn(
-                      "size-10 shrink-0 rounded-lg border border-border object-cover shadow-sm sm:size-11",
+                      "size-10 shrink-0 border border-border object-cover shadow-sm sm:size-11",
                       school.brightIcon && "bg-card",
                     )}
                     src={school.icon}

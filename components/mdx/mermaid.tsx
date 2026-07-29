@@ -138,7 +138,7 @@ export function Mermaid({ chart }: Props) {
 
   if (failed) {
     return (
-      <figure className="my-6 overflow-hidden rounded-xl border border-destructive/40 bg-code">
+      <figure className="my-6 overflow-hidden border border-destructive/40 bg-code">
         <pre className="overflow-x-auto p-4 font-mono text-[0.8125rem] text-muted-foreground leading-6">
           {chart}
         </pre>
@@ -147,7 +147,7 @@ export function Mermaid({ chart }: Props) {
   }
 
   return (
-    <figure className="my-6 overflow-hidden rounded-xl border bg-code">
+    <figure className="my-6 overflow-hidden border bg-code">
       <div
         className="flex min-h-32 items-center justify-center overflow-x-auto p-4 [&_svg]:h-auto [&_svg]:max-w-full"
         ref={ref}

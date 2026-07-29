@@ -96,7 +96,7 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0px;
   --font-sans:
     var(--font-geist-sans), -apple-system, BlinkMacSystemFont, var(--font-cjk-system), sans-serif;
   --font-cjk-system:
@@ -520,7 +520,7 @@ html[data-theme="one-dark-pro-night-flat"] {
     @apply my-[1.15em] border-s-2 ps-4 text-muted-foreground;
   }
   .note-prose :not(pre) > code {
-    @apply rounded-md bg-muted px-1.5 py-0.5 font-mono text-[0.875em];
+    @apply bg-muted px-1.5 py-0.5 font-mono text-[0.875em];
   }
   .note-prose hr {
     @apply my-10;
@@ -710,7 +710,7 @@ html[data-theme="one-dark-pro-night-flat"] {
     @apply opacity-100 blur-none;
   }
   .shiki .highlighted-word {
-    @apply rounded-sm bg-code-highlight px-0.5;
+    @apply bg-code-highlight px-0.5;
   }
 }
 
@@ -750,33 +750,6 @@ html[data-theme="one-dark-pro-night-flat"] {
     filter: blur(0);
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@property --home-shine-x {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 80px;
-}
-
-@property --home-shine-y {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
-@keyframes home-shine-sweep {
-  from {
-    --home-shine-x: 0px;
-    --home-shine-y: 77px;
-  }
-  50% {
-    --home-shine-x: 27px;
-    --home-shine-y: 12px;
-  }
-  to {
-    --home-shine-x: 80px;
-    --home-shine-y: 0px;
   }
 }
 
@@ -878,20 +851,11 @@ html[data-theme="one-dark-pro-night-flat"] {
     position: absolute;
     inset: 0;
     border: 1px solid color-mix(in srgb, var(--foreground) 60%, var(--background));
-    border-radius: inherit;
     -webkit-clip-path: inset(0 50% 50% 0);
     clip-path: inset(0 50% 50% 0);
     pointer-events: none;
     opacity: 0;
-    --home-shine-beam: 112px;
-    --home-shine-mask: radial-gradient(
-      ellipse var(--home-shine-beam) var(--home-shine-beam) at var(--home-shine-x)
-        var(--home-shine-y),
-      #000 0%,
-      #0009 30%,
-      #0003 50%,
-      #0000 70%
-    );
+    --home-shine-mask: linear-gradient(135deg, #0000 0%, #0003 34%, #0009 46%, #000 50%, #0000 64%);
     -webkit-mask-image: var(--home-shine-mask);
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
@@ -900,12 +864,7 @@ html[data-theme="one-dark-pro-night-flat"] {
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: 100% 100%;
-    --home-shine-settle: 100ms;
-    animation:
-      home-shine-sweep
-      calc(var(--home-surface-delay) - var(--home-shine-delay) - var(--home-shine-settle))
-      cubic-bezier(0.455, 0.03, 0.515, 0.955) var(--home-shine-delay) backwards,
-      home-shine-bloom
+    animation: home-shine-bloom
       calc(var(--home-surface-delay) + var(--home-surface-duration) - var(--home-shine-delay)) ease
       var(--home-shine-delay) backwards;
   }
