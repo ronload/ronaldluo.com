@@ -1,4 +1,4 @@
-import { NotebookText } from "lucide-react";
+import { House, NotebookText } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Divider, FrameGuides } from "@/components/frame";
 import { LocaleSwitcher } from "@/components/locale-switcher";
@@ -18,6 +18,13 @@ export function SiteHeader() {
           {t("contact")}
         </Link>
         <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            aria-label={t("home")}
+            className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
+          >
+            <House />
+          </Link>
           <Link
             href="/notes"
             aria-label={t("notes")}

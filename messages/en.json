@@ -92,6 +92,7 @@
   },
   "Header": {
     "contact": "Get in Touch",
+    "home": "Home",
     "notes": "Notes",
     "switchLanguage": "Switch language",
     "toggleTheme": "Toggle theme"
@@ -99,14 +100,12 @@
   "Contact": {
     "title": "Get in Touch",
     "description": "For work, collaboration, or just to say hi. Reach out anytime.",
-    "archived": "(archived)",
-    "backToHome": "Back to home"
+    "archived": "(archived)"
   },
   "Notes": {
     "title": "Notes",
     "description": "Write-ups on what I build and the problems I run into along the way.",
     "empty": "Nothing published here yet.",
-    "backToHome": "Back to home",
     "backToNotes": "Back to notes",
     "toc": "On this page",
     "updated": "Updated {date}",
