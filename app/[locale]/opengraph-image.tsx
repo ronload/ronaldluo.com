@@ -23,12 +23,11 @@ interface Props {
   params: Promise<{ locale: string }>;
 }
 
-const BG = "#1a1b26";
-const FG = "#c0caf5";
-const MUTED = "#7c84b0";
-const FRAME_LINE = "rgba(192, 202, 245, 0.12)";
-const FRAME_TEXTURE = "rgba(192, 202, 245, 0.05)";
-const FRAME_SHADOW = "rgba(8, 9, 16, 0.48)";
+const BG = "#141414";
+const FG = "#f5f5f5";
+const MUTED = "#818181";
+const FRAME_LINE = "rgba(245, 245, 245, 0.08)";
+const FRAME_TEXTURE = "rgba(245, 245, 245, 0.04)";
 const FRAME_INSET = 104;
 const FRAME_TOP = 72;
 const FRAME_BOTTOM = size.height - FRAME_TOP;
@@ -143,7 +142,7 @@ export default async function Image({ params }: Props) {
           borderRadius: 2,
           border: `1px solid ${FRAME_LINE}`,
           backgroundColor: BG,
-          boxShadow: `0 1px 2px ${FRAME_SHADOW}`,
+          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
         }}
       />
       <div
@@ -156,7 +155,7 @@ export default async function Image({ params }: Props) {
           borderRadius: 2,
           border: `1px solid ${FRAME_LINE}`,
           backgroundColor: BG,
-          boxShadow: `0 1px 2px ${FRAME_SHADOW}`,
+          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
         }}
       />
       <div
@@ -169,7 +168,7 @@ export default async function Image({ params }: Props) {
           borderRadius: 2,
           border: `1px solid ${FRAME_LINE}`,
           backgroundColor: BG,
-          boxShadow: `0 1px 2px ${FRAME_SHADOW}`,
+          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
         }}
       />
       <div
@@ -182,7 +181,7 @@ export default async function Image({ params }: Props) {
           borderRadius: 2,
           border: `1px solid ${FRAME_LINE}`,
           backgroundColor: BG,
-          boxShadow: `0 1px 2px ${FRAME_SHADOW}`,
+          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
         }}
       />
       <div
