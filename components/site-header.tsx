@@ -14,9 +14,15 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 w-full bg-background">
       <FrameGuides />
       <div className="container flex h-16 w-full items-center justify-between gap-2">
-        <Link href="/contact" className={cn(buttonVariants({ variant: "outline" }))}>
-          {t("contact")}
-        </Link>
+        <ThemeSwitcher
+          labels={{
+            apply: t("theme.apply"),
+            cancel: t("theme.cancel"),
+            close: t("theme.close"),
+            title: t("theme.title"),
+            trigger: t("theme.trigger"),
+          }}
+        />
         <div className="flex items-center gap-2">
           <Link
             href="/"
@@ -33,7 +39,6 @@ export function SiteHeader() {
             <NotebookText />
           </Link>
           <LocaleSwitcher label={t("switchLanguage")} />
-          <ThemeSwitcher label={t("toggleTheme")} />
         </div>
       </div>
       <Divider className="top-full" />

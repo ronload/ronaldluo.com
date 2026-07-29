@@ -1,16 +1,18 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FrameGuides, PageFrame } from "@/components/frame";
 import { RelMeLinks } from "@/components/rel-me-links";
 import { SiteHeader } from "@/components/site-header";
+import { ThemeColor } from "@/components/theme-color";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/identity";
 import { FEED_ALTERNATES, socialMetadata } from "@/lib/seo";
+import { providerThemes } from "@/lib/theme-registry";
 import "../globals.css";
 import { assertLocale } from "@/i18n/assert-locale";
 
@@ -24,6 +26,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   preload: false,
 });
+
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a1b26" },
+  ],
+};
 
 interface Props {
   children: React.ReactNode;
@@ -77,11 +87,14 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="flex min-h-full flex-col">
         <RelMeLinks />
         <ThemeProvider
-          attribute="class"
+          attribute="data-theme"
           defaultTheme="system"
           enableSystem
+          enableColorScheme={false}
           disableTransitionOnChange
+          themes={providerThemes}
         >
+          <ThemeColor />
           <NextIntlClientProvider messages={{}}>
             <PageFrame>
               <SiteHeader />
