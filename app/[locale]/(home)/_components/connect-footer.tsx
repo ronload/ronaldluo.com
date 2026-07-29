@@ -13,10 +13,10 @@ export function ConnectFooter() {
       <FrameTexture />
       <Divider />
       <div className="container flex flex-col items-center pt-16 text-center sm:pt-20">
-        <h2 className="font-semibold text-2xl text-foreground tracking-tight sm:text-3xl">
+        <h2 className="home-reveal home-reveal--after-title font-semibold text-2xl text-foreground tracking-tight sm:text-3xl">
           {t("connect")}
         </h2>
-        <div className="mt-6 flex items-center justify-center gap-1 sm:mt-8 sm:gap-2">
+        <div className="home-reveal-group home-reveal-group--later mt-6 flex items-center justify-center gap-1 sm:mt-8 sm:gap-2">
           {ACTIVE_CHANNELS.map(({ label, href, icon: Icon }) => (
             <a
               key={label}

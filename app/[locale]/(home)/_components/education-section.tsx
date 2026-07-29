@@ -17,10 +17,10 @@ export function EducationSection() {
     <section className="relative">
       <Divider />
       <div className="container py-16 sm:py-20">
-        <h2 className="font-semibold text-foreground text-xl tracking-tight sm:text-2xl">
+        <h2 className="home-reveal home-reveal--after-title font-semibold text-foreground text-xl tracking-tight sm:text-2xl">
           {t("title")}
         </h2>
-        <div className="mt-8 flex flex-col gap-10 sm:mt-10 sm:gap-12">
+        <div className="home-reveal-group home-reveal-group--later mt-8 flex flex-col gap-10 sm:mt-10 sm:gap-12">
           {Object.entries(SCHOOLS).map(([key, school]) => {
             const item = t.raw(`items.${key}`) as EducationItem;
 
