@@ -9,7 +9,8 @@
     "company": "Prinsur Tech CO., LTD.",
     "notes": "Notes",
     "contact": "Contact",
-    "connect": "Let's connect."
+    "connect": "Let's connect.",
+    "copyright": "© {year} Ronald Luo. All rights reserved."
   },
   "Experience": {
     "title": "Experience",

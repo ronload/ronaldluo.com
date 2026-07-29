@@ -13,7 +13,7 @@ Live at **[ronaldluo.com](https://ronaldluo.com)**.
 - **fumadocs** (`fumadocs-core` + `fumadocs-mdx`) for the bilingual Markdown content layer
 - **next-intl** for `en` / `zh-TW` localization
 - **Tailwind CSS v4** with **shadcn** (`base-maia`) on **@base-ui/react**
-- **next-themes** for light/dark, **motion** + **cobe** for the interactive globe
+- **next-themes** for light/dark and **Magic UI Dotted Map** for the SVG world map
 - **Biome** + **ESLint** for linting/formatting, deployed on **Vercel**
 
 ## Features
@@ -24,7 +24,7 @@ Live at **[ronaldluo.com](https://ronaldluo.com)**.
 - **Dynamic OG images** generated per locale via `next/og`.
 - **Social shortlinks** — `/(github|linkedin|x|instagram|…)` permanently redirect to the matching profile.
 - **Notes** at `/notes` — bilingual Markdown with a table of contents, shiki syntax highlighting, and an Atom feed per locale.
-- **Interactive globe**, theme toggle, and locale switcher.
+- **Dotted world map**, theme toggle, and locale switcher.
 
 ## Development
 
@@ -43,7 +43,7 @@ pnpm format     # auto-fix with Biome
 ```
 app/             App Router routes, global metadata, sitemap, llms.txt, and the Atom feed
 app/[locale]/    Localized pages (home, notes, contact, FAQ, for-LLMs), layout, OG image, errors
-components/      UI components (globe, header, theme/locale switchers, JSON-LD)
+components/      UI components (dotted map, header, theme/locale switchers, JSON-LD)
 content/notes/   Bilingual Markdown notes, `<slug>.<locale>.md`
 i18n/            next-intl routing and request config
 lib/             Identity, SEO, socials, contact-channel data, and the notes source
