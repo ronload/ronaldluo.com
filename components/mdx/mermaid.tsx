@@ -1,7 +1,7 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { useEffect, useId, useRef, useState } from "react";
+import { useDeferredValue, useEffect, useId, useRef, useState } from "react";
+import { useSiteTheme } from "@/components/theme-provider";
 
 const TOKENS = ["code", "foreground", "muted", "muted-foreground", "border"] as const;
 
@@ -90,7 +90,8 @@ interface Props {
 
 export function Mermaid({ chart }: Props) {
   const slot = useId().replace(/[^a-zA-Z0-9]/g, "");
-  const { resolvedTheme } = useTheme();
+  const { activeTheme } = useSiteTheme();
+  const renderedTheme = useDeferredValue(activeTheme);
   const [result, setResult] = useState<Result | null>(null);
   const [failed, setFailed] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -106,10 +107,13 @@ export function Mermaid({ chart }: Props) {
         mermaid.initialize({
           startOnLoad: false,
           suppressErrorRendering: true,
-          ...themeOptions(resolvedTheme === "dark"),
+          ...themeOptions(renderedTheme.dark),
         });
 
-        const { svg, bindFunctions } = await mermaid.render(`mermaid-${slot}`, chart);
+        const { svg, bindFunctions } = await mermaid.render(
+          `mermaid-${slot}-${renderedTheme.id}`,
+          chart,
+        );
         if (cancelled) return;
 
         setFailed(false);
@@ -122,7 +126,7 @@ export function Mermaid({ chart }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [chart, resolvedTheme, slot]);
+  }, [chart, renderedTheme.dark, renderedTheme.id, slot]);
 
   useEffect(() => {
     const element = ref.current;

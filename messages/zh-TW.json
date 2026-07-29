@@ -95,7 +95,13 @@
     "home": "首頁",
     "notes": "筆記",
     "switchLanguage": "切換語言",
-    "toggleTheme": "切換主題"
+    "theme": {
+      "trigger": "選擇主題",
+      "title": "主題",
+      "cancel": "取消",
+      "apply": "套用",
+      "close": "關閉主題選擇器"
+    }
   },
   "Contact": {
     "title": "與我聯繫",

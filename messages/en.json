@@ -95,7 +95,13 @@
     "home": "Home",
     "notes": "Notes",
     "switchLanguage": "Switch language",
-    "toggleTheme": "Toggle theme"
+    "theme": {
+      "trigger": "Choose theme",
+      "title": "Theme",
+      "cancel": "Cancel",
+      "apply": "Apply",
+      "close": "Close theme picker"
+    }
   },
   "Contact": {
     "title": "Get in Touch",
