@@ -6,6 +6,7 @@ import { RadioGroup } from "@base-ui/react/radio-group";
 import { Check, ChevronDown, X } from "lucide-react";
 import { useRef, useState, useSyncExternalStore } from "react";
 import { useSiteTheme } from "@/components/theme-provider";
+import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { type ThemePreference, themeGroups } from "@/lib/theme-registry";
@@ -70,10 +71,11 @@ export function ThemeSwitcher({ labels }: { labels: ThemeSwitcherLabels }) {
             style={{ willChange: "opacity" }}
           >
             <div className="flex shrink-0 items-start justify-between gap-4 border-b px-5 py-4 sm:px-6">
-              <div>
+              <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
                 <Dialog.Title className="font-semibold text-lg tracking-tight">
                   {labels.title}
                 </Dialog.Title>
+                <Badge variant="secondary">{activeTheme.label}</Badge>
               </div>
               <Dialog.Close
                 aria-label={labels.close}
