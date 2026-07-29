@@ -311,11 +311,29 @@
   }
 }
 
+@keyframes home-reveal-enter {
+  from {
+    filter: blur(12px);
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer components {
   .frame-guides,
-  .frame-divider {
+  .frame-divider,
+  .home-reveal,
+  .home-reveal-group {
     --frame-duration: 1.08s;
     --frame-easing: cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  .frame-guides,
+  .frame-divider {
     --frame-active-color: var(--foreground);
     --frame-active-opacity: 0.24;
     --frame-settled-opacity: 0.64;
@@ -336,12 +354,45 @@
     animation: frame-divider-reveal var(--frame-duration) var(--frame-easing) var(--frame-delay)
       both;
   }
+  .home-reveal,
+  .home-reveal-group > * {
+    animation: home-reveal-enter var(--frame-duration) var(--frame-easing) both;
+  }
+  .home-reveal {
+    --home-reveal-delay: 0s;
+    animation-delay: var(--home-reveal-delay);
+  }
+  .home-reveal-group {
+    --home-reveal-delay: 0s;
+  }
+  .home-reveal-group > * {
+    --home-reveal-offset: 0s;
+    animation-delay: calc(var(--home-reveal-delay) + var(--home-reveal-offset));
+  }
+  .home-reveal-group > :nth-child(2) {
+    --home-reveal-offset: 0.05s;
+  }
+  .home-reveal-group > :nth-child(n + 3) {
+    --home-reveal-offset: 0.1s;
+  }
+  .home-reveal--after-title {
+    --home-reveal-delay: 0.1s;
+  }
+  .home-reveal--later,
+  .home-reveal-group--later {
+    --home-reveal-delay: 0.15s;
+  }
+  .home-reveal-group--actions {
+    --home-reveal-delay: 0.2s;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .frame-guides::before,
   .frame-guides::after,
-  .frame-divider::before {
+  .frame-divider::before,
+  .home-reveal,
+  .home-reveal-group > * {
     animation: none;
   }
 }
