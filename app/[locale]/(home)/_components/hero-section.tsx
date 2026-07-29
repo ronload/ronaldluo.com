@@ -24,7 +24,7 @@ export function HeroSection() {
             </div>
           </div>
           <Image
-            className="home-reveal home-reveal--after-title col-start-2 row-start-1 aspect-square size-24 self-center rounded-full border-none object-cover shadow-sm invert sm:row-span-2 sm:h-full sm:w-auto sm:self-stretch dark:invert-0"
+            className="col-start-2 row-start-1 aspect-square size-24 self-center rounded-full border-none object-cover shadow-sm invert sm:row-span-2 sm:h-full sm:w-auto sm:self-stretch dark:invert-0"
             src="/avatar.jpg"
             alt={t("name")}
             width={176}
@@ -33,7 +33,7 @@ export function HeroSection() {
             quality={60}
             priority
           />
-          <div className="home-reveal-group home-reveal-group--actions col-span-2 row-start-2 flex gap-3 sm:col-span-1 sm:col-start-1 sm:gap-4">
+          <div className="col-span-2 row-start-2 flex gap-3 sm:col-span-1 sm:col-start-1 sm:gap-4">
             <Link
               href="/notes"
               className={cn(
