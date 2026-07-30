@@ -753,6 +753,33 @@ html[data-theme="one-dark-pro-night-flat"] {
   }
 }
 
+@property --home-shine-x {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 80px;
+}
+
+@property --home-shine-y {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@keyframes home-shine-sweep {
+  from {
+    --home-shine-x: 0px;
+    --home-shine-y: 77px;
+  }
+  50% {
+    --home-shine-x: 27px;
+    --home-shine-y: 12px;
+  }
+  to {
+    --home-shine-x: 80px;
+    --home-shine-y: 0px;
+  }
+}
+
 @keyframes home-shine-bloom {
   from {
     opacity: 0;
@@ -855,7 +882,15 @@ html[data-theme="one-dark-pro-night-flat"] {
     clip-path: inset(0 50% 50% 0);
     pointer-events: none;
     opacity: 0;
-    --home-shine-mask: linear-gradient(135deg, #0000 0%, #0003 34%, #0009 46%, #000 50%, #0000 64%);
+    --home-shine-beam: 112px;
+    --home-shine-mask: radial-gradient(
+      ellipse var(--home-shine-beam) var(--home-shine-beam) at var(--home-shine-x)
+        var(--home-shine-y),
+      #000 0%,
+      #0009 30%,
+      #0003 50%,
+      #0000 70%
+    );
     -webkit-mask-image: var(--home-shine-mask);
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
@@ -864,7 +899,12 @@ html[data-theme="one-dark-pro-night-flat"] {
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: 100% 100%;
-    animation: home-shine-bloom
+    --home-shine-settle: 100ms;
+    animation:
+      home-shine-sweep
+      calc(var(--home-surface-delay) - var(--home-shine-delay) - var(--home-shine-settle))
+      cubic-bezier(0.455, 0.03, 0.515, 0.955) var(--home-shine-delay) backwards,
+      home-shine-bloom
       calc(var(--home-surface-delay) + var(--home-surface-duration) - var(--home-shine-delay)) ease
       var(--home-shine-delay) backwards;
   }
