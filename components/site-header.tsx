@@ -27,14 +27,20 @@ export function SiteHeader() {
           <Link
             href="/"
             aria-label={t("home")}
-            className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "icon" }),
+              "border-border/[0.32]",
+            )}
           >
             <House />
           </Link>
           <Link
             href="/notes"
             aria-label={t("notes")}
-            className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "icon" }),
+              "border-border/[0.32]",
+            )}
           >
             <NotebookText />
           </Link>

@@ -19,6 +19,7 @@ export function LocaleSwitcher({ label }: { label: string }) {
     <Button
       variant="outline"
       size="icon"
+      className="border-border/[0.32]"
       aria-label={label}
       disabled={isPending}
       onClick={() => startTransition(() => router.replace(pathname, { locale: nextLocale }))}
