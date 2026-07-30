@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Divider } from "@/components/frame";
 import { SCHOOLS } from "@/lib/identity";
-import { cn } from "@/lib/utils";
+import { cn, externalLinkProps } from "@/lib/utils";
 
 interface EducationItem {
   period: string;
@@ -29,26 +29,30 @@ export function EducationSection() {
                 <p className="shrink-0 whitespace-nowrap text-muted-foreground text-sm tabular-nums leading-relaxed sm:w-36 sm:pt-0.5">
                   {item.period}
                 </p>
-                <div className="flex items-start gap-3">
+                <a
+                  className="group flex items-start gap-3 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
+                  href={school.url}
+                  {...externalLinkProps(school.url)}
+                >
                   <Image
                     className={cn(
                       "size-10 shrink-0 border border-border object-cover shadow-sm sm:size-11",
                       school.brightIcon && "bg-card",
                     )}
                     src={school.icon}
-                    alt={item.organization}
+                    alt=""
                     width={96}
                     height={96}
                   />
                   <div className="flex flex-col gap-0.5">
-                    <h3 className="font-medium text-base text-foreground leading-snug sm:text-lg">
+                    <h3 className="font-medium text-base text-foreground leading-snug underline-offset-4 group-hover:underline group-focus-visible:underline sm:text-lg">
                       {item.organization}
                     </h3>
                     {item.field ? (
                       <p className="text-muted-foreground text-sm sm:text-base">{item.field}</p>
                     ) : null}
                   </div>
-                </div>
+                </a>
               </article>
             );
           })}

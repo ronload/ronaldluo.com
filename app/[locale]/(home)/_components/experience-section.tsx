@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Divider } from "@/components/frame";
 import { EXPERIENCES } from "@/lib/identity";
+import { externalLinkProps } from "@/lib/utils";
 
 interface ExperienceItem {
   period: string;
@@ -21,7 +22,7 @@ export function ExperienceSection() {
           {t("title")}
         </h2>
         <div className="home-reveal-group home-reveal-group--later mt-8 flex flex-col gap-10 sm:mt-10 sm:gap-12">
-          {Object.entries(EXPERIENCES).map(([key, { icon }]) => {
+          {Object.entries(EXPERIENCES).map(([key, { icon, url }]) => {
             const item = t.raw(`items.${key}`) as ExperienceItem;
 
             return (
@@ -30,21 +31,25 @@ export function ExperienceSection() {
                   {item.period}
                 </p>
                 <div className="flex flex-col gap-3">
-                  <div className="flex items-center gap-3">
+                  <a
+                    className="group flex w-fit items-center gap-3 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
+                    href={url}
+                    {...externalLinkProps(url)}
+                  >
                     <Image
                       className="size-10 shrink-0 border border-border object-cover shadow-sm sm:size-11"
                       src={icon}
-                      alt={item.organization}
+                      alt=""
                       width={96}
                       height={96}
                     />
                     <div className="flex flex-col gap-0.5">
-                      <h3 className="font-medium text-base text-foreground leading-snug sm:text-lg">
+                      <h3 className="font-medium text-base text-foreground leading-snug underline-offset-4 group-hover:underline group-focus-visible:underline sm:text-lg">
                         {item.organization}
                       </h3>
                       <p className="text-muted-foreground text-sm sm:text-base">{item.role}</p>
                     </div>
-                  </div>
+                  </a>
                   <ul className="flex flex-col gap-1.5 text-muted-foreground text-sm leading-relaxed sm:text-base">
                     {item.highlights.map((highlight) => (
                       <li key={highlight} className="flex gap-2.5">
