@@ -41,7 +41,7 @@ export function PersonJsonLd({ locale }: { locale: Locale }) {
           worksFor:
             key === "prinsur"
               ? { "@id": ORG_ID }
-              : { "@type": "Organization" as const, name: exp.organization },
+              : { "@type": "Organization" as const, name: exp.organization, url: exp.url },
         })),
         alumniOf: Object.values(SCHOOLS).map((school) => ({
           "@type": "EducationalOrganization" as const,

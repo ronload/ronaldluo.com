@@ -43,6 +43,7 @@ interface School {
 interface Experience {
   icon: string;
   organization: string;
+  url: string;
   roleName: string;
   startDate: string;
   endDate?: string;
@@ -52,12 +53,14 @@ export const EXPERIENCES: Record<"prinsur" | "kaiyn" | "yn", Experience> = {
   prinsur: {
     icon: "/prinsur-icon.png",
     organization: "Prinsur Tech CO., LTD.",
+    url: PERSON.worksFor.url,
     roleName: "Co-Founder, Board Director & CTO",
     startDate: "2025",
   },
   kaiyn: {
     icon: "/kaiyn-capital-icon.jpg",
     organization: "Kaiyn Capital",
+    url: "https://kaiyn.org",
     roleName: "Co-Founder & Community Manager",
     startDate: "2023",
     endDate: "2025",
@@ -65,6 +68,7 @@ export const EXPERIENCES: Record<"prinsur" | "kaiyn" | "yn", Experience> = {
   yn: {
     icon: "/yn-official-icon.jpg",
     organization: "YN OFFICIAL",
+    url: "https://shopee.tw/ronlo",
     roleName: "Founder",
     startDate: "2019",
     endDate: "2025",
