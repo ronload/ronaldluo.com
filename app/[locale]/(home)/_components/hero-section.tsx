@@ -5,8 +5,13 @@ import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-function HomeShine() {
-  return <span aria-hidden className="home-shine z-10" />;
+function HomeShine({ position = "top-left" }: { position?: "top-left" | "bottom-right" }) {
+  return (
+    <span
+      aria-hidden
+      className={cn("home-shine z-10", position === "bottom-right" && "home-shine--bottom-right")}
+    />
+  );
 }
 
 export function HeroSection() {
@@ -29,6 +34,7 @@ export function HeroSection() {
           <div className="col-start-1 row-start-2 flex gap-3 sm:col-start-2 sm:row-start-1 sm:flex-col sm:justify-center sm:gap-4 sm:self-stretch">
             <div className="home-shine-frame flex-1 sm:min-w-44 sm:flex-none">
               <HomeShine />
+              <HomeShine position="bottom-right" />
               <Link
                 href="/notes"
                 className={cn(
@@ -42,6 +48,7 @@ export function HeroSection() {
             </div>
             <div className="home-shine-frame flex-1 sm:min-w-44 sm:flex-none">
               <HomeShine />
+              <HomeShine position="bottom-right" />
               <Link
                 href="/contact"
                 className={cn(
