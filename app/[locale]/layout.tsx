@@ -88,7 +88,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <RelMeLinks />
         <ThemeProvider
           attribute="data-theme"
-          defaultTheme="system"
+          defaultTheme="tokyonight-night"
           enableSystem
           enableColorScheme={false}
           disableTransitionOnChange
