@@ -148,17 +148,15 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
       <Button
         aria-keyshortcuts="Control+K Meta+K"
         aria-label={labels.trigger}
-        className="border-border/[0.32] px-0 lg:w-48 lg:justify-start lg:px-3"
+        className="flex-1 justify-start border-border/[0.32] px-3 lg:w-52 lg:flex-none"
         onClick={() => setOpen(true)}
-        size="icon"
+        size="default"
         type="button"
         variant="outline"
       >
         <Search />
-        <span className="sr-only lg:not-sr-only lg:ms-1 lg:text-muted-foreground">
-          {labels.title}
-        </span>
-        <kbd className="hidden border border-border/60 bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground lg:ms-auto lg:inline">
+        <span className="ms-1 text-muted-foreground">{labels.title}</span>
+        <kbd className="ms-auto shrink-0 border border-border/60 bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
           {isAppleDevice ? "⌘" : "⌃"} K
         </kbd>
       </Button>
