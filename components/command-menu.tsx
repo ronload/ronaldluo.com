@@ -192,6 +192,7 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
           <CommandInput
             aria-label={labels.placeholder}
             autoFocus
+            className="command-menu-search-input"
             onKeyDown={(event) => {
               if (
                 event.ctrlKey &&
@@ -210,7 +211,7 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
           />
           <CommandList
             aria-label={labels.title}
-            className="max-h-[calc(100svh-14rem)] px-1 py-1 sm:max-h-96"
+            className="max-h-[calc(100svh-17rem)] px-1 py-1 sm:max-h-96"
           >
             <CommandEmpty>{labels.empty}</CommandEmpty>
             <CommandGroup heading={labels.navigation}>
@@ -297,7 +298,7 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
           </CommandList>
           <div
             aria-hidden="true"
-            className="flex items-center justify-between border-t px-4 py-2 font-mono text-[10px] text-muted-foreground"
+            className="command-menu-keyboard-hints flex items-center justify-between border-t px-4 py-2 font-mono text-[10px] text-muted-foreground"
           >
             <span>
               <kbd className="me-1 border border-border/60 bg-muted px-1 py-0.5">Up/Down</kbd>

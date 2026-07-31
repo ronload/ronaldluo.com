@@ -95,6 +95,17 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+@media (hover: none), (pointer: coarse) {
+  .command-menu-search-input {
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+  }
+
+  .command-menu-keyboard-hints {
+    display: none;
+  }
+}
+
 :root {
   --radius: 0px;
   --font-sans:
