@@ -104,6 +104,22 @@
       "close": "Close theme picker"
     }
   },
+  "CommandMenu": {
+    "trigger": "Open command menu",
+    "title": "jump to ...",
+    "description": "Search pages, notes, and site settings. Use the arrow keys to navigate and Enter to select.",
+    "placeholder": "Search pages, notes, or settings...",
+    "empty": "No matching commands.",
+    "navigation": "Navigate",
+    "settings": "Settings",
+    "themes": "Themes",
+    "contacts": "Connect",
+    "switchLanguage": "Switch to Traditional Chinese",
+    "navigate": "navigate",
+    "select": "select",
+    "close": "Close command menu",
+    "skipToContent": "Skip to main content"
+  },
   "Contact": {
     "title": "Get in Touch",
     "description": "For work, collaboration, or just to say hi. Reach out anytime.",
