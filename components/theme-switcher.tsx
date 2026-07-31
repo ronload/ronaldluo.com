@@ -55,9 +55,10 @@ export function ThemeSwitcher({ labels }: { labels: ThemeSwitcherLabels }) {
     <Dialog.Root modal="trap-focus" open={open} onOpenChange={handleOpenChange}>
       <Dialog.Trigger
         aria-label={labels.trigger}
-        className={cn(buttonVariants({ variant: "outline" }), "border-border/[0.32] px-4")}
+        className={cn(buttonVariants({ variant: "outline" }), "border-border/[0.32] px-3 sm:px-4")}
       >
-        {mounted ? activeTheme.label : labels.trigger}
+        <span className="sm:hidden">{labels.title}</span>
+        <span className="hidden sm:inline">{mounted ? activeTheme.label : labels.trigger}</span>
         <ChevronDown className="size-3.5" />
       </Dialog.Trigger>
       <Dialog.Portal>

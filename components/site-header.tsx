@@ -1,5 +1,6 @@
 import { House, NotebookText } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { CommandMenu } from "@/components/command-menu";
 import { Divider, FrameGuides } from "@/components/frame";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -7,7 +8,11 @@ import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-export function SiteHeader() {
+interface SiteHeaderProps {
+  commandMenu: React.ComponentProps<typeof CommandMenu>;
+}
+
+export function SiteHeader({ commandMenu }: SiteHeaderProps) {
   const t = useTranslations("Header");
 
   return (
@@ -24,6 +29,7 @@ export function SiteHeader() {
           }}
         />
         <div className="flex items-center gap-2">
+          <CommandMenu {...commandMenu} />
           <Link
             href="/"
             aria-label={t("home")}
