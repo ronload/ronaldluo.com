@@ -12,7 +12,6 @@ import { ThemeColor } from "@/components/theme-color";
 import { ThemeProvider } from "@/components/theme-provider";
 import { assertLocale } from "@/i18n/assert-locale";
 import { routing } from "@/i18n/routing";
-import { ACTIVE_CHANNELS } from "@/lib/contact-channels";
 import { SITE_URL } from "@/lib/identity";
 import { FEED_ALTERNATES, socialMetadata } from "@/lib/seo";
 import { source } from "@/lib/source";
@@ -118,7 +117,6 @@ export default async function LocaleLayout({ children, params }: Props) {
       title: note.data.title,
       description: note.data.description,
     }));
-  const commandContacts = ACTIVE_CHANNELS.map(({ href, label }) => ({ href, label }));
 
   return (
     <html
@@ -147,7 +145,6 @@ export default async function LocaleLayout({ children, params }: Props) {
             <PageFrame>
               <SiteHeader
                 commandMenu={{
-                  contacts: commandContacts,
                   labels: commandLabels,
                   notes: commandNotes,
                 }}

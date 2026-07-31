@@ -2,7 +2,6 @@
 
 import {
   CircleHelp,
-  ExternalLink,
   House,
   Languages,
   Mail,
@@ -28,17 +27,13 @@ import {
 } from "@/components/ui/command";
 import { DialogClose } from "@/components/ui/dialog";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { ACTIVE_CHANNELS } from "@/lib/contact-channels";
 import { themeDefinitions } from "@/lib/theme-registry";
 
 export interface CommandMenuNote {
   slug: string;
   title: string;
   description: string;
-}
-
-export interface CommandMenuContact {
-  label: string;
-  href: string;
 }
 
 export interface CommandMenuLabels {
@@ -63,7 +58,6 @@ export interface CommandMenuLabels {
 }
 
 interface CommandMenuProps {
-  contacts: CommandMenuContact[];
   labels: CommandMenuLabels;
   notes: CommandMenuNote[];
 }
@@ -74,7 +68,7 @@ const getAppleDeviceSnapshot = () =>
   typeof navigator !== "undefined" &&
   /Macintosh|Mac OS X|iPhone|iPad|iPod/.test(navigator.userAgent);
 
-export function CommandMenu({ contacts, labels, notes }: CommandMenuProps) {
+export function CommandMenu({ labels, notes }: CommandMenuProps) {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -138,7 +132,13 @@ export function CommandMenu({ contacts, labels, notes }: CommandMenuProps) {
   const pageCommands = [
     { href: "/", icon: House, id: "home", label: labels.home },
     { href: "/notes", icon: NotebookText, id: "notes", label: labels.notes },
-    { href: "/contact", icon: Mail, id: "contact", label: labels.contact },
+    {
+      href: "/contact",
+      icon: Mail,
+      id: "contact",
+      keywords: [labels.contacts, "contact"],
+      label: labels.contact,
+    },
     { href: "/faq", icon: CircleHelp, id: "faq", label: labels.faq },
     { href: "/for-llms", icon: Sparkles, id: "for-llms", label: labels.forLlms },
   ];
@@ -214,10 +214,10 @@ export function CommandMenu({ contacts, labels, notes }: CommandMenuProps) {
           >
             <CommandEmpty>{labels.empty}</CommandEmpty>
             <CommandGroup heading={labels.navigation}>
-              {pageCommands.map(({ href, icon: Icon, id, label }) => (
+              {pageCommands.map(({ href, icon: Icon, id, keywords = [], label }) => (
                 <CommandItem
                   key={id}
-                  keywords={[label]}
+                  keywords={[label, ...keywords]}
                   onSelect={() => navigate(href)}
                   value={`page ${label}`}
                 >
@@ -282,21 +282,17 @@ export function CommandMenu({ contacts, labels, notes }: CommandMenuProps) {
             </CommandGroup>
             <CommandSeparator />
             <CommandGroup heading={labels.contacts}>
-              {contacts.map((contact) => {
-                const Icon = contact.href.startsWith("mailto:") ? Mail : ExternalLink;
-
-                return (
-                  <CommandItem
-                    key={contact.href}
-                    keywords={[contact.label]}
-                    onSelect={() => openContact(contact.href)}
-                    value={`contact ${contact.label}`}
-                  >
-                    <Icon />
-                    <span>{contact.label}</span>
-                  </CommandItem>
-                );
-              })}
+              {ACTIVE_CHANNELS.map(({ href, icon: Icon, label }) => (
+                <CommandItem
+                  key={href}
+                  keywords={[label]}
+                  onSelect={() => openContact(href)}
+                  value={`contact ${label}`}
+                >
+                  <Icon />
+                  <span>{label}</span>
+                </CommandItem>
+              ))}
             </CommandGroup>
           </CommandList>
           <div
