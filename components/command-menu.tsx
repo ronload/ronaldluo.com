@@ -174,7 +174,7 @@ export function CommandMenu({ contacts, labels, notes }: CommandMenuProps) {
         showCloseButton={false}
         title={labels.title}
       >
-        <Command className="relative" label={labels.title} loop vimBindings={false}>
+        <Command className="relative" label={labels.title} loop vimBindings>
           <DialogClose
             aria-label={labels.close}
             render={
@@ -192,6 +192,18 @@ export function CommandMenu({ contacts, labels, notes }: CommandMenuProps) {
           <CommandInput
             aria-label={labels.placeholder}
             autoFocus
+            onKeyDown={(event) => {
+              if (
+                event.ctrlKey &&
+                !event.metaKey &&
+                !event.altKey &&
+                !event.nativeEvent.isComposing &&
+                event.key.toLowerCase() === "u"
+              ) {
+                event.preventDefault();
+                setSearch("");
+              }
+            }}
             onValueChange={setSearch}
             placeholder={labels.placeholder}
             value={search}
