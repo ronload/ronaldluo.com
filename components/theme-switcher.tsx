@@ -1,6 +1,5 @@
 "use client";
 
-import { Dialog } from "@base-ui/react/dialog";
 import { Radio } from "@base-ui/react/radio";
 import { RadioGroup } from "@base-ui/react/radio-group";
 import { Check, ChevronDown, X } from "lucide-react";
@@ -8,7 +7,13 @@ import { useRef, useState, useSyncExternalStore } from "react";
 import { useSiteTheme } from "@/components/theme-provider";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { type ThemePreference, themeGroups } from "@/lib/theme-registry";
 import { cn } from "@/lib/utils";
 
@@ -57,8 +62,8 @@ export function ThemeSwitcher({ labels, trigger = "button" }: ThemeSwitcherProps
   };
 
   return (
-    <Dialog.Root modal="trap-focus" open={open} onOpenChange={handleOpenChange}>
-      <Dialog.Trigger
+    <Dialog modal="trap-focus" open={open} onOpenChange={handleOpenChange}>
+      <DialogTrigger
         aria-label={labels.trigger}
         className={cn(
           trigger === "badge"
@@ -69,7 +74,7 @@ export function ThemeSwitcher({ labels, trigger = "button" }: ThemeSwitcherProps
         {trigger === "badge" ? (
           <>
             <span className="flex items-center bg-foreground px-2 font-semibold text-[0.625rem] text-background tracking-widest">
-              THEME
+              {labels.title}
             </span>
             <span className="flex items-center gap-1.5 border border-border/[0.32] border-l-0 px-2.5 py-1 font-medium text-muted-foreground text-xs transition-colors group-hover:border-foreground/50 group-hover:text-foreground group-data-popup-open:border-foreground/50 group-data-popup-open:text-foreground">
               {mounted ? activeTheme.label : labels.trigger}
@@ -83,98 +88,98 @@ export function ThemeSwitcher({ labels, trigger = "button" }: ThemeSwitcherProps
             <ChevronDown className="size-3.5" />
           </>
         )}
-      </Dialog.Trigger>
-      <Dialog.Portal>
-        <Dialog.Backdrop
-          className="fixed inset-0 z-[90] bg-background/50 transition-opacity data-ending-style:opacity-0 data-starting-style:opacity-0"
-          style={{ willChange: "opacity" }}
-        />
-        <Dialog.Viewport className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-          <Dialog.Popup
-            className="flex h-[30rem] max-h-[calc(100svh-2rem)] w-full max-w-md flex-col overflow-hidden border bg-popover text-popover-foreground shadow-2xl outline-none transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0"
-            style={{ willChange: "opacity" }}
-          >
-            <div className="flex shrink-0 items-start justify-between gap-4 border-b px-5 py-4 sm:px-6">
-              <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
-                <Dialog.Title className="font-semibold text-lg tracking-tight">
-                  {labels.title}
-                </Dialog.Title>
-                <Badge variant="secondary">{activeTheme.label}</Badge>
-              </div>
-              <Dialog.Close
-                aria-label={labels.close}
-                className={buttonVariants({ variant: "ghost", size: "icon-sm" })}
-              >
-                <X />
-              </Dialog.Close>
+      </DialogTrigger>
+      <DialogContent
+        className="top-1/2 h-[30rem] max-h-[calc(100svh-2rem)] w-[calc(100%-2rem)] max-w-none -translate-y-1/2 gap-0 overflow-hidden border-border p-0 shadow-2xl sm:w-[42rem]"
+        showCloseButton={false}
+      >
+        <div className="flex size-full min-h-0 flex-col">
+          <div className="relative shrink-0 border-b p-1">
+            <div className="flex h-9 min-w-0 items-center gap-2 px-3 pe-12">
+              <DialogTitle className="shrink-0 text-sm normal-case tracking-normal">
+                {labels.title}
+              </DialogTitle>
+              <Badge variant="secondary">{activeTheme.label}</Badge>
             </div>
+            <DialogClose
+              aria-label={labels.close}
+              render={
+                <Button
+                  className="absolute end-1.5 top-1.5 z-10"
+                  size="icon-sm"
+                  type="button"
+                  variant="ghost"
+                />
+              }
+            >
+              <X />
+              <span className="sr-only">{labels.close}</span>
+            </DialogClose>
+          </div>
 
-            <ScrollArea className="min-h-0 flex-1">
-              <RadioGroup<ThemePreference>
-                aria-label={labels.title}
-                className="space-y-3 px-5 py-4 sm:px-6"
-                onValueChange={previewTheme}
-                value={pendingTheme}
-              >
-                <div className="space-y-3">
-                  {themeGroups.map((group) => (
-                    <section key={group.label}>
-                      <h3 className="mb-1 px-1 font-medium text-muted-foreground text-xs uppercase tracking-[0.12em]">
-                        {group.label}
-                      </h3>
-                      <div className="space-y-0.5">
-                        {group.themes.map((theme) => {
-                          const selected = pendingTheme === theme.id;
+          <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto px-1 py-1">
+            <RadioGroup<ThemePreference>
+              aria-label={labels.title}
+              onValueChange={previewTheme}
+              value={pendingTheme}
+            >
+              {themeGroups.map((group, index) => (
+                <section
+                  className={cn(index > 0 && "mt-1.5 border-border/50 border-t pt-1.5")}
+                  key={group.label}
+                >
+                  <h3 className="px-3 py-2 font-semibold text-muted-foreground text-xs uppercase tracking-wider">
+                    {group.label}
+                  </h3>
+                  {group.themes.map((theme) => {
+                    const selected = pendingTheme === theme.id;
 
-                          return (
-                            <Radio.Root
-                              className={cn(
-                                "flex cursor-pointer items-center gap-3 px-3 py-2 text-left outline-none transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
-                                selected ? "bg-primary/8" : "hover:bg-muted/60",
-                              )}
-                              key={theme.id}
-                              nativeButton
-                              render={<button type="button" />}
-                              value={theme.id}
-                            >
-                              <span className="min-w-0 flex-1 font-medium text-sm">
-                                {theme.label}
-                              </span>
-                              {selected ? <Check className="size-4 shrink-0 text-primary" /> : null}
-                            </Radio.Root>
-                          );
-                        })}
-                      </div>
-                    </section>
-                  ))}
-                </div>
-              </RadioGroup>
-            </ScrollArea>
+                    return (
+                      <Radio.Root
+                        className={cn(
+                          "flex w-full cursor-pointer select-none items-center gap-2 px-3 py-2 text-left text-sm outline-hidden transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                          selected ? "bg-muted text-foreground" : "hover:bg-muted",
+                        )}
+                        key={theme.id}
+                        nativeButton
+                        render={<button type="button" />}
+                        value={theme.id}
+                      >
+                        <span className="min-w-0 flex-1">{theme.label}</span>
+                        {selected ? <Check className="ms-auto size-3.5 shrink-0" /> : null}
+                      </Radio.Root>
+                    );
+                  })}
+                </section>
+              ))}
+            </RadioGroup>
+          </div>
 
-            <div className="flex shrink-0 justify-end gap-2 border-t px-5 py-4 sm:px-6">
-              <Button
-                onClick={() => {
-                  restoreTheme();
-                  setOpen(false);
-                }}
-                type="button"
-                variant="outline"
-              >
-                {labels.cancel}
-              </Button>
-              <Button
-                onClick={() => {
-                  initialTheme.current = pendingTheme;
-                  setOpen(false);
-                }}
-                type="button"
-              >
-                {labels.apply}
-              </Button>
-            </div>
-          </Dialog.Popup>
-        </Dialog.Viewport>
-      </Dialog.Portal>
-    </Dialog.Root>
+          <div className="flex shrink-0 justify-end gap-2 border-t px-4 py-2">
+            <Button
+              onClick={() => {
+                restoreTheme();
+                setOpen(false);
+              }}
+              size="sm"
+              type="button"
+              variant="outline"
+            >
+              {labels.cancel}
+            </Button>
+            <Button
+              onClick={() => {
+                initialTheme.current = pendingTheme;
+                setOpen(false);
+              }}
+              size="sm"
+              type="button"
+            >
+              {labels.apply}
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
