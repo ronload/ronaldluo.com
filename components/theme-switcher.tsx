@@ -20,11 +20,16 @@ interface ThemeSwitcherLabels {
   trigger: string;
 }
 
+interface ThemeSwitcherProps {
+  labels: ThemeSwitcherLabels;
+  trigger?: "button" | "badge";
+}
+
 const subscribe = () => () => {};
 const getMountedSnapshot = () => true;
 const getServerSnapshot = () => false;
 
-export function ThemeSwitcher({ labels }: { labels: ThemeSwitcherLabels }) {
+export function ThemeSwitcher({ labels, trigger = "button" }: ThemeSwitcherProps) {
   const { activeTheme, preference, setPreference } = useSiteTheme();
   const [open, setOpen] = useState(false);
   const mounted = useSyncExternalStore(subscribe, getMountedSnapshot, getServerSnapshot);
@@ -55,11 +60,29 @@ export function ThemeSwitcher({ labels }: { labels: ThemeSwitcherLabels }) {
     <Dialog.Root modal="trap-focus" open={open} onOpenChange={handleOpenChange}>
       <Dialog.Trigger
         aria-label={labels.trigger}
-        className={cn(buttonVariants({ variant: "outline" }), "border-border/[0.32] px-3 sm:px-4")}
+        className={cn(
+          trigger === "badge"
+            ? "group inline-flex cursor-pointer items-stretch outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            : cn(buttonVariants({ variant: "outline" }), "border-border/[0.32] px-3 sm:px-4"),
+        )}
       >
-        <span className="sm:hidden">{labels.title}</span>
-        <span className="hidden sm:inline">{mounted ? activeTheme.label : labels.trigger}</span>
-        <ChevronDown className="size-3.5" />
+        {trigger === "badge" ? (
+          <>
+            <span className="flex items-center bg-foreground px-2 font-semibold text-[0.625rem] text-background tracking-widest">
+              THEME
+            </span>
+            <span className="flex items-center gap-1.5 border border-border/[0.32] border-l-0 px-2.5 py-1 font-medium text-muted-foreground text-xs transition-colors group-hover:border-foreground/50 group-hover:text-foreground group-data-popup-open:border-foreground/50 group-data-popup-open:text-foreground">
+              {mounted ? activeTheme.label : labels.trigger}
+              <ChevronDown className="size-3" />
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="sm:hidden">{labels.title}</span>
+            <span className="hidden sm:inline">{mounted ? activeTheme.label : labels.trigger}</span>
+            <ChevronDown className="size-3.5" />
+          </>
+        )}
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Backdrop
