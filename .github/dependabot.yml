@@ -5,6 +5,8 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    labels:
+      - "type: dependency"
     commit-message:
       prefix: "chore"
       prefix-development: "chore"
@@ -28,6 +30,9 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    labels:
+      - "type: dependency"
+      - "area: automation"
     commit-message:
       prefix: "chore"
       include: "scope"
