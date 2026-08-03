@@ -3,7 +3,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import type { CommandMenuLabels } from "@/components/command-menu";
 import { FrameGuides, PageFrame } from "@/components/frame";
 import { RelMeLinks } from "@/components/rel-me-links";
@@ -81,12 +81,13 @@ export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
   assertLocale(locale);
   setRequestLocale(locale);
-  const [command, header, contact, faq, forLlms] = await Promise.all([
+  const [command, header, contact, faq, forLlms, messages] = await Promise.all([
     getTranslations({ locale, namespace: "CommandMenu" }),
     getTranslations({ locale, namespace: "Header" }),
     getTranslations({ locale, namespace: "Contact" }),
     getTranslations({ locale, namespace: "Faq" }),
     getTranslations({ locale, namespace: "ForLlms" }),
+    getMessages({ locale }),
   ]);
   const commandLabels: CommandMenuLabels = {
     close: command("close"),
@@ -141,7 +142,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           themes={providerThemes}
         >
           <ThemeColor />
-          <NextIntlClientProvider messages={{}}>
+          <NextIntlClientProvider messages={{ Error: messages.Error }}>
             <PageFrame>
               <SiteHeader
                 commandMenu={{

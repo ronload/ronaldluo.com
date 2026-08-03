@@ -1,10 +1,13 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Divider, FrameTexture } from "@/components/frame";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 export default function NotFound() {
+  const t = useTranslations("NotFound");
+
   return (
     <>
       <section className="relative z-0 flex flex-col">
@@ -20,11 +23,10 @@ export default function NotFound() {
         <div className="container flex w-full flex-1 items-center justify-center pt-12 pb-20 sm:pt-16 sm:pb-24">
           <div className="flex w-4/5 max-w-md flex-col items-center text-center">
             <h2 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
-              Page not found
+              {t("title")}
             </h2>
             <p className="wrap-break-word mt-3 break-keep text-lg text-muted-foreground leading-8">
-              The page you&apos;re looking for doesn&apos;t exist or has been moved. Let&apos;s get
-              you back on track.
+              {t("description")}
             </p>
             <div className="mt-10 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
               <Link
@@ -32,7 +34,7 @@ export default function NotFound() {
                 className={cn(buttonVariants({ size: "lg" }), "h-12 w-full px-4 text-base")}
               >
                 <ArrowLeft />
-                Go back home
+                {t("backToHome")}
               </Link>
               <Link
                 href="/contact"
@@ -41,7 +43,7 @@ export default function NotFound() {
                   "h-12 w-full px-4 text-base",
                 )}
               >
-                Contact me
+                {t("contact")}
                 <ArrowRight />
               </Link>
             </div>

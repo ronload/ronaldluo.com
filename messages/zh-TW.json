@@ -135,5 +135,17 @@
     "fallbackNotice": "這篇筆記還沒有對應語言的版本，以下顯示繁體中文原文。",
     "copyCode": "複製程式碼",
     "copiedCode": "已複製"
+  },
+  "NotFound": {
+    "title": "找不到這個頁面",
+    "description": "你要找的頁面不存在，或是已經被移動了。回到首頁繼續逛吧。",
+    "backToHome": "回到首頁",
+    "contact": "聯絡我"
+  },
+  "Error": {
+    "title": "發生了一些問題",
+    "description": "載入這個頁面時發生非預期的錯誤。你可以重試一次，或是回到首頁。",
+    "retry": "重試",
+    "backToHome": "回到首頁"
   }
 }
