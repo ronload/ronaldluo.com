@@ -32,5 +32,6 @@ jobs:
             --no-progress
             './**/*.md'
             './lib/**/*.ts'
+            './.github/workflows/lighthouse.yml'
           fail: true
           jobSummary: true

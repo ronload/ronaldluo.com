@@ -20,8 +20,9 @@ jobs:
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
-            https://ronaldluo.com/en
+            https://ronaldluo.com/
             https://ronaldluo.com/zh-TW
-            https://ronaldluo.com/en/contact
+            https://ronaldluo.com/contact
+            https://ronaldluo.com/notes/string-to-integer-atoi
           configPath: ./lighthouserc.json
           temporaryPublicStorage: true
