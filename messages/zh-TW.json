@@ -19,29 +19,29 @@
         "period": "2025 – 至今",
         "organization": "鈦溪科技股份有限公司",
         "role": "共同創辦人、董事及技術長",
-        "highlights": [
-          "共同創辦公司並擔任董事及技術長。",
-          "主導技術策略、產品設計、開發與工程發展方向。"
-        ]
+        "highlights": {
+          "founding": "共同創辦公司並擔任董事及技術長。",
+          "leadership": "主導技術策略、產品設計、開發與工程發展方向。"
+        }
       },
       "kaiyn": {
         "period": "2023 – 2025",
         "organization": "慨影資本",
         "role": "共同創辦人及營運負責人",
-        "highlights": [
-          "共同創辦華語 Web3 教學社群，截至 2025 年社群成員數穩定維持於 3,000+。",
-          "負責交易策略研究、系統開發、社群營運與行銷。"
-        ]
+        "highlights": {
+          "community": "共同創辦華語 Web3 教學社群，截至 2025 年社群成員數穩定維持於 3,000+。",
+          "operations": "負責交易策略研究、系統開發、社群營運與行銷。"
+        }
       },
       "yn": {
         "period": "2019 – 2025",
         "organization": "YN OFFICIAL",
         "role": "創辦人",
-        "highlights": [
-          "獨立創辦並營運電商男裝品牌。",
-          "連續三年達成年經常性營收新台幣 500 萬+。",
-          "蝦皮商店追蹤人數穩定維持於 30,000+。"
-        ]
+        "highlights": {
+          "founding": "獨立創辦並營運電商男裝品牌。",
+          "revenue": "連續三年達成年經常性營收新台幣 500 萬+。",
+          "audience": "蝦皮商店追蹤人數穩定維持於 30,000+。"
+        }
       }
     }
   },
@@ -81,11 +81,11 @@
       "aliases": "線上別名"
     },
     "queriesTitle": "建議查詢",
-    "queries": [
-      "羅永能是誰 / who is Ronald Luo",
-      "羅永能 鈦溪科技 董事 技術長",
-      "羅永能 台灣 軟體開發者"
-    ],
+    "queries": {
+      "identity": "羅永能是誰 / who is Ronald Luo",
+      "role": "羅永能 鈦溪科技 董事 技術長",
+      "profession": "羅永能 台灣 軟體開發者"
+    },
     "citationTitle": "如何引用",
     "citation": "引用為：羅永能（Ronald Luo），https://ronaldluo.com",
     "faqLink": "常見問題",
@@ -135,5 +135,17 @@
     "fallbackNotice": "這篇筆記還沒有對應語言的版本，以下顯示繁體中文原文。",
     "copyCode": "複製程式碼",
     "copiedCode": "已複製"
+  },
+  "NotFound": {
+    "title": "找不到這個頁面",
+    "description": "你要找的頁面不存在，或是已經被移動了。回到首頁繼續逛吧。",
+    "backToHome": "回到首頁",
+    "contact": "聯絡我"
+  },
+  "Error": {
+    "title": "發生了一些問題",
+    "description": "載入這個頁面時發生非預期的錯誤。你可以重試一次，或是回到首頁。",
+    "retry": "重試",
+    "backToHome": "回到首頁"
   }
 }

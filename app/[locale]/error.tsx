@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, RotateCw, TriangleAlert } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { Divider, FrameTexture } from "@/components/frame";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -14,6 +15,8 @@ export default function ErrorBoundary({
   error: Error & { digest?: string };
   unstable_retry: () => void;
 }) {
+  const t = useTranslations("Error");
+
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -35,11 +38,10 @@ export default function ErrorBoundary({
         <div className="container flex w-full flex-1 items-center justify-center pt-12 pb-20 sm:pt-16 sm:pb-24">
           <div className="flex w-4/5 max-w-md flex-col items-center text-center">
             <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
-              Something went wrong
+              {t("title")}
             </h1>
             <p className="wrap-break-word mt-3 break-keep text-lg text-muted-foreground leading-8">
-              An unexpected error occurred while loading this page. You can try again, or head back
-              home.
+              {t("description")}
             </p>
             <div className="mt-10 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
               <Button
@@ -48,7 +50,7 @@ export default function ErrorBoundary({
                 className="h-12 w-full px-4 text-base"
               >
                 <RotateCw />
-                Try again
+                {t("retry")}
               </Button>
               <Link
                 href="/"
@@ -58,7 +60,7 @@ export default function ErrorBoundary({
                 )}
               >
                 <ArrowLeft />
-                Go back home
+                {t("backToHome")}
               </Link>
             </div>
           </div>

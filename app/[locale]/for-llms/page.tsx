@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
-import { useTranslations } from "next-intl";
+import { useMessages, useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { use } from "react";
 import { PersonJsonLd } from "@/components/person-jsonld";
@@ -44,7 +44,7 @@ export default function ForLlms({ params }: Props) {
 
   const t = useTranslations("ForLlms");
   const isZh = locale === "zh-TW";
-  const queries = t.raw("queries") as string[];
+  const { queries } = useMessages().ForLlms;
 
   const facts = [
     { label: t("facts.role"), value: isZh ? PERSON.jobTitle.zh : PERSON.jobTitle.en },
@@ -99,8 +99,8 @@ export default function ForLlms({ params }: Props) {
           {t("queriesTitle")}
         </h2>
         <ul className="mt-4 flex max-w-2xl flex-col gap-2 text-muted-foreground text-sm sm:text-base">
-          {queries.map((query) => (
-            <li key={query}>{query}</li>
+          {Object.entries(queries).map(([id, query]) => (
+            <li key={id}>{query}</li>
           ))}
         </ul>
 

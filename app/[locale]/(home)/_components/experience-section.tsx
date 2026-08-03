@@ -1,18 +1,12 @@
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useMessages, useTranslations } from "next-intl";
 import { Divider } from "@/components/frame";
 import { EXPERIENCES } from "@/lib/identity";
-import { externalLinkProps } from "@/lib/utils";
-
-interface ExperienceItem {
-  period: string;
-  organization: string;
-  role: string;
-  highlights: string[];
-}
+import { externalLinkProps, objectKeys } from "@/lib/utils";
 
 export function ExperienceSection() {
   const t = useTranslations("Experience");
+  const { Experience } = useMessages();
 
   return (
     <section className="relative">
@@ -22,8 +16,9 @@ export function ExperienceSection() {
           {t("title")}
         </h2>
         <div className="home-reveal-group home-reveal-group--later mt-8 flex flex-col gap-10 sm:mt-10 sm:gap-12">
-          {Object.entries(EXPERIENCES).map(([key, { icon, url }]) => {
-            const item = t.raw(`items.${key}`) as ExperienceItem;
+          {objectKeys(EXPERIENCES).map((key) => {
+            const { icon, url } = EXPERIENCES[key];
+            const item = Experience.items[key];
 
             return (
               <article key={key} className="flex flex-col gap-2 sm:flex-row sm:gap-8">
@@ -51,8 +46,8 @@ export function ExperienceSection() {
                     </div>
                   </a>
                   <ul className="flex flex-col gap-1.5 text-muted-foreground text-sm leading-relaxed sm:text-base">
-                    {item.highlights.map((highlight) => (
-                      <li key={highlight} className="flex gap-2.5">
+                    {Object.entries(item.highlights).map(([id, highlight]) => (
+                      <li key={id} className="flex gap-2.5">
                         <span
                           aria-hidden="true"
                           className="mt-[0.5625rem] size-1 shrink-0 bg-muted-foreground/50"

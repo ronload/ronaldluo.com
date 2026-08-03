@@ -1,17 +1,12 @@
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useMessages, useTranslations } from "next-intl";
 import { Divider } from "@/components/frame";
 import { SCHOOLS } from "@/lib/identity";
-import { cn, externalLinkProps } from "@/lib/utils";
-
-interface EducationItem {
-  period: string;
-  organization: string;
-  field?: string;
-}
+import { cn, externalLinkProps, objectKeys } from "@/lib/utils";
 
 export function EducationSection() {
   const t = useTranslations("Education");
+  const { Education } = useMessages();
 
   return (
     <section className="relative">
@@ -21,8 +16,9 @@ export function EducationSection() {
           {t("title")}
         </h2>
         <div className="home-reveal-group home-reveal-group--later mt-8 flex flex-col gap-10 sm:mt-10 sm:gap-12">
-          {Object.entries(SCHOOLS).map(([key, school]) => {
-            const item = t.raw(`items.${key}`) as EducationItem;
+          {objectKeys(SCHOOLS).map((key) => {
+            const school = SCHOOLS[key];
+            const item = Education.items[key];
 
             return (
               <article key={key} className="flex flex-col gap-2 sm:flex-row sm:gap-8">
@@ -48,9 +44,7 @@ export function EducationSection() {
                     <h3 className="font-medium text-base text-foreground leading-snug underline-offset-4 group-hover:underline group-focus-visible:underline sm:text-lg">
                       {item.organization}
                     </h3>
-                    {item.field ? (
-                      <p className="text-muted-foreground text-sm sm:text-base">{item.field}</p>
-                    ) : null}
+                    <p className="text-muted-foreground text-sm sm:text-base">{item.field}</p>
                   </div>
                 </a>
               </article>
