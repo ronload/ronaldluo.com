@@ -12,6 +12,59 @@ interface SquareDottedMapProps extends React.SVGProps<SVGSVGElement> {
   stagger?: boolean;
 }
 
+interface DotPathOptions {
+  width: number;
+  height: number;
+  mapSamples: number;
+  dotSize: number;
+  stagger: boolean;
+}
+
+const pathCache = new Map<string, string>();
+
+// createMap emits 16 significant decimals; 2 is well below one device pixel here.
+const coord = (value: number) =>
+  value
+    .toFixed(2)
+    .replace(/(\.\d*?)0+$/, "$1")
+    .replace(/\.$/, "")
+    .replace(/^(-?)0\./, "$1.");
+
+function dotPath({ width, height, mapSamples, dotSize, stagger }: DotPathOptions) {
+  const key = `${width}x${height}@${mapSamples}/${dotSize}${stagger ? "/stagger" : ""}`;
+  const cached = pathCache.get(key);
+  if (cached !== undefined) return cached;
+
+  const { points } = createMap({ width, height, mapSamples });
+  const sorted = [...points].sort((a, b) => a.y - b.y || a.x - b.x);
+
+  const rows = sorted.reduce(
+    (acc, { y }) => (acc.has(y) ? acc : acc.set(y, acc.size)),
+    new Map<number, number>(),
+  );
+
+  const xStep = sorted.reduce((step, point, index) => {
+    const previous = sorted[index - 1];
+    if (index === 0 || previous.y !== point.y) return step;
+    const distance = point.x - previous.x;
+    return distance > 0 && (step === 0 || distance < step) ? distance : step;
+  }, 0);
+
+  const half = dotSize / 2;
+  const side = coord(dotSize);
+  const d = sorted
+    .map((point) => {
+      const offset = stagger && (rows.get(point.y) ?? 0) % 2 === 1 ? xStep / 2 : 0;
+      const x = coord(point.x + offset - half);
+      const y = coord(point.y - half);
+      return `M${x},${y}h${side}v${side}h-${side}z`;
+    })
+    .join("");
+
+  pathCache.set(key, d);
+  return d;
+}
+
 export function SquareDottedMap({
   width = 150,
   height = 75,
@@ -23,28 +76,6 @@ export function SquareDottedMap({
   style,
   ...svgProps
 }: SquareDottedMapProps) {
-  const { points } = createMap({ width, height, mapSamples });
-  const sortedPoints = [...points].sort((a, b) => a.y - b.y || a.x - b.x);
-  const rows = new Map<number, number>();
-  let xStep = 0;
-  let previousY = Number.NaN;
-  let previousX = Number.NaN;
-
-  for (const point of sortedPoints) {
-    if (point.y !== previousY) {
-      previousY = point.y;
-      previousX = Number.NaN;
-      if (!rows.has(point.y)) rows.set(point.y, rows.size);
-    }
-
-    if (!Number.isNaN(previousX)) {
-      const distance = point.x - previousX;
-      if (distance > 0) xStep = xStep === 0 ? distance : Math.min(xStep, distance);
-    }
-
-    previousX = point.x;
-  }
-
   return (
     <svg
       aria-hidden="true"
@@ -53,21 +84,7 @@ export function SquareDottedMap({
       style={{ width: "100%", height: "100%", ...style }}
       {...svgProps}
     >
-      {points.map((point) => {
-        const rowIndex = rows.get(point.y) ?? 0;
-        const offsetX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0;
-
-        return (
-          <rect
-            fill={dotColor}
-            height={dotSize}
-            key={`${point.x}-${point.y}`}
-            width={dotSize}
-            x={point.x + offsetX - dotSize / 2}
-            y={point.y - dotSize / 2}
-          />
-        );
-      })}
+      <path d={dotPath({ width, height, mapSamples, dotSize, stagger })} fill={dotColor} />
     </svg>
   );
 }
