@@ -46,8 +46,8 @@ export function ExperienceSection() {
                     </div>
                   </a>
                   <ul className="flex flex-col gap-1.5 text-muted-foreground text-sm leading-relaxed sm:text-base">
-                    {item.highlights.map((highlight) => (
-                      <li key={highlight} className="flex gap-2.5">
+                    {Object.entries(item.highlights).map(([id, highlight]) => (
+                      <li key={id} className="flex gap-2.5">
                         <span
                           aria-hidden="true"
                           className="mt-[0.5625rem] size-1 shrink-0 bg-muted-foreground/50"

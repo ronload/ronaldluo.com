@@ -99,8 +99,8 @@ export default function ForLlms({ params }: Props) {
           {t("queriesTitle")}
         </h2>
         <ul className="mt-4 flex max-w-2xl flex-col gap-2 text-muted-foreground text-sm sm:text-base">
-          {queries.map((query) => (
-            <li key={query}>{query}</li>
+          {Object.entries(queries).map(([id, query]) => (
+            <li key={id}>{query}</li>
           ))}
         </ul>
 

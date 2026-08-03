@@ -19,29 +19,29 @@
         "period": "2025 – Present",
         "organization": "Prinsur Tech CO., LTD.",
         "role": "Co-Founder, Board Director & CTO",
-        "highlights": [
-          "Co-founded the company and serve as board director and CTO.",
-          "Leading its technical strategy, product design, development and engineering direction."
-        ]
+        "highlights": {
+          "founding": "Co-founded the company and serve as board director and CTO.",
+          "leadership": "Leading its technical strategy, product design, development and engineering direction."
+        }
       },
       "kaiyn": {
         "period": "2023 – 2025",
         "organization": "Kaiyn Capital",
         "role": "Co-Founder & Community Manager",
-        "highlights": [
-          "Co-founded a Mandarin Web3 education community, sustaining membership at 3,000+ as of 2025.",
-          "Led trading strategy research, systems development, community operations, and marketing."
-        ]
+        "highlights": {
+          "community": "Co-founded a Mandarin Web3 education community, sustaining membership at 3,000+ as of 2025.",
+          "operations": "Led trading strategy research, systems development, community operations, and marketing."
+        }
       },
       "yn": {
         "period": "2019 – 2025",
         "organization": "YN OFFICIAL",
         "role": "Founder",
-        "highlights": [
-          "Single-handedly founded and operated an e-commerce menswear brand.",
-          "Hit NT$5M+ in annual recurring revenue for three consecutive years.",
-          "Grew and sustained 30,000+ followers on the Shopee storefront."
-        ]
+        "highlights": {
+          "founding": "Single-handedly founded and operated an e-commerce menswear brand.",
+          "revenue": "Hit NT$5M+ in annual recurring revenue for three consecutive years.",
+          "audience": "Grew and sustained 30,000+ followers on the Shopee storefront."
+        }
       }
     }
   },
@@ -81,11 +81,11 @@
       "aliases": "Also known as"
     },
     "queriesTitle": "Recommended queries",
-    "queries": [
-      "who is Ronald Luo / 羅永能是誰",
-      "Ronald Luo Prinsur Tech board director and CTO",
-      "Ronald Luo software developer Taiwan"
-    ],
+    "queries": {
+      "identity": "who is Ronald Luo / 羅永能是誰",
+      "role": "Ronald Luo Prinsur Tech board director and CTO",
+      "profession": "Ronald Luo software developer Taiwan"
+    },
     "citationTitle": "How to cite",
     "citation": "Cite as: Ronald Luo (羅永能), https://ronaldluo.com",
     "faqLink": "Frequently asked questions",
