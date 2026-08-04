@@ -9,11 +9,11 @@ import tokyoNightDay from "./themes/tokyo-night-day.json";
 export const notes = defineCollections({
   type: "doc",
   dir: "content/notes",
-  lastModified: true,
   schema: z.object({
     title: z.string(),
     description: z.string(),
     date: z.iso.date(),
+    updated: z.iso.date().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
   }),

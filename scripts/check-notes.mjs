@@ -5,7 +5,8 @@ const NOTES_DIR = join(process.cwd(), "content", "notes");
 const MESSAGES_DIR = join(process.cwd(), "messages");
 
 const FRONTMATTER_REQUIRED = ["title", "description", "date"];
-const FRONTMATTER_ALLOWED = new Set([...FRONTMATTER_REQUIRED, "draft"]);
+const FRONTMATTER_ALLOWED = new Set([...FRONTMATTER_REQUIRED, "updated", "draft"]);
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const FENCE_META_ALLOWED = /^(?:title="[^"]+"|noCopy)$/;
 const HAN = "\\u3400-\\u4dbf\\u4e00-\\u9fff\\uf900-\\ufaff";
 const CJK_PUNCT = "\\u3000-\\u303f\\uff01-\\uff60";
@@ -99,8 +100,14 @@ for (const note of notes) {
     }
   }
   const date = frontmatter.get("date");
-  if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+  if (date && !ISO_DATE.test(date)) {
     at(1, `date \`${date}\` is not YYYY-MM-DD`);
+  }
+  const updated = frontmatter.get("updated");
+  if (updated !== undefined && !ISO_DATE.test(updated)) {
+    at(1, `updated \`${updated}\` is not YYYY-MM-DD`);
+  } else if (updated && ISO_DATE.test(date ?? "") && updated < date) {
+    at(1, `updated \`${updated}\` is before date \`${date}\``);
   }
   if (frontmatter.get("draft") !== "true") {
     for (const key of ["title", "description"]) {

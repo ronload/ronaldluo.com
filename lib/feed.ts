@@ -27,7 +27,7 @@ export async function buildAtomFeed(locale: Locale) {
     .sort((a, b) => b.data.date.localeCompare(a.data.date));
 
   const updated = notes.reduce<string>((latest, note) => {
-    const candidate = note.data.lastModified?.toISOString() ?? toIso(note.data.date);
+    const candidate = toIso(note.data.updated ?? note.data.date);
     return candidate > latest ? candidate : latest;
   }, toIso("1970-01-01"));
 
@@ -40,7 +40,7 @@ export async function buildAtomFeed(locale: Locale) {
       `    <title>${escapeXml(note.data.title)}</title>`,
       `    <link href="${escapeXml(url)}" rel="alternate" type="text/html"/>`,
       `    <published>${toIso(note.data.date)}</published>`,
-      `    <updated>${note.data.lastModified?.toISOString() ?? toIso(note.data.date)}</updated>`,
+      `    <updated>${toIso(note.data.updated ?? note.data.date)}</updated>`,
       `    <summary type="text">${escapeXml(note.data.description)}</summary>`,
       "  </entry>",
     ].join("\n");

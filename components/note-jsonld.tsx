@@ -6,7 +6,7 @@ interface Props {
   title: string;
   description: string;
   date: string;
-  modified?: Date;
+  modified?: string;
   locale: string;
   keywords: string[];
 }
@@ -21,7 +21,7 @@ export function NoteJsonLd({ url, title, description, date, modified, locale, ke
     headline: title,
     description,
     datePublished: date,
-    dateModified: modified?.toISOString() ?? date,
+    dateModified: modified ?? date,
     inLanguage: locale,
     author: { "@id": `${SITE_URL}/#person` },
     publisher: { "@id": `${SITE_URL}/#person` },

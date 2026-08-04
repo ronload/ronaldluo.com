@@ -16,7 +16,7 @@ interface NoteEntry {
   locale: Locale;
   locales: readonly Locale[];
   date: string;
-  lastModified?: Date;
+  updated?: string;
 }
 
 function noteEntries(): NoteEntry[] {
@@ -34,7 +34,7 @@ function noteEntries(): NoteEntry[] {
         locale,
         locales: noteLocales(slug),
         date: note.data.date,
-        lastModified: note.data.lastModified,
+        updated: note.data.updated,
       });
     }
   }
@@ -50,9 +50,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority,
       alternates: { languages: languagesFor(href) },
     })),
-    ...noteEntries().map(({ href, locale, locales, lastModified }) => ({
+    ...noteEntries().map(({ href, locale, locales, date, updated }) => ({
       url: pageUrl(locale, href),
-      lastModified,
+      lastModified: updated ?? date,
       changeFrequency: "monthly" as const,
       priority: 0.6,
       alternates: { languages: languagesFor(href, locales) },
