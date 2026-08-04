@@ -1,8 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
-import { SITE_URL } from "@/lib/identity";
-import { languagesFor } from "@/lib/seo";
+import { languagesFor, pageUrl } from "@/lib/seo";
 import { isFallbackNote, noteLocales, source } from "@/lib/source";
 
 const PAGES = [
@@ -47,13 +45,13 @@ function noteEntries(): NoteEntry[] {
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...PAGES.map(({ href, priority }) => ({
-      url: SITE_URL + getPathname({ locale: routing.defaultLocale, href }),
+      url: pageUrl(routing.defaultLocale, href),
       changeFrequency: "monthly" as const,
       priority,
       alternates: { languages: languagesFor(href) },
     })),
     ...noteEntries().map(({ href, locale, locales, lastModified }) => ({
-      url: SITE_URL + getPathname({ locale, href }),
+      url: pageUrl(locale, href),
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.6,

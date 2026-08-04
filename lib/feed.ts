@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import { getPathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { PERSON, SITE_URL } from "@/lib/identity";
+import { pageUrl } from "@/lib/seo";
 import { isFallbackNote, source } from "@/lib/source";
 
 function escapeXml(value: string) {
@@ -18,8 +18,8 @@ function toIso(date: string) {
 
 export async function buildAtomFeed(locale: Locale) {
   const t = await getTranslations({ locale, namespace: "Notes" });
-  const notesUrl = SITE_URL + getPathname({ locale, href: "/notes" });
-  const selfUrl = SITE_URL + getPathname({ locale, href: "/feed.xml" });
+  const notesUrl = pageUrl(locale, "/notes");
+  const selfUrl = pageUrl(locale, "/feed.xml");
 
   const notes = source
     .getPages(locale)
@@ -32,7 +32,7 @@ export async function buildAtomFeed(locale: Locale) {
   }, toIso("1970-01-01"));
 
   const entries = notes.map((note) => {
-    const url = SITE_URL + getPathname({ locale, href: `/notes/${note.slugs[0]}` });
+    const url = pageUrl(locale, `/notes/${note.slugs[0]}`);
 
     return [
       "  <entry>",
