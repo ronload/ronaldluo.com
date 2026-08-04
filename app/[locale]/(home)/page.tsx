@@ -18,7 +18,7 @@ export default function Home({ params }: Props) {
 
   return (
     <>
-      <PersonJsonLd locale={locale} />
+      <PersonJsonLd locale={locale} path="/" />
       <HeroSection />
       <ExperienceSection />
       <EducationSection />

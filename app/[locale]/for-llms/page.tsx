@@ -62,7 +62,7 @@ export default function ForLlms({ params }: Props) {
 
   return (
     <section className="relative flex flex-1 flex-col">
-      <PersonJsonLd locale={locale} />
+      <PersonJsonLd locale={locale} path="/for-llms" />
       <div className="container pt-6">
         <Link
           href="/"

@@ -3,9 +3,14 @@ import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/identity";
 
+export const pageUrl = (locale: Locale, href: string) => SITE_URL + getPathname({ locale, href });
+
+export const canonicalUrl = (locale: Locale, href: string) =>
+  pageUrl(locale, href).replace(/\/$/, "");
+
 export const FEED_ALTERNATES = {
   "application/atom+xml": routing.locales.map((locale) => ({
-    url: SITE_URL + getPathname({ locale, href: "/feed.xml" }),
+    url: pageUrl(locale, "/feed.xml"),
     title: `Notes (${locale})`,
   })),
 };
@@ -15,16 +20,14 @@ export function languagesFor(href: string, locales: readonly Locale[] = routing.
   const fallback = available.includes(routing.defaultLocale) ? routing.defaultLocale : available[0];
 
   return {
-    ...Object.fromEntries(
-      available.map((locale) => [locale, SITE_URL + getPathname({ locale, href })]),
-    ),
-    "x-default": SITE_URL + getPathname({ locale: fallback, href }),
+    ...Object.fromEntries(available.map((locale) => [locale, pageUrl(locale, href)])),
+    "x-default": pageUrl(fallback, href),
   };
 }
 
 export function alternatesFor(locale: Locale, href: string, locales?: readonly Locale[]) {
   return {
-    canonical: SITE_URL + getPathname({ locale, href }),
+    canonical: canonicalUrl(locale, href),
     languages: languagesFor(href, locales),
   };
 }
@@ -53,7 +56,7 @@ export function socialMetadata({
       alternateLocale: isZh ? "en_US" : "zh_TW",
       firstName: "Ronald",
       lastName: "Luo",
-      url: SITE_URL + getPathname({ locale, href: path }),
+      url: pageUrl(locale, path),
       siteName: "Ronald Luo 羅永能",
       title,
       description,
@@ -115,7 +118,7 @@ export function noteMetadata({
     openGraph: {
       type: "article",
       locale: locale === "zh-TW" ? "zh_TW" : "en_US",
-      url: SITE_URL + getPathname({ locale, href }),
+      url: pageUrl(locale, href),
       siteName: "Ronald Luo 羅永能",
       title,
       description,

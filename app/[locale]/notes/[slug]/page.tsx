@@ -8,9 +8,8 @@ import { NoteToc } from "@/components/mdx/note-toc";
 import { NoteJsonLd } from "@/components/note-jsonld";
 import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
-import { getPathname, Link } from "@/i18n/navigation";
-import { SITE_URL } from "@/lib/identity";
-import { noteMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
+import { Link } from "@/i18n/navigation";
+import { noteMetadata, pageUrl, withInheritedOpenGraphImages } from "@/lib/seo";
 import { isFallbackNote, noteLocales, source } from "@/lib/source";
 import { cn } from "@/lib/utils";
 import { NoteNav } from "../_components/note-nav";
@@ -84,7 +83,7 @@ export default async function NotePage({ params }: Props) {
           locale={locale}
           modified={note.data.lastModified}
           title={note.data.title}
-          url={SITE_URL + getPathname({ locale, href: `/notes/${slug}` })}
+          url={pageUrl(locale, `/notes/${slug}`)}
         />
       )}
       <div className="container pt-6">

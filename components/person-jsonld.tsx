@@ -1,25 +1,24 @@
 import type { Graph } from "schema-dts";
-import { getPathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { BIO, EXPERIENCES, PERSON, SCHOOLS, SITE_URL } from "@/lib/identity";
+import { BIO, EXPERIENCES, PERSON, PROFILE_MODIFIED, SCHOOLS, SITE_URL } from "@/lib/identity";
+import { canonicalUrl, pageUrl } from "@/lib/seo";
 
 const PERSON_ID = `${SITE_URL}/#person`;
 const ORG_ID = `${SITE_URL}/#prinsur`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 
-export function PersonJsonLd({ locale }: { locale: Locale }) {
+export function PersonJsonLd({ locale, path }: { locale: Locale; path: string }) {
   const isZh = locale === "zh-TW";
-  const pageUrl = SITE_URL + getPathname({ locale, href: "/" });
 
   const graph: Graph = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "ProfilePage",
-        "@id": `${pageUrl}#profilepage`,
-        url: pageUrl,
+        "@id": `${pageUrl(locale, path)}#profilepage`,
+        url: canonicalUrl(locale, path),
         inLanguage: locale,
-        dateModified: new Date().toISOString(),
+        dateModified: PROFILE_MODIFIED,
         isPartOf: { "@id": WEBSITE_ID },
         about: { "@id": PERSON_ID },
         mainEntity: { "@id": PERSON_ID },
