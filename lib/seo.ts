@@ -92,7 +92,7 @@ interface NoteInput {
   title: string;
   description: string;
   date: string;
-  modified?: Date;
+  modified?: string;
   locales: readonly Locale[];
   fallback: boolean;
 }
@@ -123,7 +123,7 @@ export function noteMetadata({
       title,
       description,
       publishedTime: date,
-      modifiedTime: modified?.toISOString(),
+      modifiedTime: modified,
       authors: [SITE_URL],
     },
     twitter: {

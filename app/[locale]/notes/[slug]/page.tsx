@@ -53,7 +53,7 @@ export async function generateMetadata(
       title: note.data.title,
       description: note.data.description,
       date: note.data.date,
-      modified: note.data.lastModified,
+      modified: note.data.updated,
       locales: noteLocales(slug),
       fallback: isFallbackNote(note, locale),
     }),
@@ -81,7 +81,7 @@ export default async function NotePage({ params }: Props) {
           description={note.data.description}
           keywords={note.data.tags}
           locale={locale}
-          modified={note.data.lastModified}
+          modified={note.data.updated}
           title={note.data.title}
           url={pageUrl(locale, `/notes/${slug}`)}
         />
@@ -111,10 +111,10 @@ export default async function NotePage({ params }: Props) {
               <time dateTime={note.data.date}>
                 {format.dateTime(new Date(note.data.date), { dateStyle: "long" })}
               </time>
-              {note.data.lastModified ? (
+              {note.data.updated ? (
                 <span>
                   {t("updated", {
-                    date: format.dateTime(note.data.lastModified, { dateStyle: "long" }),
+                    date: format.dateTime(new Date(note.data.updated), { dateStyle: "long" }),
                   })}
                 </span>
               ) : null}
