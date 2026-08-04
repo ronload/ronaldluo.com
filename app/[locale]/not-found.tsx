@@ -1,9 +1,14 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { Divider, FrameTexture } from "@/components/frame";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  alternates: { canonical: null },
+};
 
 export default function NotFound() {
   const t = useTranslations("NotFound");
