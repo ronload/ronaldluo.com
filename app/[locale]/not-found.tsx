@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { Divider, FrameTexture } from "@/components/frame";
+import { Divider, FrameHero } from "@/components/frame";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -15,14 +15,11 @@ export default function NotFound() {
 
   return (
     <>
-      <section className="relative z-0 flex flex-col">
-        <FrameTexture />
-        <div className="container flex w-full flex-col items-center justify-center py-12 sm:py-24">
-          <h1 className="bg-gradient-to-b from-foreground via-foreground to-muted-foreground bg-clip-text font-bold font-mono text-[120px] text-transparent leading-none tracking-tighter sm:text-[180px] md:text-[220px]">
-            404
-          </h1>
-        </div>
-      </section>
+      <FrameHero>
+        <h1 className="bg-gradient-to-b from-foreground via-foreground to-muted-foreground bg-clip-text font-bold font-mono text-[120px] text-transparent leading-none tracking-tighter sm:text-[180px] md:text-[220px]">
+          404
+        </h1>
+      </FrameHero>
       <section className="relative z-0 flex flex-1 flex-col bg-background">
         <Divider />
         <div className="container flex w-full flex-1 items-center justify-center pt-12 pb-20 sm:pt-16 sm:pb-24">

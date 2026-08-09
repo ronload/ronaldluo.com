@@ -1,17 +1,14 @@
-import { ArrowLeft } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
+import { BackLink } from "@/components/back-link";
 import { FrameAside } from "@/components/frame";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 import { NoteToc } from "@/components/mdx/note-toc";
 import { NoteJsonLd } from "@/components/note-jsonld";
-import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
-import { Link } from "@/i18n/navigation";
 import { noteMetadata, pageUrl, withInheritedOpenGraphImages } from "@/lib/seo";
 import { isFallbackNote, noteLocales, source } from "@/lib/source";
-import { cn } from "@/lib/utils";
 import { NoteNav } from "../_components/note-nav";
 
 interface Props {
@@ -86,18 +83,7 @@ export default async function NotePage({ params }: Props) {
           url={pageUrl(locale, `/notes/${slug}`)}
         />
       )}
-      <div className="container pt-6">
-        <Link
-          className={cn(
-            buttonVariants({ variant: "link", size: "sm" }),
-            "-ms-3 gap-2 text-muted-foreground transition-colors hover:text-foreground",
-          )}
-          href="/notes"
-        >
-          <ArrowLeft />
-          {t("backToNotes")}
-        </Link>
-      </div>
+      <BackLink href="/notes" label={t("backToNotes")} />
       <div className="container pt-6 pb-20">
         <article>
           <header>

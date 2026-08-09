@@ -3,7 +3,7 @@
 import { ArrowLeft, RotateCw, TriangleAlert } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
-import { Divider, FrameTexture } from "@/components/frame";
+import { Divider, FrameHero } from "@/components/frame";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -23,16 +23,13 @@ export default function ErrorBoundary({
 
   return (
     <>
-      <section className="relative z-0 flex flex-col">
-        <FrameTexture />
-        <div className="container flex w-full flex-col items-center justify-center py-12 sm:py-24">
-          <TriangleAlert
-            aria-hidden="true"
-            className="size-28 text-foreground/80 sm:size-36 md:size-44"
-            strokeWidth={1.25}
-          />
-        </div>
-      </section>
+      <FrameHero>
+        <TriangleAlert
+          aria-hidden="true"
+          className="size-28 text-foreground/80 sm:size-36 md:size-44"
+          strokeWidth={1.25}
+        />
+      </FrameHero>
       <section className="relative z-0 flex flex-1 flex-col bg-background">
         <Divider />
         <div className="container flex w-full flex-1 items-center justify-center pt-12 pb-20 sm:pt-16 sm:pb-24">
