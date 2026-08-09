@@ -1,7 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import type { CommandMenuLabels } from "@/components/command-menu";
@@ -12,22 +11,12 @@ import { ThemeColor } from "@/components/theme-color";
 import { ThemeProvider } from "@/components/theme-provider";
 import { assertLocale } from "@/i18n/assert-locale";
 import { routing } from "@/i18n/routing";
+import { fontVariables } from "@/lib/fonts";
 import { SITE_URL } from "@/lib/identity";
-import { FEED_ALTERNATES, socialMetadata } from "@/lib/seo";
+import { FEED_ALTERNATES, socialMetadata, TITLE_TEMPLATE } from "@/lib/seo";
 import { source } from "@/lib/source";
 import { providerThemes } from "@/lib/theme-registry";
 import "../globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  preload: false,
-});
 
 const includeDrafts = process.env.NODE_ENV !== "production";
 
@@ -63,7 +52,7 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
     metadataBase: new URL(SITE_URL),
     title: {
       default: t("title"),
-      template: "%s | Ronald Luo 羅永能",
+      template: TITLE_TEMPLATE,
     },
     ...social,
     alternates: { ...social.alternates, types: FEED_ALTERNATES },
@@ -120,11 +109,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     }));
 
   return (
-    <html
-      lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      suppressHydrationWarning
-    >
+    <html lang={locale} className={`${fontVariables} h-full antialiased`} suppressHydrationWarning>
       <body className="flex min-h-full flex-col">
         <a
           className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[110] focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:focus-visible:ring-2 focus:focus-visible:ring-ring"
