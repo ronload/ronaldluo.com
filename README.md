@@ -12,7 +12,7 @@ Live at **[ronaldluo.com](https://ronaldluo.com)**.
 - **Next.js 16** (App Router, React 19) on **TypeScript**
 - **fumadocs** (`fumadocs-core` + `fumadocs-mdx`) for the bilingual Markdown content layer
 - **next-intl** for `en` / `zh-TW` localization
-- **Tailwind CSS v4** with **shadcn** (`base-maia`) on **@base-ui/react**
+- **Tailwind CSS v4** with **shadcn** (`base-sera`) on **@base-ui/react**
 - **next-themes** for light/dark and **Magic UI Dotted Map** for the SVG world map
 - **Biome** + **ESLint** for linting/formatting, deployed on **Vercel**
 

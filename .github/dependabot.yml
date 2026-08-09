@@ -10,7 +10,6 @@ updates:
     commit-message:
       prefix: "chore"
       prefix-development: "chore"
-      include: "scope"
     groups:
       production-minor-patch:
         applies-to: version-updates
@@ -35,7 +34,6 @@ updates:
       - "area: automation"
     commit-message:
       prefix: "chore"
-      include: "scope"
     groups:
       github-actions-minor-patch:
         applies-to: version-updates
