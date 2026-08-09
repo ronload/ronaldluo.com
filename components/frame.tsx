@@ -31,6 +31,27 @@ export function FrameTexture({ className }: FrameProps) {
   );
 }
 
+interface FrameHeroProps {
+  contentClassName?: string;
+  children?: React.ReactNode;
+}
+
+export function FrameHero({ contentClassName, children }: FrameHeroProps) {
+  return (
+    <section className="relative z-0 flex flex-col">
+      <FrameTexture />
+      <div
+        className={cn(
+          "container flex w-full flex-col items-center justify-center py-12 sm:py-24",
+          contentClassName,
+        )}
+      >
+        {children}
+      </div>
+    </section>
+  );
+}
+
 export function FrameGuides({ className }: FrameProps) {
   return (
     <FrameAnimation

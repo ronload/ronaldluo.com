@@ -1,15 +1,12 @@
-import { ArrowLeft } from "lucide-react";
 import type { Metadata, ResolvingMetadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { use } from "react";
+import { BackLink } from "@/components/back-link";
 import { FaqJsonLd } from "@/components/faq-jsonld";
-import { buttonVariants } from "@/components/ui/button";
 import { assertLocale } from "@/i18n/assert-locale";
-import { Link } from "@/i18n/navigation";
 import { FAQ } from "@/lib/identity";
 import { socialMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
-import { cn } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -48,18 +45,7 @@ export default function Faq({ params }: Props) {
   return (
     <section className="relative flex flex-1 flex-col">
       <FaqJsonLd locale={locale} />
-      <div className="container pt-6">
-        <Link
-          href="/"
-          className={cn(
-            buttonVariants({ variant: "link", size: "sm" }),
-            "-ms-3 gap-2 text-muted-foreground transition-colors hover:text-foreground",
-          )}
-        >
-          <ArrowLeft />
-          {t("backToHome")}
-        </Link>
-      </div>
+      <BackLink href="/" label={t("backToHome")} />
       <div className="container py-12 sm:py-16">
         <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
           {t("title")}
