@@ -8,6 +8,10 @@ export const pageUrl = (locale: Locale, href: string) => SITE_URL + getPathname(
 export const canonicalUrl = (locale: Locale, href: string) =>
   pageUrl(locale, href).replace(/\/$/, "");
 
+export const TITLE_TEMPLATE = "%s | Ronald Luo 羅永能";
+
+export const formatTitle = (title: string) => TITLE_TEMPLATE.replace("%s", title);
+
 export const FEED_ALTERNATES = {
   "application/atom+xml": routing.locales.map((locale) => ({
     url: pageUrl(locale, "/feed.xml"),

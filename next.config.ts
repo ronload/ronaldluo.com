@@ -5,6 +5,9 @@ import { SOCIAL_LINKS } from "./lib/socials";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx"],
+  experimental: {
+    globalNotFound: true,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [60, 75],

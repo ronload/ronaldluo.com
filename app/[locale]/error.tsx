@@ -3,7 +3,7 @@
 import { ArrowLeft, RotateCw, TriangleAlert } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
-import { Divider, FrameHero } from "@/components/frame";
+import { StatusPage } from "@/components/status-page";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -22,47 +22,34 @@ export default function ErrorBoundary({
   }, [error]);
 
   return (
-    <>
-      <FrameHero>
+    <StatusPage
+      hero={
         <TriangleAlert
           aria-hidden="true"
           className="size-28 text-foreground/80 sm:size-36 md:size-44"
           strokeWidth={1.25}
         />
-      </FrameHero>
-      <section className="relative z-0 flex flex-1 flex-col bg-background">
-        <Divider />
-        <div className="container flex w-full flex-1 items-center justify-center pt-12 pb-20 sm:pt-16 sm:pb-24">
-          <div className="flex w-4/5 max-w-md flex-col items-center text-center">
-            <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
-              {t("title")}
-            </h1>
-            <p className="wrap-break-word mt-3 break-keep text-lg text-muted-foreground leading-8">
-              {t("description")}
-            </p>
-            <div className="mt-10 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
-              <Button
-                onClick={() => unstable_retry()}
-                size="lg"
-                className="h-12 w-full px-4 text-base"
-              >
-                <RotateCw />
-                {t("retry")}
-              </Button>
-              <Link
-                href="/"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "h-12 w-full px-4 text-base",
-                )}
-              >
-                <ArrowLeft />
-                {t("backToHome")}
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+      }
+      title={t("title")}
+      description={t("description")}
+      actions={
+        <>
+          <Button onClick={() => unstable_retry()} size="lg" className="h-12 w-full px-4 text-base">
+            <RotateCw />
+            {t("retry")}
+          </Button>
+          <Link
+            href="/"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "h-12 w-full px-4 text-base",
+            )}
+          >
+            <ArrowLeft />
+            {t("backToHome")}
+          </Link>
+        </>
+      }
+    />
   );
 }
