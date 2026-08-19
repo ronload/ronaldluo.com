@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { use } from "react";
@@ -6,32 +6,26 @@ import { BackLink } from "@/components/back-link";
 import { FaqJsonLd } from "@/components/faq-jsonld";
 import { assertLocale } from "@/i18n/assert-locale";
 import { FAQ } from "@/lib/identity";
-import { socialMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
+import { socialMetadata } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   assertLocale(locale);
   const t = await getTranslations({ locale, namespace: "Faq" });
 
-  return withInheritedOpenGraphImages(
-    {
+  return {
+    title: t("title"),
+    ...socialMetadata({
+      locale,
+      path: "/faq",
       title: t("title"),
-      ...socialMetadata({
-        locale,
-        path: "/faq",
-        title: t("title"),
-        description: t("description"),
-      }),
-    },
-    parent,
-  );
+      description: t("description"),
+    }),
+  };
 }
 
 export default function Faq({ params }: Props) {

@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { BackLink } from "@/components/back-link";
@@ -7,7 +7,7 @@ import { mdxComponents } from "@/components/mdx/mdx-components";
 import { NoteToc } from "@/components/mdx/note-toc";
 import { NoteJsonLd } from "@/components/note-jsonld";
 import { assertLocale } from "@/i18n/assert-locale";
-import { noteMetadata, pageUrl, withInheritedOpenGraphImages } from "@/lib/seo";
+import { noteMetadata, pageUrl } from "@/lib/seo";
 import { isFallbackNote, noteLocales, source } from "@/lib/source";
 import { NoteNav } from "../_components/note-nav";
 
@@ -35,27 +35,21 @@ export function generateStaticParams() {
     });
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   assertLocale(locale);
   const note = getNote(locale, slug);
 
-  return withInheritedOpenGraphImages(
-    noteMetadata({
-      locale,
-      slug,
-      title: note.data.title,
-      description: note.data.description,
-      date: note.data.date,
-      modified: note.data.updated,
-      locales: noteLocales(slug),
-      fallback: isFallbackNote(note, locale),
-    }),
-    parent,
-  );
+  return noteMetadata({
+    locale,
+    slug,
+    title: note.data.title,
+    description: note.data.description,
+    date: note.data.date,
+    modified: note.data.updated,
+    locales: noteLocales(slug),
+    fallback: isFallbackNote(note, locale),
+  });
 }
 
 export default async function NotePage({ params }: Props) {

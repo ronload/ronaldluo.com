@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
 import { SITE_NAME, SITE_URL } from "@/lib/identity";
@@ -11,6 +11,16 @@ export const canonicalUrl = (locale: Locale, href: string) =>
 export const TITLE_TEMPLATE = `%s | ${SITE_NAME}`;
 
 export const formatTitle = (title: string) => TITLE_TEMPLATE.replace("%s", title);
+
+export const ogImages = (locale: Locale) => [
+  {
+    url: pageUrl(locale, "/opengraph-image"),
+    type: "image/png",
+    width: 1200,
+    height: 630,
+    alt: SITE_NAME,
+  },
+];
 
 export const FEED_ALTERNATES = {
   "application/atom+xml": routing.locales.map((locale) => ({
@@ -64,28 +74,12 @@ export function socialMetadata({
       siteName: SITE_NAME,
       title,
       description,
+      images: ogImages(locale),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-    },
-  };
-}
-
-export async function withInheritedOpenGraphImages(
-  metadata: Metadata,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const images = (await parent).openGraph?.images;
-
-  if (!metadata.openGraph || metadata.openGraph.images || !images) return metadata;
-
-  return {
-    ...metadata,
-    openGraph: {
-      ...metadata.openGraph,
-      images,
     },
   };
 }
@@ -129,6 +123,7 @@ export function noteMetadata({
       publishedTime: date,
       modifiedTime: modified,
       authors: [SITE_URL],
+      images: ogImages(locale),
     },
     twitter: {
       card: "summary_large_image",
