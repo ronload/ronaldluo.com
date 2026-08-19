@@ -1,6 +1,14 @@
 import type { Graph } from "schema-dts";
 import type { Locale } from "@/i18n/routing";
-import { BIO, EXPERIENCES, PERSON, PROFILE_MODIFIED, SCHOOLS, SITE_URL } from "@/lib/identity";
+import {
+  BIO,
+  EXPERIENCES,
+  PERSON,
+  PROFILE_MODIFIED,
+  SCHOOLS,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/identity";
 import { canonicalUrl, pageUrl } from "@/lib/seo";
 
 const PERSON_ID = `${SITE_URL}/#person`;
@@ -65,7 +73,7 @@ export function PersonJsonLd({ locale, path }: { locale: Locale; path: string })
         "@type": "WebSite",
         "@id": WEBSITE_ID,
         url: SITE_URL,
-        name: "Ronald Luo 羅永能",
+        name: SITE_NAME,
         inLanguage: ["en", "zh-TW"],
         publisher: { "@id": PERSON_ID },
       },

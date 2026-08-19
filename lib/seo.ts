@@ -1,14 +1,14 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
-import { SITE_URL } from "@/lib/identity";
+import { SITE_NAME, SITE_URL } from "@/lib/identity";
 
 export const pageUrl = (locale: Locale, href: string) => SITE_URL + getPathname({ locale, href });
 
 export const canonicalUrl = (locale: Locale, href: string) =>
   pageUrl(locale, href).replace(/\/$/, "");
 
-export const TITLE_TEMPLATE = "%s | Ronald Luo 羅永能";
+export const TITLE_TEMPLATE = `%s | ${SITE_NAME}`;
 
 export const formatTitle = (title: string) => TITLE_TEMPLATE.replace("%s", title);
 
@@ -61,7 +61,7 @@ export function socialMetadata({
       firstName: "Ronald",
       lastName: "Luo",
       url: pageUrl(locale, path),
-      siteName: "Ronald Luo 羅永能",
+      siteName: SITE_NAME,
       title,
       description,
     },
@@ -123,7 +123,7 @@ export function noteMetadata({
       type: "article",
       locale: locale === "zh-TW" ? "zh_TW" : "en_US",
       url: pageUrl(locale, href),
-      siteName: "Ronald Luo 羅永能",
+      siteName: SITE_NAME,
       title,
       description,
       publishedTime: date,
