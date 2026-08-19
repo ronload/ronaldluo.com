@@ -1,9 +1,9 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Divider, FrameHero } from "@/components/frame";
 import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
-import { FEED_ALTERNATES, socialMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
+import { FEED_ALTERNATES, socialMetadata } from "@/lib/seo";
 import { source } from "@/lib/source";
 
 interface Props {
@@ -12,10 +12,7 @@ interface Props {
 
 const includeDrafts = process.env.NODE_ENV !== "production";
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   assertLocale(locale);
   const t = await getTranslations({ locale, namespace: "Notes" });
@@ -26,14 +23,11 @@ export async function generateMetadata(
     description: t("description"),
   });
 
-  return withInheritedOpenGraphImages(
-    {
-      title: t("title"),
-      ...social,
-      alternates: { ...social.alternates, types: FEED_ALTERNATES },
-    },
-    parent,
-  );
+  return {
+    title: t("title"),
+    ...social,
+    alternates: { ...social.alternates, types: FEED_ALTERNATES },
+  };
 }
 
 export default async function NotesPage({ params }: Props) {

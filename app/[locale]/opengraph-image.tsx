@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { SITE_NAME } from "@/lib/identity";
 
 export const runtime = "nodejs";
 
@@ -10,7 +11,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export const alt = "Ronald Luo 羅永能";
+export const alt = SITE_NAME;
 
 export const size = {
   width: 1200,

@@ -2,6 +2,8 @@ import { SOCIAL_LINKS } from "@/lib/socials";
 
 export const SITE_URL = "https://ronaldluo.com";
 
+export const SITE_NAME = "Ronald Luo 羅永能";
+
 export const PROFILE_MODIFIED = "2026-07-30";
 
 export const PERSON = {

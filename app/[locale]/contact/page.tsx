@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { use } from "react";
@@ -6,33 +6,27 @@ import { Divider, FrameHero } from "@/components/frame";
 import { GradientButton } from "@/components/gradient-button";
 import { assertLocale } from "@/i18n/assert-locale";
 import { CONTACT_CHANNELS } from "@/lib/contact-channels";
-import { socialMetadata, withInheritedOpenGraphImages } from "@/lib/seo";
+import { socialMetadata } from "@/lib/seo";
 import { externalLinkProps } from "@/lib/utils";
 
 interface Props {
   params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   assertLocale(locale);
   const t = await getTranslations({ locale, namespace: "Contact" });
 
-  return withInheritedOpenGraphImages(
-    {
+  return {
+    title: t("title"),
+    ...socialMetadata({
+      locale,
+      path: "/contact",
       title: t("title"),
-      ...socialMetadata({
-        locale,
-        path: "/contact",
-        title: t("title"),
-        description: t("description"),
-      }),
-    },
-    parent,
-  );
+      description: t("description"),
+    }),
+  };
 }
 
 export default function Contact({ params }: Props) {
