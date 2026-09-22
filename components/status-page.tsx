@@ -1,6 +1,14 @@
 import type { ReactNode } from "react";
 import { Divider, FrameHero } from "@/components/frame";
 
+export function StatusHero({ children }: { children: ReactNode }) {
+  return (
+    <h1 className="bg-gradient-to-b from-foreground via-foreground to-muted-foreground bg-clip-text font-bold font-mono text-[120px] text-transparent leading-none tracking-tighter sm:text-[180px] md:text-[220px]">
+      {children}
+    </h1>
+  );
+}
+
 interface StatusPageProps {
   hero: ReactNode;
   title: ReactNode;

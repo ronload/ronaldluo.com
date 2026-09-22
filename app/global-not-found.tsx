@@ -4,7 +4,7 @@ import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { FrameGuides, PageFrame } from "@/components/frame";
-import { StatusPage } from "@/components/status-page";
+import { StatusHero, StatusPage } from "@/components/status-page";
 import { ThemeColor } from "@/components/theme-color";
 import { ThemeProvider } from "@/components/theme-provider";
 import { buttonVariants } from "@/components/ui/button";
@@ -59,11 +59,7 @@ export default async function GlobalNotFound() {
             <main className="relative z-0 flex flex-1 flex-col">
               <FrameGuides />
               <StatusPage
-                hero={
-                  <h1 className="bg-gradient-to-b from-foreground via-foreground to-muted-foreground bg-clip-text font-bold font-mono text-[120px] text-transparent leading-none tracking-tighter sm:text-[180px] md:text-[220px]">
-                    404
-                  </h1>
-                }
+                hero={<StatusHero>404</StatusHero>}
                 titleAs="h2"
                 title={t("title")}
                 description={t("description")}
