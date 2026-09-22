@@ -1,6 +1,7 @@
+import { SITE_URL } from "@/lib/site-url";
 import { SOCIAL_LINKS } from "@/lib/socials";
 
-export const SITE_URL = "https://ronaldluo.com";
+export { SITE_URL };
 
 export const SITE_NAME = "Ronald Luo 羅永能";
 

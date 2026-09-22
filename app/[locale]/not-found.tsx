@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { StatusPage } from "@/components/status-page";
+import { StatusHero, StatusPage } from "@/components/status-page";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -15,11 +15,7 @@ export default function NotFound() {
 
   return (
     <StatusPage
-      hero={
-        <h1 className="bg-gradient-to-b from-foreground via-foreground to-muted-foreground bg-clip-text font-bold font-mono text-[120px] text-transparent leading-none tracking-tighter sm:text-[180px] md:text-[220px]">
-          404
-        </h1>
-      }
+      hero={<StatusHero>404</StatusHero>}
       titleAs="h2"
       title={t("title")}
       description={t("description")}
