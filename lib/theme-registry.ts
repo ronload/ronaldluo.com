@@ -15,7 +15,9 @@ export type ThemeId =
   | "one-dark-pro-darker"
   | "one-dark-pro-flat"
   | "one-dark-pro-mix"
-  | "one-dark-pro-night-flat";
+  | "one-dark-pro-night-flat"
+  | "linear-light"
+  | "linear-dark";
 
 export type ThemePreference = ThemeId;
 
@@ -127,11 +129,25 @@ const one: readonly ThemeDefinition[] = [
   },
 ];
 
+const linear: readonly ThemeDefinition[] = [
+  {
+    id: "linear-light",
+    label: "Linear Light",
+    dark: false,
+  },
+  {
+    id: "linear-dark",
+    label: "Linear Dark",
+    dark: true,
+  },
+];
+
 export const themeGroups: readonly ThemeGroup[] = [
   { label: "Tokyo Night", themes: tokyonight },
   { label: "Catppuccin", themes: catppuccin },
   { label: "Rose Pine", themes: rosePine },
   { label: "One", themes: one },
+  { label: "Linear", themes: linear },
 ];
 
 export const themeDefinitions = themeGroups.flatMap((group) => group.themes);

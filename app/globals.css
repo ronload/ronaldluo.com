@@ -31,7 +31,9 @@
     [data-theme="one-dark-pro-mix"],
     [data-theme="one-dark-pro-mix"] *,
     [data-theme="one-dark-pro-night-flat"],
-    [data-theme="one-dark-pro-night-flat"] *
+    [data-theme="one-dark-pro-night-flat"] *,
+    [data-theme="linear-dark"],
+    [data-theme="linear-dark"] *
   )
 );
 
@@ -468,6 +470,44 @@ html[data-theme="one-dark-pro-night-flat"] {
   color-scheme: dark;
 }
 
+html[data-theme="linear-light"] {
+  --theme-background: #fcfcfc;
+  --theme-foreground: #1a1a1f;
+  --theme-surface: #f5f5f5;
+  --theme-surface-raised: #e8e8ec;
+  --theme-muted-foreground: #6b6f76;
+  --theme-primary: #5e6ad2;
+  --theme-primary-foreground: #ffffff;
+  --theme-info: #5e6ad2;
+  --theme-success: #26a148;
+  --theme-warning: #c4841d;
+  --theme-warning-foreground: #9f6100;
+  --theme-destructive: #d93026;
+  --theme-border: #8a8f98;
+  --theme-code: #f5f5f5;
+  --theme-code-highlight: #e8e8ec;
+  color-scheme: light;
+}
+
+html[data-theme="linear-dark"] {
+  --theme-background: #101012;
+  --theme-foreground: #e3e4e7;
+  --theme-surface: #090909;
+  --theme-surface-raised: #1e2025;
+  --theme-muted-foreground: #97979a;
+  --theme-primary: #5e6ad2;
+  --theme-primary-foreground: #ffffff;
+  --theme-info: #5896f3;
+  --theme-success: #59f3a6;
+  --theme-warning: #f3cf58;
+  --theme-warning-foreground: #f3cf58;
+  --theme-destructive: #ff9898;
+  --theme-border: #595a5c;
+  --theme-code: #090909;
+  --theme-code-highlight: #1e2025;
+  color-scheme: dark;
+}
+
 @utility container {
   @apply mx-auto max-w-4xl px-4 lg:px-6 3xl:max-w-6xl;
 }
@@ -557,7 +597,9 @@ html[data-theme="one-dark-pro-night-flat"] {
   }
   html[data-theme]:not([data-theme="light"]):not([data-theme="tokyonight-day"]):not(
       [data-theme="catppuccin-latte"]
-    ):not([data-theme="rose-pine-dawn"]):not([data-theme="one-light"])
+    ):not([data-theme="rose-pine-dawn"]):not([data-theme="one-light"]):not(
+      [data-theme="linear-light"]
+    )
     .gradient-glow {
     border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
     box-shadow: 0 -20px 80px -20px color-mix(in srgb, var(--primary) 32%, transparent) inset;
@@ -691,6 +733,20 @@ html[data-theme="one-dark-pro-night-flat"] {
     --site-shiki-font-style: var(--shiki-one-dark-pro-night-flat-font-style);
     --site-shiki-font-weight: var(--shiki-one-dark-pro-night-flat-font-weight);
     --site-shiki-text-decoration: var(--shiki-one-dark-pro-night-flat-text-decoration);
+  }
+  html[data-theme="linear-light"] .shiki,
+  html[data-theme="linear-light"] .shiki span {
+    --site-shiki-color: var(--shiki-linear-light);
+    --site-shiki-font-style: var(--shiki-linear-light-font-style);
+    --site-shiki-font-weight: var(--shiki-linear-light-font-weight);
+    --site-shiki-text-decoration: var(--shiki-linear-light-text-decoration);
+  }
+  html[data-theme="linear-dark"] .shiki,
+  html[data-theme="linear-dark"] .shiki span {
+    --site-shiki-color: var(--shiki-linear-dark);
+    --site-shiki-font-style: var(--shiki-linear-dark-font-style);
+    --site-shiki-font-weight: var(--shiki-linear-dark-font-weight);
+    --site-shiki-text-decoration: var(--shiki-linear-dark-text-decoration);
   }
   .shiki .line {
     @apply px-4;
