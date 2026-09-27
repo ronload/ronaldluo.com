@@ -3,6 +3,8 @@ import { defineCollections, defineConfig } from "fumadocs-mdx/config";
 import remarkCjkFriendly from "remark-cjk-friendly/parseOnly";
 import remarkJoinCjkLines from "remark-join-cjk-lines";
 import { z } from "zod";
+import linearDark from "./themes/linear-dark.json";
+import linearLight from "./themes/linear-light.json";
 import tokyoNightDark from "./themes/tokyo-night-dark.json";
 import tokyoNightDay from "./themes/tokyo-night-day.json";
 
@@ -41,6 +43,9 @@ export default defineConfig({
         "one-dark-pro-flat": "one-dark-pro",
         "one-dark-pro-mix": "one-dark-pro",
         "one-dark-pro-night-flat": "one-dark-pro",
+        // Shiki never reads semanticTokenColors, and its type rejects Linear Light's object values.
+        "linear-light": { ...linearLight, type: "light", semanticTokenColors: undefined },
+        "linear-dark": { ...linearDark, type: "dark" },
       },
       icon: false,
       tab: false,
