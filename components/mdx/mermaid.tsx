@@ -107,6 +107,7 @@ export function Mermaid({ chart }: Props) {
         mermaid.initialize({
           startOnLoad: false,
           suppressErrorRendering: true,
+          layout: "dagre",
           ...themeOptions(renderedTheme.dark),
         });
 
