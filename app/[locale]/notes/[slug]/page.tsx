@@ -81,13 +81,13 @@ export default async function NotePage({ params }: Props) {
       <div className="container pt-6 pb-20">
         <article>
           <header>
-            <h1 className="font-semibold text-3xl leading-tight tracking-tight sm:text-4xl">
+            <h1 className="text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
               {note.data.title}
             </h1>
-            <p className="mt-3 text-base text-muted-foreground leading-relaxed sm:text-lg">
+            <p className="mt-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
               {note.data.description}
             </p>
-            <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-muted-foreground text-sm">
+            <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
               <time dateTime={note.data.date}>
                 {format.dateTime(new Date(note.data.date), { dateStyle: "long" })}
               </time>

@@ -216,7 +216,7 @@ function TocLink({ item, previousDepth, nextDepth, first, last }: LinkProps) {
   return (
     <TOCItem
       className={cn(
-        "wrap-anywhere relative py-1.5 text-muted-foreground text-sm leading-relaxed transition-colors hover:text-accent-foreground data-[active=true]:text-primary",
+        "relative py-1.5 text-sm leading-relaxed wrap-anywhere text-muted-foreground transition-colors hover:text-accent-foreground data-[active=true]:text-primary",
         first && "pt-0",
         last && "pb-0",
       )}
@@ -260,14 +260,14 @@ export function NoteToc({ items, label }: Props) {
     <AnchorProvider toc={items}>
       <nav aria-labelledby="note-toc-label" className="flex max-h-[calc(100svh_-_8rem)] flex-col">
         <p
-          className="inline-flex items-center gap-1.5 text-muted-foreground text-sm"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground"
           id="note-toc-label"
         >
           <Text className="size-4 shrink-0" />
           {label}
         </p>
         <div
-          className="relative ms-px min-h-0 overflow-y-auto overflow-x-clip py-3 [mask-image:linear-gradient(to_bottom,transparent,white_16px,white_calc(100%_-_16px),transparent)] [scrollbar-width:none]"
+          className="relative ms-px min-h-0 [scrollbar-width:none] overflow-x-clip overflow-y-auto [mask-image:linear-gradient(to_bottom,transparent,white_16px,white_calc(100%_-_16px),transparent)] py-3"
           ref={scrollRef}
         >
           <ScrollProvider containerRef={scrollRef}>

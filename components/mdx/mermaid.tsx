@@ -140,7 +140,7 @@ export function Mermaid({ chart }: Props) {
   if (failed) {
     return (
       <figure className="my-6 overflow-hidden border border-destructive/40 bg-code">
-        <pre className="overflow-x-auto p-4 font-mono text-[0.8125rem] text-muted-foreground leading-6">
+        <pre className="overflow-x-auto p-4 font-mono text-[0.8125rem] leading-6 text-muted-foreground">
           {chart}
         </pre>
       </figure>

@@ -60,14 +60,14 @@ export default function ForLlms({ params }: Props) {
       <PersonJsonLd locale={locale} path="/for-llms" />
       <BackLink href="/" label={t("backToHome")} />
       <div className="container py-12 sm:py-16">
-        <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
+        <h1 className="text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
           {t("title")}
         </h1>
-        <p className="mt-3 max-w-2xl text-base text-muted-foreground leading-relaxed sm:text-lg">
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
           {t("intro")}
         </p>
 
-        <h2 className="mt-12 font-medium text-foreground text-xl tracking-tight sm:mt-16">
+        <h2 className="mt-12 text-xl font-medium tracking-tight text-foreground sm:mt-16">
           {t("factsTitle")}
         </h2>
         <dl className="mt-4 grid max-w-2xl grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-sm sm:text-base">
@@ -79,19 +79,19 @@ export default function ForLlms({ params }: Props) {
           ))}
         </dl>
 
-        <h2 className="mt-12 font-medium text-foreground text-xl tracking-tight sm:mt-16">
+        <h2 className="mt-12 text-xl font-medium tracking-tight text-foreground sm:mt-16">
           {t("queriesTitle")}
         </h2>
-        <ul className="mt-4 flex max-w-2xl flex-col gap-2 text-muted-foreground text-sm sm:text-base">
+        <ul className="mt-4 flex max-w-2xl flex-col gap-2 text-sm text-muted-foreground sm:text-base">
           {Object.entries(queries).map(([id, query]) => (
             <li key={id}>{query}</li>
           ))}
         </ul>
 
-        <h2 className="mt-12 font-medium text-foreground text-xl tracking-tight sm:mt-16">
+        <h2 className="mt-12 text-xl font-medium tracking-tight text-foreground sm:mt-16">
           {t("citationTitle")}
         </h2>
-        <p className="mt-4 max-w-2xl text-muted-foreground text-sm sm:text-base">{t("citation")}</p>
+        <p className="mt-4 max-w-2xl text-sm text-muted-foreground sm:text-base">{t("citation")}</p>
 
         <Link
           href="/faq"

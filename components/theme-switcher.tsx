@@ -73,10 +73,10 @@ export function ThemeSwitcher({ labels, trigger = "button" }: ThemeSwitcherProps
       >
         {trigger === "badge" ? (
           <>
-            <span className="flex items-center bg-foreground px-2 font-semibold text-[0.625rem] text-background tracking-widest">
+            <span className="flex items-center bg-foreground px-2 text-[0.625rem] font-semibold tracking-widest text-background">
               {labels.title}
             </span>
-            <span className="flex items-center gap-1.5 border border-border/[0.32] border-l-0 px-2.5 py-1 font-medium text-muted-foreground text-xs transition-colors group-hover:border-foreground/50 group-hover:text-foreground group-data-popup-open:border-foreground/50 group-data-popup-open:text-foreground">
+            <span className="flex items-center gap-1.5 border border-l-0 border-border/[0.32] px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors group-hover:border-foreground/50 group-hover:text-foreground group-data-popup-open:border-foreground/50 group-data-popup-open:text-foreground">
               {mounted ? activeTheme.label : labels.trigger}
               <ChevronDown className="size-3" />
             </span>
@@ -96,7 +96,7 @@ export function ThemeSwitcher({ labels, trigger = "button" }: ThemeSwitcherProps
         <div className="flex size-full min-h-0 flex-col">
           <div className="relative shrink-0 border-b p-1">
             <div className="flex h-9 min-w-0 items-center gap-2 px-3 pe-12">
-              <DialogTitle className="shrink-0 text-sm normal-case tracking-normal">
+              <DialogTitle className="shrink-0 text-sm tracking-normal normal-case">
                 {labels.title}
               </DialogTitle>
               <Badge variant="secondary">{activeTheme.label}</Badge>
@@ -125,10 +125,10 @@ export function ThemeSwitcher({ labels, trigger = "button" }: ThemeSwitcherProps
             >
               {themeGroups.map((group, index) => (
                 <section
-                  className={cn(index > 0 && "mt-1.5 border-border/50 border-t pt-1.5")}
+                  className={cn(index > 0 && "mt-1.5 border-t border-border/50 pt-1.5")}
                   key={group.label}
                 >
-                  <h3 className="px-3 py-2 font-semibold text-muted-foreground text-xs uppercase tracking-wider">
+                  <h3 className="px-3 py-2 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
                     {group.label}
                   </h3>
                   {group.themes.map((theme) => {
@@ -137,7 +137,7 @@ export function ThemeSwitcher({ labels, trigger = "button" }: ThemeSwitcherProps
                     return (
                       <Radio.Root
                         className={cn(
-                          "flex w-full cursor-pointer select-none items-center gap-2 px-3 py-2 text-left text-sm outline-hidden transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50",
+                          "flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-sm outline-hidden transition-colors select-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
                           selected ? "bg-muted text-foreground" : "hover:bg-muted",
                         )}
                         key={theme.id}

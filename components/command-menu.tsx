@@ -239,7 +239,7 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
                     <NotebookText className="mt-0.5" />
                     <span className="min-w-0">
                       <span className="block truncate font-medium">{note.title}</span>
-                      <span className="block truncate text-muted-foreground text-xs">
+                      <span className="block truncate text-xs text-muted-foreground">
                         {note.description}
                       </span>
                     </span>

@@ -40,10 +40,10 @@ export default function Contact({ params }: Props) {
     <>
       <FrameHero>
         <div className="flex w-4/5 flex-col gap-4 text-center">
-          <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
+          <h1 className="text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
             {t("title")}
           </h1>
-          <p className="wrap-break-word break-keep text-lg text-muted-foreground leading-8">
+          <p className="text-lg leading-8 wrap-break-word break-keep text-muted-foreground">
             {t("description")}
           </p>
         </div>
