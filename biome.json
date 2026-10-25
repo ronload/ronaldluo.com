@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.5/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -7,12 +7,33 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.next", "!dist", "!build", "!public", "!components/ui"]
+    "includes": [
+      "**",
+      "!node_modules",
+      "!.next",
+      "!dist",
+      "!build",
+      "!public",
+      "!components/ui",
+      "!pnpm-lock.yaml",
+      "!pnpm-workspace.yaml"
+    ]
   },
   "css": {
     "parser": {
       "tailwindDirectives": true
     }
+  },
+  "markdown": {
+    "parser": {
+      "frontmatter": true,
+      "cjkFriendlyEmphasis": true
+    }
+  },
+  "tailwind": {
+    "stylesheet": "./app/globals.css",
+    "mergeFunctions": ["cn", "clsx", "cx", "tw"],
+    "variantFunctions": ["cva"]
   },
   "formatter": {
     "enabled": true,
@@ -51,10 +72,7 @@
         "noImportCycles": "warn"
       },
       "nursery": {
-        "useSortedClasses": {
-          "level": "warn",
-          "options": { "functions": ["cn", "cva", "clsx", "cx", "tw"] }
-        }
+        "useTailwindSortedClasses": "warn"
       }
     },
     "domains": {

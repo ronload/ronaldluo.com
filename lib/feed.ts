@@ -28,6 +28,7 @@ export async function buildAtomFeed(locale: Locale) {
 
   const updated = notes.reduce<string>((latest, note) => {
     const candidate = toIso(note.data.updated ?? note.data.date);
+    // biome-ignore lint/complexity/useMathMinMax: compares ISO date strings, which Math.max would coerce to NaN
     return candidate > latest ? candidate : latest;
   }, toIso("1970-01-01"));
 
