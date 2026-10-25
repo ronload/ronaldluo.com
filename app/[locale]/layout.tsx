@@ -133,6 +133,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                   notes: commandNotes,
                 }}
               />
+              {/* biome-ignore lint/correctness/useUniqueElementIds: skip-link target; the layout renders once per document */}
               <main className="relative z-0 flex flex-1 flex-col" id="main-content" tabIndex={-1}>
                 <FrameGuides />
                 {children}

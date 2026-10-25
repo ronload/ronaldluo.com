@@ -3,10 +3,10 @@ import { defineCollections, defineConfig } from "fumadocs-mdx/config";
 import remarkCjkFriendly from "remark-cjk-friendly/parseOnly";
 import remarkJoinCjkLines from "remark-join-cjk-lines";
 import { z } from "zod";
-import linearDark from "./themes/linear-dark.json";
-import linearLight from "./themes/linear-light.json";
-import tokyoNightDark from "./themes/tokyo-night-dark.json";
-import tokyoNightDay from "./themes/tokyo-night-day.json";
+import linearDark from "./themes/linear-dark.json" with { type: "json" };
+import linearLight from "./themes/linear-light.json" with { type: "json" };
+import tokyoNightDark from "./themes/tokyo-night-dark.json" with { type: "json" };
+import tokyoNightDay from "./themes/tokyo-night-day.json" with { type: "json" };
 
 export const notes = defineCollections({
   type: "doc",

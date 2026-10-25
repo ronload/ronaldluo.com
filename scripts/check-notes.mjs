@@ -201,7 +201,7 @@ for (const note of notes) {
 
     for (const [, alt, target] of text.matchAll(/!\[([^\]]*)\]\(([^)\s]+)\)/g)) {
       if (!alt) {
-        at(lineNumber, `image has no alt text`);
+        at(lineNumber, "image has no alt text");
       }
       if (/^https?:/.test(target)) {
         at(

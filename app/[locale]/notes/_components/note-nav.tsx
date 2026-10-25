@@ -24,6 +24,7 @@ export async function NoteNav({ locale, slug }: Props) {
 
   return (
     <nav aria-labelledby="note-nav-label" className="flex max-h-[calc(100svh_-_8rem)] flex-col">
+      {/* biome-ignore lint/correctness/useUniqueElementIds: rendered once per note page, so the id cannot repeat */}
       <p
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground"
         id="note-nav-label"

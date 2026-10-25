@@ -10,7 +10,7 @@ import {
   useTOCListener,
 } from "fumadocs-core/toc";
 import { Text } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const BASE = 8;
@@ -259,6 +259,7 @@ interface Props {
 }
 
 export function NoteToc({ items, label }: Props) {
+  const labelId = useId();
   const scrollRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [track, setTrack] = useState<Track | null>(null);
@@ -286,11 +287,8 @@ export function NoteToc({ items, label }: Props) {
 
   return (
     <AnchorProvider toc={items}>
-      <nav aria-labelledby="note-toc-label" className="flex max-h-[calc(100svh_-_8rem)] flex-col">
-        <p
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground"
-          id="note-toc-label"
-        >
+      <nav aria-labelledby={labelId} className="flex max-h-[calc(100svh_-_8rem)] flex-col">
+        <p className="inline-flex items-center gap-1.5 text-sm text-muted-foreground" id={labelId}>
           <Text className="size-4 shrink-0" />
           {label}
         </p>

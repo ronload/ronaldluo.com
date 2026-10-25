@@ -25,5 +25,6 @@ function GradientButton({ className, glowClassName, children, ...props }: Gradie
   );
 }
 
+// biome-ignore lint/style/useComponentExportOnlyModules: the type-only export is erased at compile time
 export type { GradientButtonProps };
 export { GradientButton, GradientGlow };
