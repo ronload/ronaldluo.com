@@ -58,7 +58,7 @@ export default function Love({ params }: Props) {
 
   return (
     <StatusPage
-      hero={<StatusHero>404</StatusHero>}
+      hero={<StatusHero code="404" />}
       titleAs="h2"
       title={COPY.title}
       description={COPY.description}

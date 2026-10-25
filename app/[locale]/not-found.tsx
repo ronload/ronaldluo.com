@@ -15,7 +15,7 @@ export default function NotFound() {
 
   return (
     <StatusPage
-      hero={<StatusHero>404</StatusHero>}
+      hero={<StatusHero code="404" />}
       titleAs="h2"
       title={t("title")}
       description={t("description")}

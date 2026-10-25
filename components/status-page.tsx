@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import { Divider, FrameHero } from "@/components/frame";
 
-export function StatusHero({ children }: { children: ReactNode }) {
+export function StatusHero({ code }: { code: string }) {
   return (
     <h1 className="bg-gradient-to-b from-foreground via-foreground to-muted-foreground bg-clip-text font-mono text-[120px] leading-none font-bold tracking-tighter text-transparent sm:text-[180px] md:text-[220px]">
-      {children}
+      {code}
     </h1>
   );
 }

@@ -59,7 +59,7 @@ export default async function GlobalNotFound() {
             <main className="relative z-0 flex flex-1 flex-col">
               <FrameGuides />
               <StatusPage
-                hero={<StatusHero>404</StatusHero>}
+                hero={<StatusHero code="404" />}
                 titleAs="h2"
                 title={t("title")}
                 description={t("description")}
