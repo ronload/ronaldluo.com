@@ -1,19 +1,12 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
-import { use } from "react";
 import { StatusHero, StatusPage } from "@/components/status-page";
 import { buttonVariants } from "@/components/ui/button";
-import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { SITE_NAME } from "@/lib/identity";
 import { canonicalUrl, ogImages, pageUrl } from "@/lib/seo";
 import { cn } from "@/lib/utils";
-
-interface Props {
-  params: Promise<{ locale: string }>;
-}
 
 const HREF = "/love";
 
@@ -51,11 +44,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Love({ params }: Props) {
-  const { locale } = use(params);
-  assertLocale(locale);
-  setRequestLocale(locale);
-
+export default function Love() {
   return (
     <StatusPage
       hero={<StatusHero code="404" />}

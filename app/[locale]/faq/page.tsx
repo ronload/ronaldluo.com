@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { use } from "react";
 import { BackLink } from "@/components/back-link";
 import { FaqJsonLd } from "@/components/faq-jsonld";
@@ -31,7 +31,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default function Faq({ params }: Props) {
   const { locale } = use(params);
   assertLocale(locale);
-  setRequestLocale(locale);
 
   const t = useTranslations("Faq");
   const items = locale === "zh-TW" ? FAQ.zh : FAQ.en;

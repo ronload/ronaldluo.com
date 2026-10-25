@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { use } from "react";
+import { getTranslations } from "next-intl/server";
 import { Divider, FrameHero } from "@/components/frame";
 import { GradientButton } from "@/components/gradient-button";
 import { assertLocale } from "@/i18n/assert-locale";
@@ -29,11 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function Contact({ params }: Props) {
-  const { locale } = use(params);
-  assertLocale(locale);
-  setRequestLocale(locale);
-
+export default function Contact() {
   const t = useTranslations("Contact");
 
   return (

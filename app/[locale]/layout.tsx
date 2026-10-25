@@ -2,7 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import type { CommandMenuLabels } from "@/components/command-menu";
 import { FrameGuides, PageFrame } from "@/components/frame";
 import { RelMeLinks } from "@/components/rel-me-links";
@@ -68,7 +68,6 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
   assertLocale(locale);
-  setRequestLocale(locale);
   const [command, header, contact, faq, forLlms, messages] = await Promise.all([
     getTranslations({ locale, namespace: "CommandMenu" }),
     getTranslations({ locale, namespace: "Header" }),

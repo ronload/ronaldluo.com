@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import { useMessages, useTranslations } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { use } from "react";
 import { BackLink } from "@/components/back-link";
 import { PersonJsonLd } from "@/components/person-jsonld";
@@ -35,7 +35,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default function ForLlms({ params }: Props) {
   const { locale } = use(params);
   assertLocale(locale);
-  setRequestLocale(locale);
 
   const t = useTranslations("ForLlms");
   const isZh = locale === "zh-TW";

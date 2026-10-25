@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { Divider, FrameHero } from "@/components/frame";
 import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
@@ -32,7 +32,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function NotesPage({ params }: Props) {
   const { locale } = await params;
   assertLocale(locale);
-  setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "Notes" });
   const format = await getFormatter({ locale });

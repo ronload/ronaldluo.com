@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { BackLink } from "@/components/back-link";
 import { FrameAside } from "@/components/frame";
 import { mdxComponents } from "@/components/mdx/mdx-components";
@@ -56,7 +56,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function NotePage({ params }: Props) {
   const { locale, slug } = await params;
   assertLocale(locale);
-  setRequestLocale(locale);
 
   const note = getNote(locale, slug);
   const t = await getTranslations({ locale, namespace: "Notes" });
