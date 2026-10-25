@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { getTranslations } from "next-intl/server";
+import type { CSSProperties } from "react";
 import { routing } from "@/i18n/routing";
 import { SITE_NAME } from "@/lib/identity";
 
@@ -24,6 +25,11 @@ interface Props {
   params: Promise<{ locale: string }>;
 }
 
+interface FramePart {
+  id: string;
+  style: CSSProperties;
+}
+
 const BG = "#141414";
 const FG = "#f5f5f5";
 const MUTED = "#818181";
@@ -35,6 +41,32 @@ const FRAME_BOTTOM = size.height - FRAME_TOP;
 const DOT_SIZE = 8;
 const CONTENT_INSET = FRAME_INSET + 48;
 const FONT_SRC = /src:\s*url\(([^)]+)\)\s*format\('(?:opentype|truetype)'\)/;
+
+const FRAME_LINES: FramePart[] = [
+  { id: "left", style: { top: 0, bottom: 0, left: FRAME_INSET - 0.5, width: 1 } },
+  { id: "right", style: { top: 0, right: FRAME_INSET - 0.5, bottom: 0, width: 1 } },
+  { id: "top", style: { top: FRAME_TOP - 0.5, left: 0, width: "100%", height: 1 } },
+  { id: "bottom", style: { top: FRAME_BOTTOM - 0.5, left: 0, width: "100%", height: 1 } },
+];
+
+const CORNER_DOTS: FramePart[] = [
+  {
+    id: "top-left",
+    style: { top: FRAME_TOP - DOT_SIZE / 2, left: FRAME_INSET - DOT_SIZE / 2 },
+  },
+  {
+    id: "top-right",
+    style: { top: FRAME_TOP - DOT_SIZE / 2, right: FRAME_INSET - DOT_SIZE / 2 },
+  },
+  {
+    id: "bottom-left",
+    style: { top: FRAME_BOTTOM - DOT_SIZE / 2, left: FRAME_INSET - DOT_SIZE / 2 },
+  },
+  {
+    id: "bottom-right",
+    style: { top: FRAME_BOTTOM - DOT_SIZE / 2, right: FRAME_INSET - DOT_SIZE / 2 },
+  },
+];
 
 async function loadGoogleFont(family: string, weight: number, text: string): Promise<ArrayBuffer> {
   const url = `https://fonts.googleapis.com/css2?family=${family}:wght@${weight}&text=${encodeURIComponent(text)}`;
@@ -94,94 +126,23 @@ export default async function Image({ params }: Props) {
           backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 2px, ${FRAME_TEXTURE} 2px, ${FRAME_TEXTURE} 4px)`,
         }}
       />
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          bottom: 0,
-          left: FRAME_INSET - 0.5,
-          width: 1,
-          backgroundColor: FRAME_LINE,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          right: FRAME_INSET - 0.5,
-          bottom: 0,
-          width: 1,
-          backgroundColor: FRAME_LINE,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          top: FRAME_TOP - 0.5,
-          left: 0,
-          width: "100%",
-          height: 1,
-          backgroundColor: FRAME_LINE,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          top: FRAME_BOTTOM - 0.5,
-          left: 0,
-          width: "100%",
-          height: 1,
-          backgroundColor: FRAME_LINE,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          top: FRAME_TOP - DOT_SIZE / 2,
-          left: FRAME_INSET - DOT_SIZE / 2,
-          width: DOT_SIZE,
-          height: DOT_SIZE,
-          border: `1px solid ${FRAME_LINE}`,
-          backgroundColor: BG,
-          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          top: FRAME_TOP - DOT_SIZE / 2,
-          right: FRAME_INSET - DOT_SIZE / 2,
-          width: DOT_SIZE,
-          height: DOT_SIZE,
-          border: `1px solid ${FRAME_LINE}`,
-          backgroundColor: BG,
-          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          top: FRAME_BOTTOM - DOT_SIZE / 2,
-          left: FRAME_INSET - DOT_SIZE / 2,
-          width: DOT_SIZE,
-          height: DOT_SIZE,
-          border: `1px solid ${FRAME_LINE}`,
-          backgroundColor: BG,
-          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          top: FRAME_BOTTOM - DOT_SIZE / 2,
-          right: FRAME_INSET - DOT_SIZE / 2,
-          width: DOT_SIZE,
-          height: DOT_SIZE,
-          border: `1px solid ${FRAME_LINE}`,
-          backgroundColor: BG,
-          boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
-        }}
-      />
+      {FRAME_LINES.map(({ id, style }) => (
+        <div key={id} style={{ position: "absolute", ...style, backgroundColor: FRAME_LINE }} />
+      ))}
+      {CORNER_DOTS.map(({ id, style }) => (
+        <div
+          key={id}
+          style={{
+            position: "absolute",
+            ...style,
+            width: DOT_SIZE,
+            height: DOT_SIZE,
+            border: `1px solid ${FRAME_LINE}`,
+            backgroundColor: BG,
+            boxShadow: "0 1px 2px rgba(0, 0, 0, 0.32)",
+          }}
+        />
+      ))}
       <div
         style={{
           position: "relative",
