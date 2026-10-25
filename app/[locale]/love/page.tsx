@@ -11,6 +11,10 @@ import { SITE_NAME } from "@/lib/identity";
 import { canonicalUrl, ogImages, pageUrl } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
+interface Props {
+  params: Promise<{ locale: string }>;
+}
+
 const HREF = "/love";
 
 // Deliberately untranslated: the joke only lands in English, so the copy stays
@@ -46,10 +50,6 @@ export const metadata: Metadata = {
     description: COPY.description,
   },
 };
-
-interface Props {
-  params: Promise<{ locale: string }>;
-}
 
 export default function Love({ params }: Props) {
   const { locale } = use(params);

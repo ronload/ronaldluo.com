@@ -1,4 +1,4 @@
-export type ThemeId =
+type ThemeId =
   | "tokyonight-day"
   | "tokyonight-night"
   | "tokyonight-storm"
@@ -19,15 +19,15 @@ export type ThemeId =
   | "linear-light"
   | "linear-dark";
 
-export type ThemePreference = ThemeId;
+type ThemePreference = ThemeId;
 
-export interface ThemeDefinition {
+interface ThemeDefinition {
   id: ThemeId;
   label: string;
   dark: boolean;
 }
 
-export interface ThemeGroup {
+interface ThemeGroup {
   label: string;
   themes: readonly ThemeDefinition[];
 }
@@ -173,3 +173,5 @@ export function resolveTheme(
 
   return getTheme(resolvedTheme === "dark" ? "tokyonight-night" : "one-light");
 }
+
+export type { ThemeDefinition, ThemeGroup, ThemeId, ThemePreference };

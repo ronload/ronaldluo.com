@@ -6,6 +6,15 @@ interface FrameProps {
   children?: React.ReactNode;
 }
 
+interface FrameHeroProps {
+  contentClassName?: string;
+  children?: React.ReactNode;
+}
+
+interface FrameAsideProps extends FrameProps {
+  side?: "start" | "end";
+}
+
 export function PageFrame({ className, children }: FrameProps) {
   return (
     <div className={cn("relative isolate flex min-h-svh flex-1 flex-col overflow-clip", className)}>
@@ -29,11 +38,6 @@ export function FrameTexture({ className }: FrameProps) {
       />
     </div>
   );
-}
-
-interface FrameHeroProps {
-  contentClassName?: string;
-  children?: React.ReactNode;
 }
 
 export function FrameHero({ contentClassName, children }: FrameHeroProps) {
@@ -63,10 +67,6 @@ export function FrameGuides({ className }: FrameProps) {
       )}
     />
   );
-}
-
-interface FrameAsideProps extends FrameProps {
-  side?: "start" | "end";
 }
 
 export function FrameAside({ className, children, side = "end" }: FrameAsideProps) {

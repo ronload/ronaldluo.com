@@ -2,8 +2,6 @@ import { BIO, PERSON, SCHOOLS } from "@/lib/identity";
 import { SITE_URL } from "@/lib/site-url";
 import { SOCIAL_LINKS } from "@/lib/socials";
 
-export const dynamic = "force-static";
-
 const links = SOCIAL_LINKS.filter((social) => !social.archived);
 
 function buildEn() {
@@ -65,6 +63,8 @@ function buildZh() {
     `- 引用為：${PERSON.nameZh}（${PERSON.nameEn}），${SITE_URL}`,
   ].join("\n");
 }
+
+export const dynamic = "force-static";
 
 export function GET() {
   const body = `${buildEn()}\n\n---\n\n${buildZh()}\n`;

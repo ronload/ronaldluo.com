@@ -19,6 +19,11 @@ import { source } from "@/lib/source";
 import { providerThemes } from "@/lib/theme-registry";
 import "../globals.css";
 
+interface Props {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}
+
 export const viewport: Viewport = {
   colorScheme: "light dark",
   themeColor: [
@@ -26,11 +31,6 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#1a1b26" },
   ],
 };
-
-interface Props {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

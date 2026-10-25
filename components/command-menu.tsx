@@ -30,6 +30,18 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { ACTIVE_CHANNELS } from "@/lib/contact-channels";
 import { themeDefinitions } from "@/lib/theme-registry";
 
+interface CommandMenuProps {
+  labels: CommandMenuLabels;
+  notes: CommandMenuNote[];
+}
+
+const APPLE_DEVICE = /Macintosh|Mac OS X|iPhone|iPad|iPod/;
+
+const subscribe = () => () => {};
+const getServerSnapshot = () => false;
+const getAppleDeviceSnapshot = () =>
+  typeof navigator !== "undefined" && APPLE_DEVICE.test(navigator.userAgent);
+
 export interface CommandMenuNote {
   slug: string;
   title: string;
@@ -56,18 +68,6 @@ export interface CommandMenuLabels {
   title: string;
   trigger: string;
 }
-
-interface CommandMenuProps {
-  labels: CommandMenuLabels;
-  notes: CommandMenuNote[];
-}
-
-const APPLE_DEVICE = /Macintosh|Mac OS X|iPhone|iPad|iPod/;
-
-const subscribe = () => () => {};
-const getServerSnapshot = () => false;
-const getAppleDeviceSnapshot = () =>
-  typeof navigator !== "undefined" && APPLE_DEVICE.test(navigator.userAgent);
 
 export function CommandMenu({ labels, notes }: CommandMenuProps) {
   const locale = useLocale();

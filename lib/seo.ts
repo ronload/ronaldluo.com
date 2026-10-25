@@ -6,6 +6,24 @@ import { SITE_URL } from "@/lib/site-url";
 
 const TRAILING_SLASH = /\/$/;
 
+interface SocialInput {
+  locale: Locale;
+  path: string;
+  title: string;
+  description: string;
+}
+
+interface NoteInput {
+  locale: Locale;
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  modified?: string;
+  locales: readonly Locale[];
+  fallback: boolean;
+}
+
 export const pageUrl = (locale: Locale, href: string) => SITE_URL + getPathname({ locale, href });
 
 export const canonicalUrl = (locale: Locale, href: string) =>
@@ -49,13 +67,6 @@ export function alternatesFor(locale: Locale, href: string, locales?: readonly L
   };
 }
 
-interface SocialInput {
-  locale: Locale;
-  path: string;
-  title: string;
-  description: string;
-}
-
 export function socialMetadata({
   locale,
   path,
@@ -85,17 +96,6 @@ export function socialMetadata({
       description,
     },
   };
-}
-
-interface NoteInput {
-  locale: Locale;
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  modified?: string;
-  locales: readonly Locale[];
-  fallback: boolean;
 }
 
 export function noteMetadata({
