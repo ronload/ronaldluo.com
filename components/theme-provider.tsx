@@ -9,6 +9,7 @@ function ThemeInitializer() {
 
   useEffect(() => {
     if (isThemeId(theme)) return;
+    // biome-ignore lint/nursery/useReactCompiler: flagged by name only; next-themes' setTheme is not a useState setter
     setTheme(resolveTheme(theme, resolvedTheme).id);
   }, [resolvedTheme, setTheme, theme]);
 
