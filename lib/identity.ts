@@ -1,8 +1,6 @@
 import { SITE_URL } from "@/lib/site-url";
 import { SOCIAL_LINKS } from "@/lib/socials";
 
-export { SITE_URL };
-
 export const SITE_NAME = "Ronald Luo 羅永能";
 
 export const PROFILE_MODIFIED = "2026-07-30";

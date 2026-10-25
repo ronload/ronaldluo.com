@@ -1,4 +1,5 @@
-import { BIO, PERSON, SCHOOLS, SITE_URL } from "@/lib/identity";
+import { BIO, PERSON, SCHOOLS } from "@/lib/identity";
+import { SITE_URL } from "@/lib/site-url";
 import { SOCIAL_LINKS } from "@/lib/socials";
 
 export const dynamic = "force-static";

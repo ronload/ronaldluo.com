@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { PERSON, SITE_URL } from "@/lib/identity";
+import { PERSON } from "@/lib/identity";
 import { pageUrl } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site-url";
 import { isFallbackNote, source } from "@/lib/source";
 
 function escapeXml(value: string) {

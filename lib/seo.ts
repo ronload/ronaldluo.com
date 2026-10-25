@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
-import { SITE_NAME, SITE_URL } from "@/lib/identity";
+import { SITE_NAME } from "@/lib/identity";
+import { SITE_URL } from "@/lib/site-url";
 
 const TRAILING_SLASH = /\/$/;
 
