@@ -1,7 +1,7 @@
 "use client";
 
 import { useDeferredValue, useEffect, useId, useRef, useState } from "react";
-import { useSiteTheme } from "@/components/theme-provider";
+import { useSiteTheme } from "@/hooks/use-site-theme";
 
 const TOKENS = ["code", "foreground", "muted", "muted-foreground", "border"] as const;
 

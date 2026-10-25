@@ -4,7 +4,6 @@ import { Radio } from "@base-ui/react/radio";
 import { RadioGroup } from "@base-ui/react/radio-group";
 import { Check, ChevronDown, X } from "lucide-react";
 import { useRef, useState, useSyncExternalStore } from "react";
-import { useSiteTheme } from "@/components/theme-provider";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -14,6 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useSiteTheme } from "@/hooks/use-site-theme";
 import { type ThemePreference, themeGroups } from "@/lib/theme-registry";
 import { cn } from "@/lib/utils";
 

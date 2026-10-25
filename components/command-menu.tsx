@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useEffect, useState, useSyncExternalStore, useTransition } from "react";
-import { useSiteTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -26,6 +25,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { DialogClose } from "@/components/ui/dialog";
+import { useSiteTheme } from "@/hooks/use-site-theme";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ACTIVE_CHANNELS } from "@/lib/contact-channels";
 import { themeDefinitions } from "@/lib/theme-registry";
