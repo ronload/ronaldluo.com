@@ -2,10 +2,9 @@ import { Library } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { INCLUDE_DRAFTS } from "@/lib/env";
 import { source } from "@/lib/source";
 import { cn } from "@/lib/utils";
-
-const includeDrafts = process.env.NODE_ENV !== "production";
 
 interface Props {
   locale: Locale;
@@ -16,7 +15,7 @@ export async function NoteNav({ locale, slug }: Props) {
   const t = await getTranslations({ locale, namespace: "Notes" });
   const notes = source
     .getPages(locale)
-    .filter((note) => includeDrafts || !note.data.draft)
+    .filter((note) => INCLUDE_DRAFTS || !note.data.draft)
     .sort((a, b) => b.data.date.localeCompare(a.data.date));
 
   if (notes.length === 0) return null;

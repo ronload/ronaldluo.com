@@ -7,6 +7,7 @@ import { mdxComponents } from "@/components/mdx/mdx-components";
 import { NoteToc } from "@/components/mdx/note-toc";
 import { NoteJsonLd } from "@/components/note-jsonld";
 import { assertLocale } from "@/i18n/assert-locale";
+import { INCLUDE_DRAFTS } from "@/lib/env";
 import { noteMetadata, pageUrl } from "@/lib/seo";
 import { isFallbackNote, noteLocales, source } from "@/lib/source";
 import { NoteNav } from "../_components/note-nav";
@@ -15,11 +16,9 @@ interface Props {
   params: Promise<{ locale: string; slug: string }>;
 }
 
-const includeDrafts = process.env.NODE_ENV !== "production";
-
 function getNote(locale: string, slug: string) {
   const note = source.getPage([slug], locale);
-  if (!note || (note.data.draft && !includeDrafts)) notFound();
+  if (!note || (note.data.draft && !INCLUDE_DRAFTS)) notFound();
 
   return note;
 }
@@ -31,7 +30,7 @@ export function generateStaticParams() {
     .map((param) => ({ locale: param.locale, slug: param.slug[0] }))
     .filter(({ locale, slug }) => {
       const note = source.getPage([slug], locale);
-      return note !== undefined && (includeDrafts || !note.data.draft);
+      return note !== undefined && (INCLUDE_DRAFTS || !note.data.draft);
     });
 }
 

@@ -3,14 +3,13 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { Divider, FrameHero } from "@/components/frame";
 import { assertLocale } from "@/i18n/assert-locale";
 import { Link } from "@/i18n/navigation";
+import { INCLUDE_DRAFTS } from "@/lib/env";
 import { FEED_ALTERNATES, socialMetadata } from "@/lib/seo";
 import { source } from "@/lib/source";
 
 interface Props {
   params: Promise<{ locale: string }>;
 }
-
-const includeDrafts = process.env.NODE_ENV !== "production";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -39,7 +38,7 @@ export default async function NotesPage({ params }: Props) {
   const format = await getFormatter({ locale });
   const notes = source
     .getPages(locale)
-    .filter((note) => includeDrafts || !note.data.draft)
+    .filter((note) => INCLUDE_DRAFTS || !note.data.draft)
     .sort((a, b) => b.data.date.localeCompare(a.data.date));
 
   return (

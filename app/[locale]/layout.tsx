@@ -11,14 +11,13 @@ import { ThemeColor } from "@/components/theme-color";
 import { ThemeProvider } from "@/components/theme-provider";
 import { assertLocale } from "@/i18n/assert-locale";
 import { routing } from "@/i18n/routing";
+import { INCLUDE_DRAFTS } from "@/lib/env";
 import { fontVariables } from "@/lib/fonts";
 import { SITE_URL } from "@/lib/identity";
 import { FEED_ALTERNATES, socialMetadata, TITLE_TEMPLATE } from "@/lib/seo";
 import { source } from "@/lib/source";
 import { providerThemes } from "@/lib/theme-registry";
 import "../globals.css";
-
-const includeDrafts = process.env.NODE_ENV !== "production";
 
 export const viewport: Viewport = {
   colorScheme: "light dark",
@@ -100,7 +99,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   };
   const commandNotes = source
     .getPages(locale)
-    .filter((note) => includeDrafts || !note.data.draft)
+    .filter((note) => INCLUDE_DRAFTS || !note.data.draft)
     .sort((a, b) => b.data.date.localeCompare(a.data.date))
     .map((note) => ({
       slug: note.slugs[0],
