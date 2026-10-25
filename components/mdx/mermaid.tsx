@@ -131,7 +131,7 @@ export function Mermaid({ chart }: Props) {
 
   useEffect(() => {
     const element = ref.current;
-    if (!element || !result) return;
+    if (!(element && result)) return;
 
     element.innerHTML = result.svg;
     result.bind?.(element);

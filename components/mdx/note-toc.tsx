@@ -117,10 +117,10 @@ function TrackHighlight({ track }: { track: Track }) {
     (infos: TOCItemInfo[]) => {
       const element = ref.current;
       const range = activeRange(infos);
-      if (!element || !range) return;
+      if (!(element && range)) return;
 
       const [start, end] = range;
-      if (!track.bounds[start] || !track.bounds[end]) return;
+      if (!(track.bounds[start] && track.bounds[end])) return;
 
       const up = goesUp(thumb.current, start, end);
       thumb.current = { start, end, up };

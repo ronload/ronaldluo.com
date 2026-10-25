@@ -58,7 +58,7 @@ function useOpenShortcut(setOpen: (open: boolean) => void) {
         event.altKey ||
         isEditable ||
         event.key.toLowerCase() !== "k" ||
-        (!event.metaKey && !event.ctrlKey) ||
+        !(event.metaKey || event.ctrlKey) ||
         document.querySelector('[role="dialog"][aria-modal="true"]')
       ) {
         return;

@@ -24,7 +24,7 @@ export async function buildAtomFeed(locale: Locale) {
 
   const notes = source
     .getPages(locale)
-    .filter((note) => !note.data.draft && !isFallbackNote(note, locale))
+    .filter((note) => !(note.data.draft || isFallbackNote(note, locale)))
     .sort((a, b) => b.data.date.localeCompare(a.data.date));
 
   const updated = notes.reduce<string>((latest, note) => {
