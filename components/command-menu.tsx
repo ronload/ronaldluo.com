@@ -206,7 +206,9 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
         description={labels.description}
         onOpenChange={(nextOpen) => {
           setOpen(nextOpen);
-          if (!nextOpen) setSearch("");
+          if (!nextOpen) {
+            setSearch("");
+          }
         }}
         open={open}
         showCloseButton={false}

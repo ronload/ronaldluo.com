@@ -18,7 +18,9 @@ export async function NoteNav({ locale, slug }: Props) {
     .filter((note) => INCLUDE_DRAFTS || !note.data.draft)
     .sort((a, b) => b.data.date.localeCompare(a.data.date));
 
-  if (notes.length === 0) return null;
+  if (notes.length === 0) {
+    return null;
+  }
 
   return (
     <nav aria-labelledby="note-nav-label" className="flex max-h-[calc(100svh_-_8rem)] flex-col">

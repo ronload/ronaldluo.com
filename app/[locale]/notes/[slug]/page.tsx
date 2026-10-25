@@ -18,7 +18,9 @@ interface Props {
 
 function getNote(locale: string, slug: string) {
   const note = source.getPage([slug], locale);
-  if (!note || (note.data.draft && !INCLUDE_DRAFTS)) notFound();
+  if (!note || (note.data.draft && !INCLUDE_DRAFTS)) {
+    notFound();
+  }
 
   return note;
 }

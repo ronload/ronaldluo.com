@@ -11,7 +11,9 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const publicDir = join(root, "public");
 
 const keyFile = readdirSync(publicDir).find((file) => {
-  if (!file.endsWith(".txt")) return false;
+  if (!file.endsWith(".txt")) {
+    return false;
+  }
   return readFileSync(join(publicDir, file), "utf8").trim() === file.slice(0, -4);
 });
 

@@ -24,12 +24,16 @@ function stripInlineCode(line) {
 
 function parseNote(text) {
   const match = text.match(FRONTMATTER);
-  if (!match) return null;
+  if (!match) {
+    return null;
+  }
   const [, raw, body] = match;
   const frontmatter = new Map();
   for (const line of raw.split(LINE_BREAK)) {
     const kv = line.match(FRONTMATTER_ENTRY);
-    if (kv) frontmatter.set(kv[1], kv[2].trim());
+    if (kv) {
+      frontmatter.set(kv[1], kv[2].trim());
+    }
   }
   const offset = text.slice(0, text.length - body.length).split(LINE_BREAK).length - 1;
   return { frontmatter, body, offset };
@@ -43,7 +47,9 @@ function proseLines(body, offset) {
       inFence = !inFence;
       return;
     }
-    if (!inFence) out.push({ line, lineNumber: offset + i + 1 });
+    if (!inFence) {
+      out.push({ line, lineNumber: offset + i + 1 });
+    }
   });
   return out;
 }
@@ -53,8 +59,12 @@ function fenceInfoStrings(body, offset) {
   let inFence = false;
   body.split(LINE_BREAK).forEach((line, i) => {
     const trimmed = line.trim();
-    if (!trimmed.startsWith("```")) return;
-    if (!inFence) out.push({ info: trimmed.slice(3).trim(), lineNumber: offset + i + 1 });
+    if (!trimmed.startsWith("```")) {
+      return;
+    }
+    if (!inFence) {
+      out.push({ info: trimmed.slice(3).trim(), lineNumber: offset + i + 1 });
+    }
     inFence = !inFence;
   });
   return out;
@@ -74,9 +84,13 @@ try {
 const notes = [];
 for (const file of files) {
   const match = file.match(/^(.+)\.([^.]+)\.md$/);
-  if (!match) continue;
+  if (!match) {
+    continue;
+  }
   const [, slug, locale] = match;
-  if (!locales.includes(locale)) continue;
+  if (!locales.includes(locale)) {
+    continue;
+  }
   const parsed = parseNote(readFileSync(join(NOTES_DIR, file), "utf8"));
   if (!parsed) {
     errors.push({ file, line: 1, message: "no frontmatter block" });
@@ -95,7 +109,9 @@ for (const note of notes) {
   const at = (line, message) => errors.push({ file, line, message });
 
   for (const key of FRONTMATTER_REQUIRED) {
-    if (!frontmatter.has(key)) at(1, `frontmatter is missing \`${key}\``);
+    if (!frontmatter.has(key)) {
+      at(1, `frontmatter is missing \`${key}\``);
+    }
   }
   for (const key of frontmatter.keys()) {
     if (!FRONTMATTER_ALLOWED.has(key)) {
@@ -118,7 +134,9 @@ for (const note of notes) {
         at(1, `${key} is empty; fill it in or keep \`draft: true\``);
       }
     }
-    if (body.trim() === "") at(1, "body is empty; write it or keep `draft: true`");
+    if (body.trim() === "") {
+      at(1, "body is empty; write it or keep `draft: true`");
+    }
   }
 
   for (const { info, lineNumber } of fenceInfoStrings(body, offset)) {
@@ -150,27 +168,41 @@ for (const note of notes) {
         `${where}underscore emphasis next to a Han character does not parse; use \`**\``,
       );
     }
-    if (EMOJI.test(text)) at(lineNumber, `${where}emoji`);
+    if (EMOJI.test(text)) {
+      at(lineNumber, `${where}emoji`);
+    }
     if (/[“”‘’]/.test(text)) {
       at(lineNumber, `${where}curly quote; use "" in English and 「」 in Chinese`);
     }
 
     if (locale === "en") {
-      if (/[—–]/.test(text)) at(lineNumber, `${where}em or en dash`);
-      if (/…/.test(text)) at(lineNumber, `${where}ellipsis character; use three periods`);
+      if (/[—–]/.test(text)) {
+        at(lineNumber, `${where}em or en dash`);
+      }
+      if (/…/.test(text)) {
+        at(lineNumber, `${where}ellipsis character; use three periods`);
+      }
       const cjk = text.match(new RegExp(`[${HAN}${CJK_PUNCT}]`));
-      if (cjk) at(lineNumber, `${where}untranslated CJK \`${cjk[0]}\``);
+      if (cjk) {
+        at(lineNumber, `${where}untranslated CJK \`${cjk[0]}\``);
+      }
     } else {
       for (const run of text.match(/—+/g) ?? []) {
-        if (run.length !== 2) at(lineNumber, `${where}破折號 must be exactly ——`);
+        if (run.length !== 2) {
+          at(lineNumber, `${where}破折號 must be exactly ——`);
+        }
       }
       for (const run of text.match(/…+/g) ?? []) {
-        if (run.length !== 2) at(lineNumber, `${where}刪節號 must be exactly ……`);
+        if (run.length !== 2) {
+          at(lineNumber, `${where}刪節號 must be exactly ……`);
+        }
       }
     }
 
     for (const [, alt, target] of text.matchAll(/!\[([^\]]*)\]\(([^)\s]+)\)/g)) {
-      if (!alt) at(lineNumber, `image has no alt text`);
+      if (!alt) {
+        at(lineNumber, `image has no alt text`);
+      }
       if (/^https?:/.test(target)) {
         at(
           lineNumber,
@@ -209,12 +241,16 @@ for (const note of notes) {
 
 const bySlug = new Map();
 for (const { slug, locale } of notes) {
-  if (!bySlug.has(slug)) bySlug.set(slug, new Set());
+  if (!bySlug.has(slug)) {
+    bySlug.set(slug, new Set());
+  }
   bySlug.get(slug).add(locale);
 }
 for (const [slug, present] of bySlug) {
   for (const locale of locales) {
-    if (present.has(locale)) continue;
+    if (present.has(locale)) {
+      continue;
+    }
     warnings.push({
       file: `content/notes/${slug}.${locale}.md`,
       line: 1,
@@ -233,8 +269,12 @@ const emit = (level, { file, line, message }) => {
   }
 };
 
-for (const w of warnings) emit("warning", w);
-for (const e of errors) emit("error", e);
+for (const w of warnings) {
+  emit("warning", w);
+}
+for (const e of errors) {
+  emit("error", e);
+}
 
 if (errors.length > 0) {
   console.error(`\n${errors.length} error(s) in ${notes.length} note file(s).`);

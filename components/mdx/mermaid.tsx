@@ -33,7 +33,9 @@ function readPalette(): Palette | null {
   canvas.width = 1;
   canvas.height = 1;
   const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  if (!ctx) return null;
+  if (!ctx) {
+    return null;
+  }
 
   const probe = document.createElement("span");
   probe.style.cssText = "position:fixed;visibility:hidden";
@@ -46,7 +48,9 @@ function readPalette(): Palette | null {
 
   const base = flatten(ctx, "#ffffff", read("code"));
   const palette = {} as Palette;
-  for (const token of TOKENS) palette[token] = flatten(ctx, base, read(token));
+  for (const token of TOKENS) {
+    palette[token] = flatten(ctx, base, read(token));
+  }
   probe.remove();
 
   return palette.foreground === palette.code ? null : palette;
@@ -54,7 +58,9 @@ function readPalette(): Palette | null {
 
 function themeOptions(dark: boolean) {
   const palette = readPalette();
-  if (!palette) return { theme: dark ? ("dark" as const) : ("neutral" as const) };
+  if (!palette) {
+    return { theme: dark ? ("dark" as const) : ("neutral" as const) };
+  }
 
   return {
     theme: "base" as const,
@@ -102,7 +108,9 @@ export function Mermaid({ chart }: Props) {
     enqueue(async () => {
       try {
         const { default: mermaid } = await import("mermaid");
-        if (cancelled) return;
+        if (cancelled) {
+          return;
+        }
 
         mermaid.initialize({
           startOnLoad: false,
@@ -115,12 +123,16 @@ export function Mermaid({ chart }: Props) {
           `mermaid-${slot}-${renderedTheme.id}`,
           chart,
         );
-        if (cancelled) return;
+        if (cancelled) {
+          return;
+        }
 
         setFailed(false);
         setResult({ svg, bind: bindFunctions });
       } catch {
-        if (!cancelled) setFailed(true);
+        if (!cancelled) {
+          setFailed(true);
+        }
       }
     });
 
@@ -131,7 +143,9 @@ export function Mermaid({ chart }: Props) {
 
   useEffect(() => {
     const element = ref.current;
-    if (!(element && result)) return;
+    if (!(element && result)) {
+      return;
+    }
 
     element.innerHTML = result.svg;
     result.bind?.(element);

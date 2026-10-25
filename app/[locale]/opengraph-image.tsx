@@ -74,9 +74,13 @@ async function loadGoogleFont(family: string, weight: number, text: string): Pro
     await fetch(url, { headers: { "User-Agent": "node" }, cache: "force-cache" })
   ).text();
   const resource = css.match(FONT_SRC);
-  if (!resource) throw new Error(`Failed to resolve font: ${family} ${weight}`);
+  if (!resource) {
+    throw new Error(`Failed to resolve font: ${family} ${weight}`);
+  }
   const res = await fetch(resource[1], { cache: "force-cache" });
-  if (!res.ok) throw new Error(`Failed to fetch font: ${family} ${weight}`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch font: ${family} ${weight}`);
+  }
   return res.arrayBuffer();
 }
 

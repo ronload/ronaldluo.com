@@ -37,7 +37,9 @@ const coord = (value: number) =>
 function dotPath({ width, height, mapSamples, dotSize, stagger }: DotPathOptions) {
   const key = `${width}x${height}@${mapSamples}/${dotSize}${stagger ? "/stagger" : ""}`;
   const cached = pathCache.get(key);
-  if (cached !== undefined) return cached;
+  if (cached !== undefined) {
+    return cached;
+  }
 
   const { points } = createMap({ width, height, mapSamples });
   const sorted = [...points].sort((a, b) => a.y - b.y || a.x - b.x);
@@ -49,7 +51,9 @@ function dotPath({ width, height, mapSamples, dotSize, stagger }: DotPathOptions
 
   const xStep = sorted.reduce((step, point, index) => {
     const previous = sorted[index - 1];
-    if (index === 0 || previous.y !== point.y) return step;
+    if (index === 0 || previous.y !== point.y) {
+      return step;
+    }
     const distance = point.x - previous.x;
     return distance > 0 && (step === 0 || distance < step) ? distance : step;
   }, 0);

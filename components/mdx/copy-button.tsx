@@ -23,7 +23,9 @@ export function CopyButton({ label, copiedLabel, className }: Props) {
       className={cn("text-muted-foreground", className)}
       onClick={(event) => {
         const code = event.currentTarget.closest("figure")?.querySelector("pre")?.textContent;
-        if (!code) return;
+        if (!code) {
+          return;
+        }
         void navigator.clipboard.writeText(code).then(() => {
           setCopied(true);
           clearTimeout(timer.current);
