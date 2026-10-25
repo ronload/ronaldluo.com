@@ -2,24 +2,18 @@
 
 import { ArrowLeft, RotateCw, TriangleAlert } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
 import { StatusPage } from "@/components/status-page";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 export default function ErrorBoundary({
-  error,
   unstable_retry,
 }: {
   error: Error & { digest?: string };
   unstable_retry: () => void;
 }) {
   const t = useTranslations("Error");
-
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
 
   return (
     <StatusPage
