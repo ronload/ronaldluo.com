@@ -4,6 +4,9 @@ import { CodeBlock } from "@/components/mdx/code-block";
 import { Mermaid } from "@/components/mdx/mermaid";
 import { Link } from "@/i18n/navigation";
 
+const EXTERNAL_URL = /^(https?:)?\/\//i;
+const HASH_OR_SCHEME = /^#|^[a-z][a-z\d+.-]*:/i;
+
 function MdxImage({ alt, height, src, width, ...props }: ComponentProps<"img">) {
   if (!src) return null;
 
@@ -22,10 +25,10 @@ function MdxImage({ alt, height, src, width, ...props }: ComponentProps<"img">) 
 
 function MdxLink({ href, ...props }: ComponentProps<"a">) {
   if (!href) return <a {...props} />;
-  if (/^(https?:)?\/\//i.test(href)) {
+  if (EXTERNAL_URL.test(href)) {
     return <a href={href} rel="noreferrer" target="_blank" {...props} />;
   }
-  if (/^#|^[a-z][a-z\d+.-]*:/i.test(href)) return <a href={href} {...props} />;
+  if (HASH_OR_SCHEME.test(href)) return <a href={href} {...props} />;
 
   return <Link href={href} {...props} />;
 }

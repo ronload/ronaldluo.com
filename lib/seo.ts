@@ -3,10 +3,12 @@ import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
 import { SITE_NAME, SITE_URL } from "@/lib/identity";
 
+const TRAILING_SLASH = /\/$/;
+
 export const pageUrl = (locale: Locale, href: string) => SITE_URL + getPathname({ locale, href });
 
 export const canonicalUrl = (locale: Locale, href: string) =>
-  pageUrl(locale, href).replace(/\/$/, "");
+  pageUrl(locale, href).replace(TRAILING_SLASH, "");
 
 export const TITLE_TEMPLATE = `%s | ${SITE_NAME}`;
 

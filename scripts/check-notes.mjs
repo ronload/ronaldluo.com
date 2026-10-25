@@ -6,6 +6,9 @@ const MESSAGES_DIR = join(process.cwd(), "messages");
 
 const FRONTMATTER_REQUIRED = ["title", "description", "date"];
 const FRONTMATTER_ALLOWED = new Set([...FRONTMATTER_REQUIRED, "updated", "draft"]);
+const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
+const FRONTMATTER_ENTRY = /^([A-Za-z][A-Za-z0-9_]*):\s*(.*)$/;
+const LINE_BREAK = /\r?\n/;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const FENCE_META_ALLOWED = /^(?:title="[^"]+"|noCopy)$/;
 const HAN = "\\u3400-\\u4dbf\\u4e00-\\u9fff\\uf900-\\ufaff";
@@ -20,22 +23,22 @@ function stripInlineCode(line) {
 }
 
 function parseNote(text) {
-  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  const match = text.match(FRONTMATTER);
   if (!match) return null;
   const [, raw, body] = match;
   const frontmatter = new Map();
-  for (const line of raw.split(/\r?\n/)) {
-    const kv = line.match(/^([A-Za-z][A-Za-z0-9_]*):\s*(.*)$/);
+  for (const line of raw.split(LINE_BREAK)) {
+    const kv = line.match(FRONTMATTER_ENTRY);
     if (kv) frontmatter.set(kv[1], kv[2].trim());
   }
-  const offset = text.slice(0, text.length - body.length).split(/\r?\n/).length - 1;
+  const offset = text.slice(0, text.length - body.length).split(LINE_BREAK).length - 1;
   return { frontmatter, body, offset };
 }
 
 function proseLines(body, offset) {
   const out = [];
   let inFence = false;
-  body.split(/\r?\n/).forEach((line, i) => {
+  body.split(LINE_BREAK).forEach((line, i) => {
     if (line.trim().startsWith("```")) {
       inFence = !inFence;
       return;
@@ -48,7 +51,7 @@ function proseLines(body, offset) {
 function fenceInfoStrings(body, offset) {
   const out = [];
   let inFence = false;
-  body.split(/\r?\n/).forEach((line, i) => {
+  body.split(LINE_BREAK).forEach((line, i) => {
     const trimmed = line.trim();
     if (!trimmed.startsWith("```")) return;
     if (!inFence) out.push({ info: trimmed.slice(3).trim(), lineNumber: offset + i + 1 });

@@ -22,13 +22,17 @@ interface DotPathOptions {
 
 const pathCache = new Map<string, string>();
 
+const TRAILING_ZEROS = /(\.\d*?)0+$/;
+const TRAILING_DOT = /\.$/;
+const LEADING_ZERO = /^(-?)0\./;
+
 // createMap emits 16 significant decimals; 2 is well below one device pixel here.
 const coord = (value: number) =>
   value
     .toFixed(2)
-    .replace(/(\.\d*?)0+$/, "$1")
-    .replace(/\.$/, "")
-    .replace(/^(-?)0\./, "$1.");
+    .replace(TRAILING_ZEROS, "$1")
+    .replace(TRAILING_DOT, "")
+    .replace(LEADING_ZERO, "$1.");
 
 function dotPath({ width, height, mapSamples, dotSize, stagger }: DotPathOptions) {
   const key = `${width}x${height}@${mapSamples}/${dotSize}${stagger ? "/stagger" : ""}`;

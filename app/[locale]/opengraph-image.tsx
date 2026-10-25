@@ -34,13 +34,14 @@ const FRAME_TOP = 72;
 const FRAME_BOTTOM = size.height - FRAME_TOP;
 const DOT_SIZE = 8;
 const CONTENT_INSET = FRAME_INSET + 48;
+const FONT_SRC = /src:\s*url\(([^)]+)\)\s*format\('(?:opentype|truetype)'\)/;
 
 async function loadGoogleFont(family: string, weight: number, text: string): Promise<ArrayBuffer> {
   const url = `https://fonts.googleapis.com/css2?family=${family}:wght@${weight}&text=${encodeURIComponent(text)}`;
   const css = await (
     await fetch(url, { headers: { "User-Agent": "node" }, cache: "force-cache" })
   ).text();
-  const resource = css.match(/src:\s*url\(([^)]+)\)\s*format\('(?:opentype|truetype)'\)/);
+  const resource = css.match(FONT_SRC);
   if (!resource) throw new Error(`Failed to resolve font: ${family} ${weight}`);
   const res = await fetch(resource[1], { cache: "force-cache" });
   if (!res.ok) throw new Error(`Failed to fetch font: ${family} ${weight}`);

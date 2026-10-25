@@ -62,11 +62,12 @@ interface CommandMenuProps {
   notes: CommandMenuNote[];
 }
 
+const APPLE_DEVICE = /Macintosh|Mac OS X|iPhone|iPad|iPod/;
+
 const subscribe = () => () => {};
 const getServerSnapshot = () => false;
 const getAppleDeviceSnapshot = () =>
-  typeof navigator !== "undefined" &&
-  /Macintosh|Mac OS X|iPhone|iPad|iPod/.test(navigator.userAgent);
+  typeof navigator !== "undefined" && APPLE_DEVICE.test(navigator.userAgent);
 
 export function CommandMenu({ labels, notes }: CommandMenuProps) {
   const locale = useLocale();
