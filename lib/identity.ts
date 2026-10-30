@@ -1,7 +1,22 @@
 import { SITE_URL } from "@/lib/site-url";
 import { SOCIAL_LINKS } from "@/lib/socials";
 
-export { SITE_URL };
+interface School {
+  name: string;
+  nameZh: string;
+  url: string;
+  icon: string;
+  brightIcon?: boolean;
+}
+
+interface Experience {
+  icon: string;
+  organization: string;
+  url: string;
+  roleName: string;
+  startDate: string;
+  endDate?: string;
+}
 
 export const SITE_NAME = "Ronald Luo 羅永能";
 
@@ -36,23 +51,6 @@ export const PERSON = {
   email: "ronald@ronaldluo.com",
   sameAs: SOCIAL_LINKS.filter((social) => !social.archived).map((social) => social.url),
 } as const;
-
-interface School {
-  name: string;
-  nameZh: string;
-  url: string;
-  icon: string;
-  brightIcon?: boolean;
-}
-
-interface Experience {
-  icon: string;
-  organization: string;
-  url: string;
-  roleName: string;
-  startDate: string;
-  endDate?: string;
-}
 
 export const EXPERIENCES: Record<"prinsur" | "kaiyn" | "yn", Experience> = {
   prinsur: {

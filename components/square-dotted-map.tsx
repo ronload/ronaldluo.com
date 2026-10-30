@@ -22,18 +22,24 @@ interface DotPathOptions {
 
 const pathCache = new Map<string, string>();
 
+const TRAILING_ZEROS = /(\.\d*?)0+$/;
+const TRAILING_DOT = /\.$/;
+const LEADING_ZERO = /^(-?)0\./;
+
 // createMap emits 16 significant decimals; 2 is well below one device pixel here.
 const coord = (value: number) =>
   value
     .toFixed(2)
-    .replace(/(\.\d*?)0+$/, "$1")
-    .replace(/\.$/, "")
-    .replace(/^(-?)0\./, "$1.");
+    .replace(TRAILING_ZEROS, "$1")
+    .replace(TRAILING_DOT, "")
+    .replace(LEADING_ZERO, "$1.");
 
 function dotPath({ width, height, mapSamples, dotSize, stagger }: DotPathOptions) {
   const key = `${width}x${height}@${mapSamples}/${dotSize}${stagger ? "/stagger" : ""}`;
   const cached = pathCache.get(key);
-  if (cached !== undefined) return cached;
+  if (cached !== undefined) {
+    return cached;
+  }
 
   const { points } = createMap({ width, height, mapSamples });
   const sorted = [...points].sort((a, b) => a.y - b.y || a.x - b.x);
@@ -45,7 +51,9 @@ function dotPath({ width, height, mapSamples, dotSize, stagger }: DotPathOptions
 
   const xStep = sorted.reduce((step, point, index) => {
     const previous = sorted[index - 1];
-    if (index === 0 || previous.y !== point.y) return step;
+    if (index === 0 || previous.y !== point.y) {
+      return step;
+    }
     const distance = point.x - previous.x;
     return distance > 0 && (step === 0 || distance < step) ? distance : step;
   }, 0);

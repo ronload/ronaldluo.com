@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useEffect, useState, useSyncExternalStore, useTransition } from "react";
-import { useSiteTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -26,9 +25,94 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { DialogClose } from "@/components/ui/dialog";
+import { useSiteTheme } from "@/hooks/use-site-theme";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ACTIVE_CHANNELS } from "@/lib/contact-channels";
 import { themeDefinitions } from "@/lib/theme-registry";
+
+interface CommandMenuProps {
+  labels: CommandMenuLabels;
+  notes: CommandMenuNote[];
+}
+
+const APPLE_DEVICE = /Macintosh|Mac OS X|iPhone|iPad|iPod/;
+
+const subscribe = () => () => {};
+const getServerSnapshot = () => false;
+const getAppleDeviceSnapshot = () =>
+  typeof navigator !== "undefined" && APPLE_DEVICE.test(navigator.userAgent);
+
+function useOpenShortcut(setOpen: (open: boolean) => void) {
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target;
+      const isEditable =
+        target instanceof HTMLElement &&
+        target.closest(
+          "input, textarea, select, [contenteditable='true'], [contenteditable='plaintext-only']",
+        );
+
+      if (
+        event.defaultPrevented ||
+        event.isComposing ||
+        event.altKey ||
+        isEditable ||
+        event.key.toLowerCase() !== "k" ||
+        !(event.metaKey || event.ctrlKey) ||
+        document.querySelector('[role="dialog"][aria-modal="true"]')
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      setOpen(true);
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [setOpen]);
+}
+
+function isClearInputShortcut(event: KeyboardEvent) {
+  return (
+    event.ctrlKey &&
+    !event.metaKey &&
+    !event.altKey &&
+    !event.isComposing &&
+    event.key.toLowerCase() === "u"
+  );
+}
+
+function openHref(href: string) {
+  if (href.startsWith("http")) {
+    window.open(href, "_blank", "noopener,noreferrer");
+    return;
+  }
+
+  window.location.assign(href);
+}
+
+function KeyHint({ keys, label }: { keys: string; label: string }) {
+  return (
+    <span>
+      <kbd className="me-1 border border-border/60 bg-muted px-1 py-0.5">{keys}</kbd>
+      {label}
+    </span>
+  );
+}
+
+function KeyboardHints({ labels }: { labels: CommandMenuLabels }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="command-menu-keyboard-hints flex items-center justify-between border-t px-4 py-2 font-mono text-[10px] text-muted-foreground"
+    >
+      <KeyHint keys="Up/Down" label={labels.navigate} />
+      <KeyHint keys="Enter" label={labels.select} />
+      <KeyHint keys="Esc" label={labels.close} />
+    </div>
+  );
+}
 
 export interface CommandMenuNote {
   slug: string;
@@ -57,17 +141,6 @@ export interface CommandMenuLabels {
   trigger: string;
 }
 
-interface CommandMenuProps {
-  labels: CommandMenuLabels;
-  notes: CommandMenuNote[];
-}
-
-const subscribe = () => () => {};
-const getServerSnapshot = () => false;
-const getAppleDeviceSnapshot = () =>
-  typeof navigator !== "undefined" &&
-  /Macintosh|Mac OS X|iPhone|iPad|iPod/.test(navigator.userAgent);
-
 export function CommandMenu({ labels, notes }: CommandMenuProps) {
   const locale = useLocale();
   const pathname = usePathname();
@@ -79,34 +152,7 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
   const [isPending, startTransition] = useTransition();
   const nextLocale = locale === "en" ? "zh-TW" : "en";
 
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      const target = event.target;
-      const isEditable =
-        target instanceof HTMLElement &&
-        target.closest(
-          "input, textarea, select, [contenteditable='true'], [contenteditable='plaintext-only']",
-        );
-
-      if (
-        event.defaultPrevented ||
-        event.isComposing ||
-        event.altKey ||
-        isEditable ||
-        event.key.toLowerCase() !== "k" ||
-        (!event.metaKey && !event.ctrlKey) ||
-        document.querySelector('[role="dialog"][aria-modal="true"]')
-      ) {
-        return;
-      }
-
-      event.preventDefault();
-      setOpen(true);
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
+  useOpenShortcut(setOpen);
 
   const closeMenu = () => {
     setOpen(false);
@@ -120,13 +166,7 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
 
   const openContact = (href: string) => {
     closeMenu();
-
-    if (href.startsWith("http")) {
-      window.open(href, "_blank", "noopener,noreferrer");
-      return;
-    }
-
-    window.location.assign(href);
+    openHref(href);
   };
 
   const pageCommands = [
@@ -157,7 +197,7 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
         <Search />
         <span className="ms-1 text-muted-foreground">{labels.title}</span>
         <kbd className="ms-auto shrink-0 border border-border/60 bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
-          {isAppleDevice ? "⌘" : "⌃"} K
+          {isAppleDevice ? "⌘ K" : "⌃ K"}
         </kbd>
       </Button>
 
@@ -166,7 +206,9 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
         description={labels.description}
         onOpenChange={(nextOpen) => {
           setOpen(nextOpen);
-          if (!nextOpen) setSearch("");
+          if (!nextOpen) {
+            setSearch("");
+          }
         }}
         open={open}
         showCloseButton={false}
@@ -192,13 +234,7 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
             autoFocus
             className="command-menu-search-input"
             onKeyDown={(event) => {
-              if (
-                event.ctrlKey &&
-                !event.metaKey &&
-                !event.altKey &&
-                !event.nativeEvent.isComposing &&
-                event.key.toLowerCase() === "u"
-              ) {
+              if (isClearInputShortcut(event.nativeEvent)) {
                 event.preventDefault();
                 setSearch("");
               }
@@ -239,7 +275,7 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
                     <NotebookText className="mt-0.5" />
                     <span className="min-w-0">
                       <span className="block truncate font-medium">{note.title}</span>
-                      <span className="block truncate text-muted-foreground text-xs">
+                      <span className="block truncate text-xs text-muted-foreground">
                         {note.description}
                       </span>
                     </span>
@@ -294,23 +330,7 @@ export function CommandMenu({ labels, notes }: CommandMenuProps) {
               ))}
             </CommandGroup>
           </CommandList>
-          <div
-            aria-hidden="true"
-            className="command-menu-keyboard-hints flex items-center justify-between border-t px-4 py-2 font-mono text-[10px] text-muted-foreground"
-          >
-            <span>
-              <kbd className="me-1 border border-border/60 bg-muted px-1 py-0.5">Up/Down</kbd>
-              {labels.navigate}
-            </span>
-            <span>
-              <kbd className="me-1 border border-border/60 bg-muted px-1 py-0.5">Enter</kbd>
-              {labels.select}
-            </span>
-            <span>
-              <kbd className="me-1 border border-border/60 bg-muted px-1 py-0.5">Esc</kbd>
-              {labels.close}
-            </span>
-          </div>
+          <KeyboardHints labels={labels} />
         </Command>
       </CommandDialog>
     </>

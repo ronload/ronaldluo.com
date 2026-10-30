@@ -14,7 +14,7 @@ Live at **[ronaldluo.com](https://ronaldluo.com)**.
 - **next-intl** for `en` / `zh-TW` localization
 - **Tailwind CSS v4** with **shadcn** (`base-sera`) on **@base-ui/react**
 - **next-themes** for light/dark and **Magic UI Dotted Map** for the SVG world map
-- **Biome** + **ESLint** for linting/formatting, deployed on **Vercel**
+- **Biome** for linting/formatting, deployed on **Vercel**
 
 ## Features
 

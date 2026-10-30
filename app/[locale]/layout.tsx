@@ -2,7 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import type { CommandMenuLabels } from "@/components/command-menu";
 import { FrameGuides, PageFrame } from "@/components/frame";
 import { RelMeLinks } from "@/components/rel-me-links";
@@ -11,14 +11,18 @@ import { ThemeColor } from "@/components/theme-color";
 import { ThemeProvider } from "@/components/theme-provider";
 import { assertLocale } from "@/i18n/assert-locale";
 import { routing } from "@/i18n/routing";
+import { INCLUDE_DRAFTS } from "@/lib/env";
 import { fontVariables } from "@/lib/fonts";
-import { SITE_URL } from "@/lib/identity";
 import { FEED_ALTERNATES, socialMetadata, TITLE_TEMPLATE } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site-url";
 import { source } from "@/lib/source";
 import { providerThemes } from "@/lib/theme-registry";
 import "../globals.css";
 
-const includeDrafts = process.env.NODE_ENV !== "production";
+interface Props {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}
 
 export const viewport: Viewport = {
   colorScheme: "light dark",
@@ -27,11 +31,6 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#1a1b26" },
   ],
 };
-
-interface Props {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -69,7 +68,6 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
   assertLocale(locale);
-  setRequestLocale(locale);
   const [command, header, contact, faq, forLlms, messages] = await Promise.all([
     getTranslations({ locale, namespace: "CommandMenu" }),
     getTranslations({ locale, namespace: "Header" }),
@@ -100,7 +98,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   };
   const commandNotes = source
     .getPages(locale)
-    .filter((note) => includeDrafts || !note.data.draft)
+    .filter((note) => INCLUDE_DRAFTS || !note.data.draft)
     .sort((a, b) => b.data.date.localeCompare(a.data.date))
     .map((note) => ({
       slug: note.slugs[0],
@@ -135,6 +133,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                   notes: commandNotes,
                 }}
               />
+              {/* biome-ignore lint/correctness/useUniqueElementIds: skip-link target; the layout renders once per document */}
               <main className="relative z-0 flex flex-1 flex-col" id="main-content" tabIndex={-1}>
                 <FrameGuides />
                 {children}

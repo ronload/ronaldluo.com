@@ -12,7 +12,7 @@ export function ExperienceSection() {
     <section className="relative">
       <Divider />
       <div className="container py-16 sm:py-20">
-        <h2 className="home-reveal home-reveal--after-title font-semibold text-foreground text-xl tracking-tight sm:text-2xl">
+        <h2 className="home-reveal home-reveal--after-title text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
           {t("title")}
         </h2>
         <div className="home-reveal-group home-reveal-group--later mt-8 flex flex-col gap-10 sm:mt-10 sm:gap-12">
@@ -22,7 +22,7 @@ export function ExperienceSection() {
 
             return (
               <article key={key} className="flex flex-col gap-2 sm:flex-row sm:gap-8">
-                <p className="shrink-0 whitespace-nowrap text-muted-foreground text-sm tabular-nums leading-relaxed sm:w-36 sm:pt-0.5">
+                <p className="shrink-0 text-sm leading-relaxed whitespace-nowrap text-muted-foreground tabular-nums sm:w-36 sm:pt-0.5">
                   {item.period}
                 </p>
                 <div className="flex flex-col gap-3">
@@ -39,13 +39,13 @@ export function ExperienceSection() {
                       height={96}
                     />
                     <div className="flex flex-col gap-0.5">
-                      <h3 className="font-medium text-base text-foreground leading-snug underline-offset-4 group-hover:underline group-focus-visible:underline sm:text-lg">
+                      <h3 className="text-base leading-snug font-medium text-foreground underline-offset-4 group-hover:underline group-focus-visible:underline sm:text-lg">
                         {item.organization}
                       </h3>
-                      <p className="text-muted-foreground text-sm sm:text-base">{item.role}</p>
+                      <p className="text-sm text-muted-foreground sm:text-base">{item.role}</p>
                     </div>
                   </a>
-                  <ul className="flex flex-col gap-1.5 text-muted-foreground text-sm leading-relaxed sm:text-base">
+                  <ul className="flex flex-col gap-1.5 text-sm leading-relaxed text-muted-foreground sm:text-base">
                     {Object.entries(item.highlights).map(([id, highlight]) => (
                       <li key={id} className="flex gap-2.5">
                         <span

@@ -19,7 +19,7 @@ export function CodeBlock({
   return (
     <figure className="relative my-6 overflow-hidden border bg-code">
       {title ? (
-        <figcaption className="border-b px-4 py-2 pe-12 font-mono text-muted-foreground text-xs">
+        <figcaption className="border-b px-4 py-2 pe-12 font-mono text-xs text-muted-foreground">
           {title}
         </figcaption>
       ) : null}

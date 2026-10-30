@@ -1,4 +1,3 @@
-import { setRequestLocale } from "next-intl/server";
 import { use } from "react";
 import { PersonJsonLd } from "@/components/person-jsonld";
 import { assertLocale } from "@/i18n/assert-locale";
@@ -14,7 +13,6 @@ interface Props {
 export default function Home({ params }: Props) {
   const { locale } = use(params);
   assertLocale(locale);
-  setRequestLocale(locale);
 
   return (
     <>

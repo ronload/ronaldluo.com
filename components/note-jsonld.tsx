@@ -1,5 +1,5 @@
 import type { BlogPosting, WithContext } from "schema-dts";
-import { SITE_URL } from "@/lib/identity";
+import { SITE_URL } from "@/lib/site-url";
 
 interface Props {
   url: string;

@@ -1,20 +1,20 @@
 import type { ReactNode } from "react";
 import { Divider, FrameHero } from "@/components/frame";
 
-export function StatusHero({ children }: { children: ReactNode }) {
-  return (
-    <h1 className="bg-gradient-to-b from-foreground via-foreground to-muted-foreground bg-clip-text font-bold font-mono text-[120px] text-transparent leading-none tracking-tighter sm:text-[180px] md:text-[220px]">
-      {children}
-    </h1>
-  );
-}
-
 interface StatusPageProps {
   hero: ReactNode;
   title: ReactNode;
   description: ReactNode;
   actions: ReactNode;
   titleAs?: "h1" | "h2";
+}
+
+export function StatusHero({ code }: { code: string }) {
+  return (
+    <h1 className="bg-gradient-to-b from-foreground via-foreground to-muted-foreground bg-clip-text font-mono text-[120px] leading-none font-bold tracking-tighter text-transparent sm:text-[180px] md:text-[220px]">
+      {code}
+    </h1>
+  );
 }
 
 export function StatusPage({
@@ -31,10 +31,10 @@ export function StatusPage({
         <Divider />
         <div className="container flex w-full flex-1 items-center justify-center pt-12 pb-20 sm:pt-16 sm:pb-24">
           <div className="flex w-4/5 max-w-md flex-col items-center text-center">
-            <Title className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
+            <Title className="text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
               {title}
             </Title>
-            <p className="wrap-break-word mt-3 break-keep text-lg text-muted-foreground leading-8">
+            <p className="mt-3 text-lg leading-8 wrap-break-word break-keep text-muted-foreground">
               {description}
             </p>
             <div className="mt-10 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">{actions}</div>

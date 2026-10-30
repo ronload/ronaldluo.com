@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useSiteTheme } from "@/components/theme-provider";
+import { useSiteTheme } from "@/hooks/use-site-theme";
 
 export function ThemeColor() {
   const { activeTheme } = useSiteTheme();

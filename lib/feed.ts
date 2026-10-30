@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { PERSON, SITE_URL } from "@/lib/identity";
+import { PERSON } from "@/lib/identity";
 import { pageUrl } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site-url";
 import { isFallbackNote, source } from "@/lib/source";
 
 function escapeXml(value: string) {
@@ -23,11 +24,12 @@ export async function buildAtomFeed(locale: Locale) {
 
   const notes = source
     .getPages(locale)
-    .filter((note) => !note.data.draft && !isFallbackNote(note, locale))
+    .filter((note) => !(note.data.draft || isFallbackNote(note, locale)))
     .sort((a, b) => b.data.date.localeCompare(a.data.date));
 
   const updated = notes.reduce<string>((latest, note) => {
     const candidate = toIso(note.data.updated ?? note.data.date);
+    // biome-ignore lint/complexity/useMathMinMax: compares ISO date strings, which Math.max would coerce to NaN
     return candidate > latest ? candidate : latest;
   }, toIso("1970-01-01"));
 

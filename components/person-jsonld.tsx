@@ -1,15 +1,8 @@
 import type { Graph } from "schema-dts";
 import type { Locale } from "@/i18n/routing";
-import {
-  BIO,
-  EXPERIENCES,
-  PERSON,
-  PROFILE_MODIFIED,
-  SCHOOLS,
-  SITE_NAME,
-  SITE_URL,
-} from "@/lib/identity";
+import { BIO, EXPERIENCES, PERSON, PROFILE_MODIFIED, SCHOOLS, SITE_NAME } from "@/lib/identity";
 import { canonicalUrl, pageUrl } from "@/lib/seo";
+import { SITE_URL } from "@/lib/site-url";
 
 const PERSON_ID = `${SITE_URL}/#person`;
 const ORG_ID = `${SITE_URL}/#prinsur`;

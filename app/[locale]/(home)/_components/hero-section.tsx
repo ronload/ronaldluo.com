@@ -36,11 +36,11 @@ export function HeroSection() {
                 }}
                 trigger="badge"
               />
-              <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl md:text-5xl">
+              <h1 className="text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl md:text-5xl">
                 {t("name")}
               </h1>
             </div>
-            <div className="home-reveal home-reveal--later flex max-w-md flex-col gap-0.5 text-base text-muted-foreground leading-relaxed md:text-lg">
+            <div className="home-reveal home-reveal--later flex max-w-md flex-col gap-0.5 text-base leading-relaxed text-muted-foreground md:text-lg">
               <p>{t("title")}</p>
               <p>{t("company")}</p>
             </div>

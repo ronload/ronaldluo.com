@@ -2,13 +2,16 @@
 
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
 import { type ComponentProps, useEffect } from "react";
-import { isThemeId, resolveTheme, type ThemePreference } from "@/lib/theme-registry";
+import { isThemeId, resolveTheme } from "@/lib/theme-registry";
 
 function ThemeInitializer() {
   const { resolvedTheme, setTheme, theme } = useTheme();
 
   useEffect(() => {
-    if (isThemeId(theme)) return;
+    if (isThemeId(theme)) {
+      return;
+    }
+    // biome-ignore lint/nursery/useReactCompiler: flagged by name only; next-themes' setTheme is not a useState setter
     setTheme(resolveTheme(theme, resolvedTheme).id);
   }, [resolvedTheme, setTheme, theme]);
 
@@ -22,16 +25,4 @@ export function ThemeProvider({ children, ...props }: ComponentProps<typeof Next
       {children}
     </NextThemesProvider>
   );
-}
-
-export function useSiteTheme() {
-  const { resolvedTheme, setTheme, theme } = useTheme();
-  const activeTheme = resolveTheme(theme, resolvedTheme);
-  const preference: ThemePreference = isThemeId(theme) ? theme : activeTheme.id;
-
-  return {
-    activeTheme,
-    preference,
-    setPreference: (nextTheme: ThemePreference) => setTheme(nextTheme),
-  };
 }

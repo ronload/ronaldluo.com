@@ -1,4 +1,4 @@
-export type ThemeId =
+type ThemeId =
   | "tokyonight-day"
   | "tokyonight-night"
   | "tokyonight-storm"
@@ -19,15 +19,15 @@ export type ThemeId =
   | "linear-light"
   | "linear-dark";
 
-export type ThemePreference = ThemeId;
+type ThemePreference = ThemeId;
 
-export interface ThemeDefinition {
+interface ThemeDefinition {
   id: ThemeId;
   label: string;
   dark: boolean;
 }
 
-export interface ThemeGroup {
+interface ThemeGroup {
   label: string;
   themes: readonly ThemeDefinition[];
 }
@@ -160,7 +160,9 @@ export function isThemeId(value: string | undefined): value is ThemeId {
 
 export function getTheme(id: ThemeId): ThemeDefinition {
   const theme = themeDefinitions.find((candidate) => candidate.id === id);
-  if (!theme) throw new Error(`Unknown theme: ${id}`);
+  if (!theme) {
+    throw new Error(`Unknown theme: ${id}`);
+  }
 
   return theme;
 }
@@ -169,7 +171,11 @@ export function resolveTheme(
   preference: string | undefined,
   resolvedTheme: string | undefined,
 ): ThemeDefinition {
-  if (isThemeId(preference)) return getTheme(preference);
+  if (isThemeId(preference)) {
+    return getTheme(preference);
+  }
 
   return getTheme(resolvedTheme === "dark" ? "tokyonight-night" : "one-light");
 }
+
+export type { ThemeDefinition, ThemeGroup, ThemeId, ThemePreference };

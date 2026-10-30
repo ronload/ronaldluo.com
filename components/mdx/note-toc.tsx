@@ -10,21 +10,29 @@ import {
   useTOCListener,
 } from "fumadocs-core/toc";
 import { Text } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const BASE = 8;
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 function itemOffset(depth: number) {
-  if (depth <= 2) return 12 + BASE;
-  if (depth === 3) return 24 + BASE;
+  if (depth <= 2) {
+    return 12 + BASE;
+  }
+  if (depth === 3) {
+    return 24 + BASE;
+  }
   return 36 + BASE;
 }
 
 function lineOffset(depth: number) {
-  if (depth <= 2) return BASE;
-  if (depth === 3) return 8 + BASE;
+  if (depth <= 2) {
+    return BASE;
+  }
+  if (depth === 3) {
+    return 8 + BASE;
+  }
   return 16 + BASE;
 }
 
@@ -45,7 +53,9 @@ function measure(container: HTMLElement, items: TOCItemType[]): Track | null {
 
   for (const item of items) {
     const anchor = container.querySelector<HTMLElement>(`a[href="${item.url}"]`);
-    if (!anchor) return null;
+    if (!anchor) {
+      return null;
+    }
 
     const styles = getComputedStyle(anchor);
     const x = lineOffset(item.depth) + 0.5;
@@ -62,7 +72,9 @@ function measure(container: HTMLElement, items: TOCItemType[]): Track | null {
     previous = [top, bottom, x];
   }
 
-  if (bounds.length === 0) return null;
+  if (bounds.length === 0) {
+    return null;
+  }
 
   const probe = document.createElementNS(SVG_NS, "path");
   probe.setAttribute("d", path);
@@ -72,7 +84,9 @@ function measure(container: HTMLElement, items: TOCItemType[]): Track | null {
   for (let index = 0; index < bounds.length; index++) {
     const [top, bottom] = bounds[index];
     let length = index === 0 ? top : lengths[index - 1][1] + (top - bounds[index - 1][1]);
-    while (length < total && probe.getPointAtLength(length).y < top) length++;
+    while (length < total && probe.getPointAtLength(length).y < top) {
+      length++;
+    }
     lengths.push([length, length + bottom - top]);
   }
 
@@ -90,8 +104,12 @@ function activeRange(infos: TOCItemInfo[]): [start: number, end: number] | null 
   let end = -1;
 
   for (let index = 0; index < infos.length; index++) {
-    if (!infos[index].active) continue;
-    if (start === -1) start = index;
+    if (!infos[index].active) {
+      continue;
+    }
+    if (start === -1) {
+      start = index;
+    }
     end = index;
   }
 
@@ -99,7 +117,9 @@ function activeRange(infos: TOCItemInfo[]): [start: number, end: number] | null 
 }
 
 function goesUp(previous: Thumb | null, start: number, end: number) {
-  if (!previous) return false;
+  if (!previous) {
+    return false;
+  }
 
   return (
     previous.start > start ||
@@ -117,10 +137,14 @@ function TrackHighlight({ track }: { track: Track }) {
     (infos: TOCItemInfo[]) => {
       const element = ref.current;
       const range = activeRange(infos);
-      if (!element || !range) return;
+      if (!(element && range)) {
+        return;
+      }
 
       const [start, end] = range;
-      if (!track.bounds[start] || !track.bounds[end]) return;
+      if (!(track.bounds[start] && track.bounds[end])) {
+        return;
+      }
 
       const up = goesUp(thumb.current, start, end);
       thumb.current = { start, end, up };
@@ -216,7 +240,7 @@ function TocLink({ item, previousDepth, nextDepth, first, last }: LinkProps) {
   return (
     <TOCItem
       className={cn(
-        "wrap-anywhere relative py-1.5 text-muted-foreground text-sm leading-relaxed transition-colors hover:text-accent-foreground data-[active=true]:text-primary",
+        "relative py-1.5 text-sm leading-relaxed wrap-anywhere text-muted-foreground transition-colors hover:text-accent-foreground data-[active=true]:text-primary",
         first && "pt-0",
         last && "pb-0",
       )}
@@ -235,19 +259,24 @@ interface Props {
 }
 
 export function NoteToc({ items, label }: Props) {
+  const labelId = useId();
   const scrollRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [track, setTrack] = useState<Track | null>(null);
 
   const remeasure = useCallback(() => {
     const container = listRef.current;
-    if (!container || container.clientHeight === 0) return;
+    if (!container || container.clientHeight === 0) {
+      return;
+    }
     setTrack(measure(container, items));
   }, [items]);
 
   useEffect(() => {
     const container = listRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
 
     const observer = new ResizeObserver(remeasure);
     observer.observe(container);
@@ -258,16 +287,13 @@ export function NoteToc({ items, label }: Props) {
 
   return (
     <AnchorProvider toc={items}>
-      <nav aria-labelledby="note-toc-label" className="flex max-h-[calc(100svh_-_8rem)] flex-col">
-        <p
-          className="inline-flex items-center gap-1.5 text-muted-foreground text-sm"
-          id="note-toc-label"
-        >
+      <nav aria-labelledby={labelId} className="flex max-h-[calc(100svh_-_8rem)] flex-col">
+        <p className="inline-flex items-center gap-1.5 text-sm text-muted-foreground" id={labelId}>
           <Text className="size-4 shrink-0" />
           {label}
         </p>
         <div
-          className="relative ms-px min-h-0 overflow-y-auto overflow-x-clip py-3 [mask-image:linear-gradient(to_bottom,transparent,white_16px,white_calc(100%_-_16px),transparent)] [scrollbar-width:none]"
+          className="relative ms-px min-h-0 [scrollbar-width:none] overflow-x-clip overflow-y-auto [mask-image:linear-gradient(to_bottom,transparent,white_16px,white_calc(100%_-_16px),transparent)] py-3"
           ref={scrollRef}
         >
           <ScrollProvider containerRef={scrollRef}>

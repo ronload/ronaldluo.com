@@ -1,6 +1,7 @@
 import type { FAQPage, WithContext } from "schema-dts";
 import type { Locale } from "@/i18n/routing";
-import { FAQ, SITE_URL } from "@/lib/identity";
+import { FAQ } from "@/lib/identity";
+import { SITE_URL } from "@/lib/site-url";
 
 export function FaqJsonLd({ locale }: { locale: Locale }) {
   const items = locale === "zh-TW" ? FAQ.zh : FAQ.en;

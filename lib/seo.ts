@@ -1,12 +1,33 @@
 import type { Metadata } from "next";
 import { getPathname } from "@/i18n/navigation";
 import { type Locale, routing } from "@/i18n/routing";
-import { SITE_NAME, SITE_URL } from "@/lib/identity";
+import { SITE_NAME } from "@/lib/identity";
+import { SITE_URL } from "@/lib/site-url";
+
+const TRAILING_SLASH = /\/$/;
+
+interface SocialInput {
+  locale: Locale;
+  path: string;
+  title: string;
+  description: string;
+}
+
+interface NoteInput {
+  locale: Locale;
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  modified?: string;
+  locales: readonly Locale[];
+  fallback: boolean;
+}
 
 export const pageUrl = (locale: Locale, href: string) => SITE_URL + getPathname({ locale, href });
 
 export const canonicalUrl = (locale: Locale, href: string) =>
-  pageUrl(locale, href).replace(/\/$/, "");
+  pageUrl(locale, href).replace(TRAILING_SLASH, "");
 
 export const TITLE_TEMPLATE = `%s | ${SITE_NAME}`;
 
@@ -46,13 +67,6 @@ export function alternatesFor(locale: Locale, href: string, locales?: readonly L
   };
 }
 
-interface SocialInput {
-  locale: Locale;
-  path: string;
-  title: string;
-  description: string;
-}
-
 export function socialMetadata({
   locale,
   path,
@@ -82,17 +96,6 @@ export function socialMetadata({
       description,
     },
   };
-}
-
-interface NoteInput {
-  locale: Locale;
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  modified?: string;
-  locales: readonly Locale[];
-  fallback: boolean;
 }
 
 export function noteMetadata({

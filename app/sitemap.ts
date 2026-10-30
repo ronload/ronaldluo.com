@@ -26,7 +26,9 @@ function noteEntries(): NoteEntry[] {
   for (const locale of routing.locales) {
     for (const note of source.getPages(locale)) {
       const slug = note.slugs[0];
-      if (note.data.draft || isFallbackNote(note, locale) || seen.has(slug)) continue;
+      if (note.data.draft || isFallbackNote(note, locale) || seen.has(slug)) {
+        continue;
+      }
 
       seen.add(slug);
       entries.push({

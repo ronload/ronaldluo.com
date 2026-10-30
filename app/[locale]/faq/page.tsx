@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { use } from "react";
 import { BackLink } from "@/components/back-link";
 import { FaqJsonLd } from "@/components/faq-jsonld";
@@ -31,7 +31,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default function Faq({ params }: Props) {
   const { locale } = use(params);
   assertLocale(locale);
-  setRequestLocale(locale);
 
   const t = useTranslations("Faq");
   const items = locale === "zh-TW" ? FAQ.zh : FAQ.en;
@@ -41,19 +40,19 @@ export default function Faq({ params }: Props) {
       <FaqJsonLd locale={locale} />
       <BackLink href="/" label={t("backToHome")} />
       <div className="container py-12 sm:py-16">
-        <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
+        <h1 className="text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
           {t("title")}
         </h1>
-        <p className="mt-3 max-w-2xl text-base text-muted-foreground leading-relaxed sm:text-lg">
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
           {t("description")}
         </p>
         <dl className="mt-10 flex max-w-2xl flex-col gap-8 sm:mt-12 sm:gap-10">
           {items.map((item) => (
             <div key={item.question} className="flex flex-col gap-2">
-              <dt className="font-medium text-foreground text-lg leading-snug sm:text-xl">
+              <dt className="text-lg leading-snug font-medium text-foreground sm:text-xl">
                 {item.question}
               </dt>
-              <dd className="text-muted-foreground text-sm leading-relaxed sm:text-base">
+              <dd className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                 {item.answer}
               </dd>
             </div>

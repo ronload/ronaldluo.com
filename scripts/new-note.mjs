@@ -48,7 +48,9 @@ const args = process.argv.slice(2);
 const withTranslation = args.includes(`--${TRANSLATION_LOCALE}`);
 const positional = args.filter((arg) => !arg.startsWith("--"));
 
-if (positional.length === 0 || positional.length > 2) usage();
+if (positional.length === 0 || positional.length > 2) {
+  usage();
+}
 
 const [englishTitle, localTitle] = positional;
 const slug = slugify(englishTitle);
@@ -72,12 +74,16 @@ const files = [
 
 for (const { locale, title } of files) {
   const path = join(notesDir, `${slug}.${locale}.md`);
-  if (existsSync(path)) fail(`${path} already exists`);
+  if (existsSync(path)) {
+    fail(`${path} already exists`);
+  }
   writeFileSync(path, frontmatter(title, date), "utf8");
   created.push(`content/notes/${slug}.${locale}.md`);
 }
 
-for (const path of created) console.warn(`created ${path}`);
+for (const path of created) {
+  console.warn(`created ${path}`);
+}
 console.warn(`\nslug \`${slug}\`, dated ${date}, drafted.`);
 console.warn("fill in description, write the body, then set draft to false to publish.");
 if (!withTranslation) {

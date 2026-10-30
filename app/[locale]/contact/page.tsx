@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { use } from "react";
+import { getTranslations } from "next-intl/server";
 import { Divider, FrameHero } from "@/components/frame";
 import { GradientButton } from "@/components/gradient-button";
 import { assertLocale } from "@/i18n/assert-locale";
@@ -29,21 +28,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function Contact({ params }: Props) {
-  const { locale } = use(params);
-  assertLocale(locale);
-  setRequestLocale(locale);
-
+export default function Contact() {
   const t = useTranslations("Contact");
 
   return (
     <>
       <FrameHero>
         <div className="flex w-4/5 flex-col gap-4 text-center">
-          <h1 className="font-semibold text-3xl text-foreground leading-tight tracking-tight sm:text-4xl">
+          <h1 className="text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
             {t("title")}
           </h1>
-          <p className="wrap-break-word break-keep text-lg text-muted-foreground leading-8">
+          <p className="text-lg leading-8 wrap-break-word break-keep text-muted-foreground">
             {t("description")}
           </p>
         </div>
